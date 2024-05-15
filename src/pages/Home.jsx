@@ -3,6 +3,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 import FormBanner from '../components/FormBanner';
 import SolutionsCards from '../components/SolutionsCards';
+import CardCarousel from '../components/CardCarousel';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -188,6 +189,7 @@ function Home() {
         <RightArrow onClick={goToNext}><Icon icon={faChevronRight} /></RightArrow>
       </CarouselContainer>
       <Cards/>
+      <CardCarousel/>
       <FormBanner />
       <SolutionsCards />
     </Container>

@@ -208,7 +208,7 @@ function FormBanner() {
               <FieldContainer>
                 <InputField type="text" placeholder="Digite o seu nome completo..." />
                 <InputField type="email" placeholder="Seu melhor e-mail..." />
-                <InputField type="email" placeholder="Seu melhor telefone..." />
+                <InputField type="number" placeholder="Seu melhor telefone..." />
                 <SelectField>
                   <option value="opcao1">Opção 1</option>
                   <option value="opcao2">Opção 2</option>
