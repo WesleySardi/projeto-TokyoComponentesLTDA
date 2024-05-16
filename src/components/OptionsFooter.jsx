@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -57,7 +58,7 @@ const Title = styled.h1`
   font-weight: bold;
 `;
 
-const Text = styled.p`
+const Text = styled(Link)`
   font-size: 1vw;
   text-align: left;
   margin: 2% 0 2% 0;
@@ -84,11 +85,16 @@ const PartOneBottom = styled.div`
   margin: 2% 0 2% 0
 `;
 
+const StyledLink = styled(Link)`
+  width: auto;
+  height: auto;
+  margin-right: 2vw;
+`;
+
 
 const Icon = styled.img`
-  width: 1.2vw;
-  height: auto;
-  padding-right: 2vw;
+ width: 1.2vw;
+ height: auto;
 `;
 
 const PartTwo = styled.div`
@@ -138,11 +144,11 @@ const OptionsFooter = () => {
                         </TextPartOne>
                     </PartOneMiddle>
                     <PartOneBottom>
-                        <Icon src='../img/tiktokIcon.png'/>
-                        <Icon src='../img/instagramIcon.png'/>
-                        <Icon src='../img/facebookIcon.png'/>
-                        <Icon src='../img/youtubeIcon.png'/>
-                        <Icon src='../img/linkedinIcon.png'/>
+                        <StyledLink><Icon src='../img/tiktokIcon.png' /></StyledLink>
+                        <StyledLink><Icon src='../img/instagramIcon.png' /></StyledLink>
+                        <StyledLink><Icon src='../img/facebookIcon.png' /></StyledLink>
+                        <StyledLink><Icon src='../img/youtubeIcon.png' /></StyledLink>
+                        <StyledLink><Icon src='../img/linkedinIcon.png' /></StyledLink>
                     </PartOneBottom>
                 </PartOne>
             </Part>

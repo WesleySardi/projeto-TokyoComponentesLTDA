@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import TopBar from './TopBar';
 
 const StyledContainer = styled.div`
 display: flex;
@@ -126,16 +127,16 @@ const fadeOutForDarkMode = keyframes`
     }
 `;
 
-const ImgStyleLogo = styled.img`
-    width: '5vw',
-    padding: '4vh',
-    opacity: 1
-  `;
-
 const HeaderStyle = styled.div`
     width: 100%;
     display: flex;
   `;
+
+const ImgStyleLogo = styled.img`
+    /*width: 5vw,
+    padding: 4vh,
+    opacity: 1*/
+`;
 
 const StyledDiv = styled.div`
     display: flex;
@@ -146,8 +147,6 @@ const StyledDiv = styled.div`
 
 const StyledList = styled.ul`
     list-style-type: none;
-    padding: 0;
-    padding-right: 5vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -202,9 +201,8 @@ function Header() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDarkModeAnimationRunning, setIsDarkModeAnimationRunning] = useState(false);
 
-  const [isMouseOver, setIsMouseOver] = useState(false);
-
   const [isAtTop, setIsAtTop] = useState(true);
+  const [isAtTheBannerRange, setIsAtTheBannerRange] = useState(true);
 
   const [rotateIcon, setRotateIcon] = useState(false);
 
@@ -212,31 +210,22 @@ function Header() {
 
   const [tokyoLogoStyle, setTokyoLogoStyle] = useState({
     width: '5vw',
-    padding: '4vh',
+    padding: '4vh 4vh 4vh 5vw',
     opacity: 1
   });
 
-  const [tokyoLogoStyleExpandedOpacityZero] = useState({
-    width: '10vw',
-    padding: '2vh',
+  const [tokyoLogoStyleZeroOpacity] = useState({
+    width: '5vw',
+    padding: '4vh 4vh 4vh 5vw',
     opacity: 0
   });
 
-  const [tokyoLogoStyleExpanded] = useState({
-    width: '15vw',
-    padding: '2vh',
-    opacity: 1
-  });
-
-  const [tokyoLogoStyleRetractedOpacityZero] = useState({
-    width: '5vw',
-    padding: '4vh',
-    opacity: 0
-  });
-
-  const [tokyoLogoStyleRetracted] = useState({
-    width: '5vw',
-    padding: '4vh',
+  const [tokyoLogoStyleAtTop] = useState({
+    position: 'absolute',
+    width: '6vw',
+    height: 'auto',
+    top: '8vh',
+    left: '10vw',
     opacity: 1
   });
 
@@ -257,6 +246,10 @@ function Header() {
   }, []);
 
   useEffect(() => {
+    //setTokyoLogoStyle(tokyoLogoStyleRetractedOpacityZero);
+  }, [isAtTop])
+
+  useEffect(() => {
     const handleScroll = () => {
       if (!isDarkModeAnimationRunning) {
         const scrollPosition = window.scrollY;
@@ -264,20 +257,17 @@ function Header() {
         const threshold = windowHeight * 1;
 
         if (scrollPosition > threshold && !retract && !animationActive) {
-          setAnimationActive(true); // Ativa a animação
+          setAnimationActive(true);
           setRetract(true);
-          setTokyoLogoStyle(tokyoLogoStyleRetractedOpacityZero);
-          setTokyoLogo('/img/tokyoLettersLogo.png');
+          setIsAtTheBannerRange(false);
         } else if (scrollPosition <= threshold && retract && animationActive) {
-          setAnimationActive(false); // Desativa a animação
+          setAnimationActive(false);
           setRetract(false);
-          setTokyoLogoStyle(tokyoLogoStyleRetracted);
-          setTokyoLogo('/img/tokyoLogo.png');
+          setIsAtTheBannerRange(true);
         } else if (scrollPosition > threshold && !retract && animationActive) {
-          setAnimationActive(true); // Ativa a animação
+          setAnimationActive(true);
           setRetract(true);
-          setTokyoLogoStyle(tokyoLogoStyleRetractedOpacityZero);
-          setTokyoLogo('/img/tokyoLettersLogo.png');
+          setIsAtTheBannerRange(false);
         };
       }
     }
@@ -297,24 +287,9 @@ function Header() {
       setIsDarkModeAnimationRunning(false)
       setRotateIcon(false);
     }, 1500);
-
-    const scrollPosition = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const threshold = windowHeight * 0.5;
-
-    /*if (scrollPosition > threshold) { //&& !isMouseOver
-      if (!retract && !isDarkModeAnimationRunning) {
-        setTimeout(() => {
-          setAnimationActive(true);
-          setRetract(true);
-          setTokyoLogoStyle(tokyoLogoStyleRetractedOpacityZero);
-        }, 3500);
-      }
-    }*/
   };
 
   const handleMouseEnter = () => {
-    //setIsMouseOver(true);
     if (!isDarkModeAnimationRunning) {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -323,19 +298,15 @@ function Header() {
       if (animationActive) {
         if (scrollPosition >= threshold) {
           setRetract(false);
-          setTokyoLogoStyle(tokyoLogoStyleExpanded);
         } else {
           setAnimationActive(false);
           setRetract(false);
-          setTokyoLogoStyle(tokyoLogoStyleRetracted);
-          setTokyoLogo('/img/tokyoLogo.png');
         }
       }
     }
   };
 
   const handleMouseLeave = () => {
-    //setIsMouseOver(false);
     if (!isDarkModeAnimationRunning) {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -344,12 +315,9 @@ function Header() {
       if (animationActive) {
         if (scrollPosition >= threshold) {
           setRetract(true);
-          setTokyoLogoStyle(tokyoLogoStyleExpandedOpacityZero);
         } else {
           setAnimationActive(false);
           setRetract(false);
-          setTokyoLogoStyle(tokyoLogoStyleRetracted);
-          setTokyoLogo('/img/tokyoLogo.png');
         }
       }
     }
@@ -396,21 +364,32 @@ function Header() {
     width: 9vw;
     text-decoration: none;
     ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
+    border: 1px solid red;
+    border-radius: 0.5vw;
+    padding: 1.2vh 0.1vw 1vh 0.1vw;
+
+    &:hover {
+      //background-color: #d35400;
+      background-color: red;
+      color: white;
+    }
   `;
 
   const StyledContactItem = styled(Link)`
   flex-basis: 50%;
-  border: 1px solid #d35400;
+  //border: 1px solid #d35400;
+  border: 1px solid red;
   border-radius: 0.5vw;
-  padding: 1.2vh;
+  padding: 1.2vh 1vw 1vh 1vw;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
   ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
   
   &:hover {
-    background-color: #d35400;
-    color: white;
+    //background-color: #d35400;
+      background-color: red;
+      color: white;
   }
   `;
 
@@ -451,13 +430,14 @@ function Header() {
 
   return (
     <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {isAtTop ? <TopBar/> : <></>}
       <BackgroundStyle>
         <BackgroundStyleBlur />
         <HeaderStyle>
-          <ImgStyleLogo src={tokyoLogo} alt="ZloLogo" style={!isDarkModeAnimationRunning ? tokyoLogoStyle : (isAtTop ? tokyoLogoStyle : tokyoLogoStyleRetractedOpacityZero)} />
+          <ImgStyleLogo src={tokyoLogo} alt="ZloLogo" style={isAtTop ? tokyoLogoStyleAtTop : !isDarkModeAnimationRunning && isAtTheBannerRange ? tokyoLogoStyle : tokyoLogoStyleZeroOpacity} />
         </HeaderStyle>
         <StyledDiv>
-          <StyledList>
+          <StyledList style={isAtTop ? {padding: '10vh 5vw 0 0'} : {padding: '0 5vw 0 0'}}>
             <StyledListItem to="/">Home</StyledListItem>
             <StyledListItem to="/">Produtos</StyledListItem>
             <StyledListItem to="/">Blog</StyledListItem>
@@ -482,7 +462,7 @@ function Header() {
             </StyledContainer>
             <StyledListItemAndIcon to="/">
               <Icon icon={faCartShopping} />
-              Loja Virtual
+              E-commerce
             </StyledListItemAndIcon>
           </StyledList>
         </StyledDiv>
