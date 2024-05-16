@@ -4,13 +4,16 @@ import styled, { css, keyframes } from 'styled-components';
 import FormBanner from '../components/FormBanner';
 import SolutionsCards from '../components/SolutionsCards';
 import CardCarousel from '../components/CardCarousel';
+import Cards from '../components/Cards';
+import Banner from '../components/Banner';
+import Footer from '../components/Footer';
+import OptionsFooter from '../components/OptionsFooter';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import Cards from '../components/Cards';
 
 const Container = styled.div`
   //background-color: #161616;
@@ -58,8 +61,8 @@ const TextDescription = styled.p`
   align-items: center;
   font-weight: bold;
   font-style: italic;
-  //color: white;
-  color: #d35400;
+  color: red;
+  //color: #d35400;
   margin: auto;
   width: 60%;
 `;
@@ -76,7 +79,7 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to right, #9b111e, #ff3366); /* Degradê do vermelho escuro para o vermelho claro */
+  background-image: linear-gradient(to right, #9b111e, #ED2033); /* Degradê do vermelho escuro para o vermelho claro */
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3); /* Leve sombra */
 `;
 
@@ -99,11 +102,10 @@ const RightArrow = styled(ArrowButton)`
 `;
 
 const images = [
-  '../img/wallpaperWorld.jpg',
-  '../img/wallpaperWorld.jpg',
-  '../img/wallpaperWorld.jpg',
-  '../img/wallpaperWorld.jpg',
-  // Add more image paths as needed
+  '../img/backgroundHome.png',
+  '../img/backgroundHome.png',
+  '../img/backgroundHome.png',
+  '../img/backgroundHome.png'
 ];
 
 const textContents = [
@@ -166,7 +168,7 @@ function Home() {
   const CarouselImage = styled.img`
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    //object-fit: cover;
     animation: ${({ isPrevious }) =>
       isPrevious ? css`${slideOutAnimation} 0.5s forwards` : css`${slideInAnimation} 0.5s forwards`
     };
@@ -189,9 +191,12 @@ function Home() {
         <RightArrow onClick={goToNext}><Icon icon={faChevronRight} /></RightArrow>
       </CarouselContainer>
       <Cards/>
+      <Banner link={'/'} image={'../img/banner.png'}/>
       <CardCarousel/>
       <FormBanner />
-      <SolutionsCards />
+      <OptionsFooter/>
+      {/*<SolutionsCards />*/}
+      <Footer/>
     </Container>
   );
 }

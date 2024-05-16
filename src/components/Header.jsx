@@ -261,7 +261,7 @@ function Header() {
       if (!isDarkModeAnimationRunning) {
         const scrollPosition = window.scrollY;
         const windowHeight = window.innerHeight;
-        const threshold = windowHeight * 0.5;
+        const threshold = windowHeight * 1;
 
         if (scrollPosition > threshold && !retract && !animationActive) {
           setAnimationActive(true); // Ativa a animação

@@ -46,6 +46,7 @@ function FormBanner() {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: #A90101;
+    background-color: red;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
   `;
 

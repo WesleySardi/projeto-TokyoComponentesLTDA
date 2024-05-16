@@ -54,18 +54,27 @@ const Card = styled(Link)`
   flex-shrink: 0;
   position: relative;
   background-color: white;
+  border-radius: 3%;
   margin: 0 1%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(to right, #f0f0f0, white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 const CardImage = styled.img`
   width: 100%;
   height: 50%;
   pointer-events: none;
+  border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
 `;
 
 const CardTitle = styled.h3`
@@ -84,7 +93,8 @@ const Tag = styled.div`
   right: 0;
   top: 50%;
   transform: translateY(-150%);
-  background-color: orange;
+  //background-color: orange;
+  background-color: red;
   padding: 5px;
   color: white;
   font-weight: bold;
@@ -127,31 +137,31 @@ const IconComboBox = styled(FontAwesomeIcon)`
 
 const data = [
     {
-        image: '../img/backgroundCard6.png',
+        image: '../img/Card3.png',
         title: '10 Dicas para analisar Circuitos Impressos',
         tag: 'Eletrônica',
         link: '/'
     },
     {
-        image: '../img/backgroundCard6.png',
+        image: '../img/Card2.png',
         title: 'Como entrar na mundo da robótica com projetos reais',
         tag: 'Robótica',
         link: '/'
     },
     {
-        image: '../img/backgroundCard6.png',
+        image: '../img/Card1.png',
         title: '10 Dicas para analisar Circuitos Impressos',
         tag: 'Eletrônica',
         link: '/'
     },
     {
-        image: '../img/backgroundCard6.png',
+        image: '../img/Card3.png',
         title: 'Como entrar na mundo da robótica com projetos reais',
         tag: 'Robótica',
         link: '/'
     },
     {
-        image: '../img/backgroundCard6.png',
+        image: '../img/Card2.png',
         title: '10 Dicas para analisar Circuitos Impressos',
         tag: 'Eletrônica',
         link: '/'
