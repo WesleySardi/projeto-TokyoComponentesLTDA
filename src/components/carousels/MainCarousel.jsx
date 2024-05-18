@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const CarouselContainer = styled.div`
   position: relative;
@@ -49,7 +49,7 @@ const Text = styled.p`
 const Button = styled.button`
   padding: 1rem 2rem;
   font-size: 1.2rem;
-  background-color: rgba(170, 0, 0, 0.5);
+  background-color: rgba(170, 0, 0, 0.7);
   color: white;
   border: none;
   cursor: pointer;
@@ -89,13 +89,13 @@ const images = [
     buttonText: 'Confira já!'
   },
   {
-    url: '../img/wallpaperCompEletronicos.jpg',
+    url: '../img/wallpaperWorld2.jpg',
     title: 'Explore o mundo da eletrônica!',
     text: 'Mais de 12.000 itens em estoque!',
     buttonText: 'Confira já!'
   },
   {
-    url: '../img/backgroundHome.png',
+    url: '../img/wallpaperWorld3.jpg',
     title: 'Explore o mundo da eletrônica!',
     text: 'Mais de 12.000 itens em estoque!',
     buttonText: 'Confira já!'
@@ -137,6 +137,14 @@ const MainCarousel = () => {
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
   return (
     <CarouselContainer>
       {images.map((image, index) => (
@@ -150,8 +158,8 @@ const MainCarousel = () => {
       ))}
       <AbsoluteImage src="../img/wsBalloonImage.png" alt="Descrição da imagem" />
       <ArrowContainer>
-        <Arrow onClick={prevSlide}><StyledIconLeft icon={faChevronLeft} currentIndex={currentIndex} images={images} /></Arrow>
-        <Arrow onClick={nextSlide}><StyledIconRight icon={faChevronRight} currentIndex={currentIndex} images={images} /></Arrow>
+        <Arrow onClick={prevSlide}><StyledIconLeft icon={faArrowLeft} currentIndex={currentIndex} images={images} /></Arrow>
+        <Arrow onClick={nextSlide}><StyledIconRight icon={faArrowRight} currentIndex={currentIndex} images={images} /></Arrow>
       </ArrowContainer>
     </CarouselContainer>
   );

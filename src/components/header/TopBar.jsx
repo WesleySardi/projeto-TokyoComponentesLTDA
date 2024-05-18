@@ -9,6 +9,7 @@ const HeaderContainer = styled.div`
   display: flex;
   z-index: 1000;
   border-bottom: 1px solid red;
+  border-image: linear-gradient(to right, #2C0001, red) 1;
 `;
 
 const Section = styled.div`

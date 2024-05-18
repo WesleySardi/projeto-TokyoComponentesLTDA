@@ -159,6 +159,12 @@ const Icon = styled(FontAwesomeIcon)`
     margin-right: 10px;
   `;
 
+const StyledIcon = styled.img`
+    width: 2rem;
+    height: auto;
+    margin-right: 5%;
+  `;
+
 const IconComboBox = styled(FontAwesomeIcon)`
     margin-left: 5px;
   `;
@@ -374,36 +380,45 @@ function Header() {
   `;
 
   const StyledListItemAndIcon = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.1rem;
-    text-align: center;
-    color: black;
-    width: 9vw;
-    text-decoration: none;
-    ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
-    border: 1px solid red;
-    border-radius: 0.5vw;
-    padding: 1.2vh 0.1vw 1vh 0.1vw;
-
-    &:hover {
-      background-color: red;
-      color: white;
-    }
-  `;
-
-  const StyledContactItem = styled(Link)`
-  font-size: 1.1rem;
-  flex-basis: 50%;
-  border: 1px solid red;
-  border-radius: 0.5vw;
-  padding: 1.2vh 1vw 1vh 1vw;
   text-align: center;
-  cursor: pointer;
+  padding: 5px;
+  color: black;
+  width: 9vw;
+  height: 4vh;
   text-decoration: none;
   ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
-  
+  border: 1px solid red;
+  border-radius: 0.5vw;
+
   &:hover {
-      background-color: red;
-      color: white;
+    background-color: red;
+    color: white;
+  }
+`;
+
+
+  const StyledContactItem = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  text-align: center;
+  color: black;
+  padding: 5px;
+  width: 7vw;
+  height: 4vh;
+  text-decoration: none;
+  ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
+  border: 1px solid red;
+  border-radius: 0.5vw;
+
+  &:hover {
+    background-color: red;
+    color: white;
   }
   `;
 
@@ -476,7 +491,8 @@ function Header() {
               </DarkModeContainer>
             </StyledContainer>
             <StyledListItemAndIcon to="/">
-              <Icon icon={faCartShopping} />
+              <StyledIcon src="../img/EcommerceIcon.png"/>
+              {/*<Icon icon={faCartShopping} />*/}
               E-commerce
             </StyledListItemAndIcon>
           </StyledList>

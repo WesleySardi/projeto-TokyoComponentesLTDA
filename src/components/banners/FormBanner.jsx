@@ -1,8 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 function FormBanner() {
 
@@ -100,7 +97,7 @@ function FormBanner() {
   display: flex;
   align-items: center;
   justify-content: center; /* Alinha verticalmente ao centro */
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 `;
 
   const TitleForm = styled.h3`
@@ -121,8 +118,9 @@ function FormBanner() {
     font-size: 1.3rem;
   `;
 
-  const Icon = styled.img`
-    /* Estilos do ícone */
+  const StyledIcon = styled.img`
+    width: 3rem;
+    height: auto;
   `;
 
   const FieldContainer = styled.div`
@@ -132,14 +130,6 @@ function FormBanner() {
   `;
 
   const InputField = styled.input`
-    /* Estilos dos campos de input */
-    margin-bottom: 10px;
-    border-radius: 5px;
-    padding: 2%;
-  `;
-
-  const SelectField = styled.select`
-    /* Estilos da comboBox */
     margin-bottom: 10px;
     border-radius: 5px;
     padding: 2%;
@@ -148,7 +138,6 @@ function FormBanner() {
   const CheckBoxLabel = styled.label`
     font-size: 1rem;
     color: gray;
-    margin-top: 3%;
     text-align: center;
     color: white;
     padding: 0% 3%;
@@ -157,13 +146,13 @@ function FormBanner() {
   const SendButton = styled.button`
     background-color: green;
     color: white;
-    padding: 8px 20px;
+    padding: 3.5%;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin: 0 auto;
     margin-top: 3%;
-    width: 40%;
+    width: 30%;
   `;
 
   const CheckBoxContainer = styled.div`
@@ -172,19 +161,31 @@ function FormBanner() {
     text-align: center;
   `;
 
-  const WhiteCircle = styled.div`
-    z-index: 0;
-    position: absolute;
-    width: 30%;
-    height: 60%;
-    background-color: white;
-    border-radius: 50%;
+  const TermsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
   `;
+
+  const RequiredFieldsLabel = styled.label`
+    margin-top: 5%;
+    display: block;
+    color: white;
+  `;
+
+  const StyledCheckBox = styled.input.attrs({ type: 'checkbox' })`
+  width: auto;
+  height: 100%;
+  cursor: pointer;
+  accent-color: green;
+`;
 
   return (
     <AdditionalContent>
       <StyledSecondDiv>
-        {/*<WhiteCircle />*/}
         <StyledThirdDiv style={{ width: '40%' }}>
           <TitleDiv>
             <h2>Entre em contato e obtenha as melhores soluções!</h2>
@@ -198,32 +199,24 @@ function FormBanner() {
         <StyledThirdDiv style={{ width: '40%' }}>
           <FormDiv>
             <FormContainer>
-              {/* Div do título com o ícone */}
               <TitleContainer>
                 <TitleForm>Receba tudo em primeira mão</TitleForm>
                 <IconContainer>
-                  <FontAwesomeIcon icon={faEnvelope} className={Icon.styledComponentId} size={"2x"} />
+                  <StyledIcon src='../img/CardIcon.png' />
                 </IconContainer>
               </TitleContainer>
-              {/* Div do formulário */}
               <FieldContainer>
-                <InputField type="text" placeholder="Digite o seu nome completo..." />
-                <InputField type="email" placeholder="Seu melhor e-mail..." />
-                <InputField type="number" placeholder="Seu melhor telefone..." />
-                <SelectField>
-                  <option value="opcao1">Opção 1</option>
-                  <option value="opcao2">Opção 2</option>
-                  <option value="opcao3">Opção 3</option>
-                </SelectField>
+                <InputField type="text" placeholder="Digite o seu nome completo... *" />
+                <InputField type="email" placeholder="Seu melhor e-mail... *" />
+                <InputField type="number" placeholder="Seu melhor telefone... *" />
                 <CheckBoxContainer>
-                  <div>
-                    <input type="checkbox" id="termos" name="termos" />
-                    <CheckBoxLabel htmlFor="termos">Li e concordo com os termos de uso</CheckBoxLabel>
-                  </div>
-                  <CheckBoxLabel>* Campos Obrigatórios</CheckBoxLabel>
+                  <TermsContainer>
+                    <StyledCheckBox id="termos" name="termos" />
+                    <CheckBoxLabel htmlFor="termos">Aceito os termos de privacidade</CheckBoxLabel>
+                  </TermsContainer>
+                  <RequiredFieldsLabel>* Campos Obrigatórios</RequiredFieldsLabel>
                 </CheckBoxContainer>
               </FieldContainer>
-              {/* Botão de enviar */}
               <SendButton>Enviar</SendButton>
             </FormContainer>
           </FormDiv>

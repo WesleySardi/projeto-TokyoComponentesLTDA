@@ -15,9 +15,30 @@ const Container = styled.div`
   width: 100vw;
 `;
 
+const CenterBottomImage = styled.img`
+  position: absolute;
+  bottom: -7.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5%; /* Ajuste o tamanho conforme necessário */
+  height: auto; /* Ajuste o tamanho conforme necessário */
+  z-index: 1;
+`;
+const CenterBottomImage2 = styled.img`
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.6%; /* Ajuste o tamanho conforme necessário */
+  height: auto; /* Ajuste o tamanho conforme necessário */
+  z-index: 1;
+`;
+
 function Home() {
   return (
     <Container>
+      <CenterBottomImage src="../img/TokyoLogo.png" alt="Outra descrição da imagem" />
+      <CenterBottomImage2 src="../img/dotsImage.png" alt="Outra descrição da imagem" />
       <MainCarousel />
       <Cards />
       <Banner link={'/'} image={'../img/banner.png'} />
