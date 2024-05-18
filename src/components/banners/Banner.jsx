@@ -7,7 +7,7 @@ const Banner = (props) => {
   const FullScreenImage = styled.div`
   width: 100vw;
   height: 70vh;
-  margin: 15vh 0;
+  margin: 6% 0;
   background-image: url(${props.image});
   background-size: cover;
   background-position: center;

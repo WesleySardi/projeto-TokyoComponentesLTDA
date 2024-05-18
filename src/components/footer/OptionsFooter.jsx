@@ -52,27 +52,27 @@ const PartOneMiddle = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 0.9vw;
+  font-size: 1.2rem;
   text-align: left;
   margin: 4% 0 4% 0;
   font-weight: bold;
 `;
 
 const Text = styled(Link)`
-  font-size: 1vw;
+  font-size: 1.2rem;
   text-align: left;
   margin: 2% 0 2% 0;
   color: grey;
 `;
 
 const TitlePartOne = styled.h1`
-  font-size: 1.3vw;
+  font-size: 1.3rem;
   text-align: left;
   margin: 6% 0 1% 0
 `;
 
 const TextPartOne = styled.p`
-  font-size: 1vw;
+  font-size: 1rem;
   text-align: left;
   margin: 1% 0 1% 0;
   color: grey;
@@ -119,11 +119,11 @@ const PartFour = styled.div`
 `;
 
 const Button = styled.button`
-  font-size: 1vw;
-  width: 40%;
+  font-size: 1.2rem;
+  width: 50%;
   background-color: red;
   color: white;
-  padding: 3% 1% 3% 1%;
+  padding: 4% 1% 4% 1%;
   border-radius: 0.5vw;
 `;
 

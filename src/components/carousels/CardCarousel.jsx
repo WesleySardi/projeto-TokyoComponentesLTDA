@@ -35,7 +35,7 @@ const Title = styled.h1`
   margin-bottom: 1%;
   color: red;
   font-weight: bold;
-  font-size: 3vw;
+  font-size: 3rem;
 `;
 
 const Text = styled.p`

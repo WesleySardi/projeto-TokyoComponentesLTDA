@@ -152,19 +152,19 @@ function SolutionsCards() {
 
     const RedTitle = styled.h1`
         color: red;
-        font-size: 2.5vw;
+        font-size: 2rem;
     `;
 
     const GrayText = styled.p`
         color: gray;
-        font-size: 1.5vw;
+        font-size: 1.5rem;
     `;
 
     const CenteredText = styled.p`
         color: gray;
         text-align: center;
         margin: auto;
-        font-size: 1vw;
+        font-size: 1.1rem;
     `;
 
     const Icon = styled.img`

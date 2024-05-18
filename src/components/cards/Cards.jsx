@@ -28,7 +28,7 @@ const FirstPart = styled.div`
 
 const UpperText = styled.p`
     //font-weight: bold;
-    font-size: 0.8vw;
+    font-size: 1.15rem;
     color: grey;
 `;
 
@@ -51,7 +51,7 @@ const Title = styled.h2`
   position: absolute;
   left: 10%;
   margin-bottom: 3%;
-  font-size: 2vw;
+  font-size: 2rem;
 `;
 
 const SecondDiv = styled.div`
@@ -91,7 +91,7 @@ const CardTitle = styled.h3`
     height: 10%;
     text-align: left;
     font-weight: bold;
-    font-size: 1.15vw;
+    font-size: 1.15rem;
     padding: 1vh 0;
 `;
 
@@ -99,7 +99,7 @@ const CardText = styled.p`
     height: 40%;
     text-align: left;
     color: grey;
-    font-size: 0.9vw;
+    font-size: 1rem;
     padding: 1vh 0;
 `;
 
@@ -123,12 +123,12 @@ const ThirdDiv = styled.div`
     justify-content: center;
     align-items: center;
     height: 6%;
-    margin-top: 4%;
+    margin-top: 6%;
 `;
 
 const BottomTitle = styled.h3`
     font-weight: bold;
-    font-size: 2.5vw;
+    font-size: 2.5rem;
 `;
 
 const StyledLink = styled(Link)`

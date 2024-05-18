@@ -61,7 +61,7 @@ function FormBanner() {
   const TitleDiv = styled.div`
     color: white;
     font-weight: bold;
-    font-size: 27px;
+    font-size: 2.3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,7 +105,7 @@ function FormBanner() {
 
   const TitleForm = styled.h3`
   flex: 70%;
-  font-size: 1.3vw;
+  font-size: 1.3rem;
   font-weight: bold;
   text-align: right;
   color: white;
@@ -118,7 +118,7 @@ function FormBanner() {
     align-items: center;
     margin-left: 5%;
     color: white;
-    font-size: 1.3vw;
+    font-size: 1.3rem;
   `;
 
   const Icon = styled.img`
@@ -146,7 +146,7 @@ function FormBanner() {
   `;
 
   const CheckBoxLabel = styled.label`
-    font-size: 12px;
+    font-size: 1rem;
     color: gray;
     margin-top: 3%;
     text-align: center;

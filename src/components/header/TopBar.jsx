@@ -24,13 +24,14 @@ const Content = styled.div`
 `;
 
 const Image = styled.img`
-  width: 1vw;  // Ajuste o tamanho conforme necessário
+  width: 1vw;
   height: auto;
   margin-right: 10px;
 `;
 
 const Text = styled.span`
-  font-size: 0.8vw;
+  font-size: 0.8rem;
+  font-weight: bold;
   color: white;
 `;
 

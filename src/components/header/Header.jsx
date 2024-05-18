@@ -55,6 +55,7 @@ border-radius: 0.5vw;
 `;
 
 const ComboBoxListItem = styled(Link)`
+font-size: 1.1rem;
 display: block;
 padding: 12px 16px;
 text-align: left;
@@ -76,7 +77,7 @@ const retractAnimation = keyframes`
     }
   `;
 
-const contractAnimation = keyframes`
+const expandAnimation = keyframes`
         from {
             height: 8vh;
         }
@@ -194,7 +195,7 @@ const ExpandedHeaderContainer = styled.div`
     height: 17vh;
     width: 100vw;
     background-color: transparent;
-    z-index: 1;
+    z-index: 1000;
 `;
 
 function Header() {
@@ -206,13 +207,7 @@ function Header() {
 
   const [rotateIcon, setRotateIcon] = useState(false);
 
-  const [tokyoLogo, setTokyoLogo] = useState('/img/tokyoLogo.png');
-
-  const [tokyoLogoStyle, setTokyoLogoStyle] = useState({
-    width: '5vw',
-    padding: '4vh 4vh 4vh 5vw',
-    opacity: 1
-  });
+  const [tokyoLogo] = useState('/img/tokyoLogo.png');
 
   const [tokyoLogoStyleZeroOpacity] = useState({
     width: '5vw',
@@ -244,10 +239,6 @@ function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    //setTokyoLogoStyle(tokyoLogoStyleRetractedOpacityZero);
-  }, [isAtTop])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -286,7 +277,7 @@ function Header() {
     setTimeout(() => {
       setIsDarkModeAnimationRunning(false)
       setRotateIcon(false);
-    }, 1500);
+    }, isAtTop ? 300 : 1500);
   };
 
   const handleMouseEnter = () => {
@@ -324,13 +315,21 @@ function Header() {
   };
 
   const BackgroundStyle = styled.div`
-  ${isAtTop ? isDarkModeAnimationRunning ? `background-color: rgba(0, 0, 0, 0.5);` : `background-color: rgba(0, 0, 0, 0.2);` : `background-color: rgba(255, 255, 255, 0.6);`}
+    background-color: ${isAtTop ? `rgba(0, 0, 0, 0)` : `rgba(255, 255, 255, 0.6)`};
     height: 17vh;
     width: 100vw;
     display: flex;
     justify-content: left;
     z-index: 1000;
-    ${isAtTop ? '' : css`animation: ${!retract && !isDarkModeAnimationRunning ? contractAnimation : retractAnimation} 0.5s forwards;`}
+    animation: 
+    ${isAtTop ? 'none' :
+      isDarkModeAnimationRunning && isAtTop ? 'none' :
+        isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
+          isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
+            (!isDarkModeAnimationRunning && isAtTop ? expandAnimation :
+              (isAtTheBannerRange ? expandAnimation :
+                (retract ? retractAnimation : expandAnimation)))
+    } 0.2s forwards;
   `;
 
   const BackgroundStyleBlur = styled.div`
@@ -340,17 +339,33 @@ function Header() {
     &::before {
       content: '';
       position: absolute;
-      width: 100%;
-      ${isAtTop ? `background-color: rgba(0, 0, 0, 0);` : `background-color: rgba(255, 255, 255, 0.6);`}
+      height: 100%;
+      width: 100vw;
+      background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.6)'};
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
-      ${isAtTop
-      ? css`animation: ${retract && !isDarkModeAnimationRunning ? retractAnimation : contractAnimation} 0.5s forwards, ${isDarkModeAnimationRunning ? expandForDarkModeTopZero : "none"} 1.5s forwards, ${isDarkModeAnimationRunning && !isDarkMode ? fadeInForDarkMode : "none"} 1.5s forwards, ${isDarkModeAnimationRunning && isDarkMode ? fadeOutForDarkMode : "none"} 1.5s forwards;`
-      : css`animation: ${retract && !isDarkModeAnimationRunning ? retractAnimation : contractAnimation} 0.5s forwards, ${isDarkModeAnimationRunning ? expandForDarkMode : "none"} 1.5s forwards, ${isDarkModeAnimationRunning && !isDarkMode ? fadeInForDarkMode : "none"} 1.5s forwards, ${isDarkModeAnimationRunning && isDarkMode ? fadeOutForDarkMode : "none"} 1.5s forwards;`}
+      animation: 
+      ${isAtTop ? 'none' :
+      isDarkModeAnimationRunning && isAtTop ? 'none' :
+        isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
+          isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
+            (!isDarkModeAnimationRunning && isAtTop ? expandAnimation :
+              (isAtTheBannerRange ? expandAnimation :
+                (retract ? retractAnimation : expandAnimation)))} 0.2s forwards,
+
+      ${(isDarkModeAnimationRunning && isAtTop ? 'none' :
+      isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? expandForDarkMode :
+        isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? expandForDarkMode : 'none')} 1.5s forwards,
+
+      ${(!isAtTop && isDarkModeAnimationRunning && isDarkMode ? fadeOutForDarkMode :
+        !isAtTop && isDarkModeAnimationRunning && !isDarkMode ? fadeInForDarkMode :
+        !isAtTop && !isDarkModeAnimationRunning ? 'none' : 'none'
+    )} 1.5s forwards;
     }
   `;
 
   const StyledListItem = styled(Link)`
+    font-size: 1.2rem;
     text-align: center;
     color: black;
     width: 7vw;
@@ -359,6 +374,7 @@ function Header() {
   `;
 
   const StyledListItemAndIcon = styled(Link)`
+  font-size: 1.1rem;
     text-align: center;
     color: black;
     width: 9vw;
@@ -369,15 +385,14 @@ function Header() {
     padding: 1.2vh 0.1vw 1vh 0.1vw;
 
     &:hover {
-      //background-color: #d35400;
       background-color: red;
       color: white;
     }
   `;
 
   const StyledContactItem = styled(Link)`
+  font-size: 1.1rem;
   flex-basis: 50%;
-  //border: 1px solid #d35400;
   border: 1px solid red;
   border-radius: 0.5vw;
   padding: 1.2vh 1vw 1vh 1vw;
@@ -387,13 +402,13 @@ function Header() {
   ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
   
   &:hover {
-    //background-color: #d35400;
       background-color: red;
       color: white;
   }
   `;
 
   const ComboBoxButton = styled.button`
+  font-size: 1.2rem;
   background-color: transparent;
   color: black;
   border: none;
@@ -430,14 +445,14 @@ function Header() {
 
   return (
     <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      {isAtTop ? <TopBar/> : <></>}
+      {isAtTop ? <TopBar /> : <></>}
       <BackgroundStyle>
         <BackgroundStyleBlur />
         <HeaderStyle>
-          <ImgStyleLogo src={tokyoLogo} alt="ZloLogo" style={isAtTop ? tokyoLogoStyleAtTop : !isDarkModeAnimationRunning && isAtTheBannerRange ? tokyoLogoStyle : tokyoLogoStyleZeroOpacity} />
+          <ImgStyleLogo src={tokyoLogo} alt="ZloLogo" style={isAtTop ? tokyoLogoStyleAtTop : tokyoLogoStyleZeroOpacity} />
         </HeaderStyle>
         <StyledDiv>
-          <StyledList style={isAtTop ? {padding: '10vh 5vw 0 0'} : {padding: '0 5vw 0 0'}}>
+          <StyledList style={isAtTop ? { padding: '10vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
             <StyledListItem to="/">Home</StyledListItem>
             <StyledListItem to="/">Produtos</StyledListItem>
             <StyledListItem to="/">Blog</StyledListItem>
