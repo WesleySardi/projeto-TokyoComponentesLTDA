@@ -37,6 +37,11 @@ const Title = styled.h1`
   width: 60%;
   margin: auto;
   font-weight: bold;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 5vh;
+    width: 100%;
+  }
 `;
 
 const Text = styled.p`
@@ -44,6 +49,12 @@ const Text = styled.p`
   width: 60%;
   margin: 2% auto 4% auto;
   color: red;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    margin: 2vh auto 3vh auto;
+    font-size: 3.5vh;
+    width: 80%;
+  }
 `;
 
 const Button = styled.button`
@@ -56,14 +67,26 @@ const Button = styled.button`
   border-radius: 0.7vw;
   width: 20%;
   font-weight: bold;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 3vh;
+    padding: 1.5vh 0;
+    width: 25vh;
+  }
 `;
 
 const AbsoluteImage = styled.img`
   position: absolute;
   bottom: 5%;
   left: 2%;
-  width: 20%; /* Ajuste o tamanho conforme necessário */
-  height: auto; /* Ajuste o tamanho conforme necessário */
+  width: 20%;
+  height: auto;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    width: 25vh;
+    bottom: 2%;
+    left: 4%;
+  }
 `;
 
 const ArrowContainer = styled.div`
@@ -72,6 +95,11 @@ const ArrowContainer = styled.div`
   right: 8%;
   display: flex;
   align-items: center;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    bottom: 4%;
+    right: 4%;
+  }
 `;
 
 const Arrow = styled.div`
@@ -79,6 +107,10 @@ const Arrow = styled.div`
   color: white;
   cursor: pointer;
   margin: 0 10px;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 5vh;
+  }
 `;
 
 const images = [

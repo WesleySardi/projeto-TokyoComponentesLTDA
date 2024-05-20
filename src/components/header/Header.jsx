@@ -3,7 +3,7 @@ import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import TopBar from './TopBar';
 
@@ -155,10 +155,22 @@ const StyledList = styled.ul`
     justify-content: center;
     list-style-type: none;
     z-index: 1;
+
+    @media ${props => props.theme.breakpoints.mobile} {
+      display: flex;
+      justify-content: right;
+      width: 100%;
+    }
   `;
 
 const Icon = styled(FontAwesomeIcon)`
     margin-right: 10px;
+
+    @media ${props => props.theme.breakpoints.mobile} {
+      color: red;
+      font-size: 4vh;
+      margin-right: 12vw;
+    }
   `;
 
 const StyledIcon = styled.img`
@@ -199,6 +211,21 @@ function Header() {
   const [retract, setRetract] = useState(false);
 
   const [animationActive, setAnimationActive] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 700);
+      setIsSmallDesktop(window.innerWidth <= 1279);
+    };
+
+    handleResize(); // Define o estado inicial
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -346,11 +373,24 @@ function Header() {
     border-radius: 0.5vw;
     color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};
     display: flex;
-    font-size: 2.2vh;
+    font-size: 1.8vh;
     height: 2vw;
     justify-content: center;
     padding: 5px;
     width: 9vw;
+
+    @media ${props => props.theme.breakpoints.smalldesktop} {
+      align-items: center;
+      border: 1px solid red;
+      border-radius: 0.5vw;
+      color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};
+      display: flex;
+      font-size: 2.2vh;
+      height: 2vw;
+      justify-content: center;
+      padding: 5px;
+      width: 5vw;
+    }
 
     &:hover {
       background-color: red;
@@ -410,42 +450,52 @@ function Header() {
 
   return (
     <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      {isAtTop ? <TopBar /> : <></>}
+      {isAtTop && !isMobile ? <TopBar /> : <></>}
       <BackgroundStyle>
         <BackgroundStyleBlur />
         <HeaderStyle>
-          <ImgStyleLogo src={'/img/tokyoLogo.png'} alt="ZloLogo" style={isAtTop ? { position: 'absolute', width: '15vh', height: 'auto', top: '10vh', left: '10vw', opacity: 1 } : { opacity: 0 }} />
+          <ImgStyleLogo src={'/img/tokyoLogo.png'} alt="ZloLogo"
+            style={isAtTop && !isMobile ? { position: 'absolute', width: '15vh', height: 'auto', top: '10vh', left: '10vw', opacity: 1 } :
+              isAtTop && isMobile ? { position: 'absolute', width: '7vh', height: 'auto', top: '5vh', left: '10vw', opacity: 1 } :
+                { opacity: 0 }}
+          />
         </HeaderStyle>
         <StyledDiv>
-          <StyledList style={isAtTop ? { padding: '18vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
-            <StyledListItem to="/">Home</StyledListItem>
-            <StyledListItem to="/">Produtos</StyledListItem>
-            <StyledListItem to="/">Blog</StyledListItem>
-            <ComboBoxContainer>
-              <ComboBoxButton>Institucional <IconComboBox icon={faChevronDown} /></ComboBoxButton>
-              <ComboBoxList>
-                <ComboBoxListItem to="/">
-                  Quem Somos
-                </ComboBoxListItem>
-                <ComboBoxListItem to="/">
-                  Trabalhe Conosco
-                </ComboBoxListItem>
-              </ComboBoxList>
-            </ComboBoxContainer>
-            <StyledContainer>
-              <StyledContactItem to="/">Contato</StyledContactItem>
-              <DarkModeContainer isDarkMode={isDarkMode}>
-                <DarkModeButton isDarkMode={isDarkMode} onClick={toggleDarkMode} disabled={isDarkModeAnimationRunning ? true : false}>
-                  <DarkModeIcon icon={isDarkMode ? faSun : faMoon} rotate={rotateIcon} />
-                </DarkModeButton>
-              </DarkModeContainer>
-            </StyledContainer>
-            <StyledListItemAndIcon to="/">
-              {/*<StyledIcon src="../img/EcommerceIcon.png" />*/}
-              <Icon icon={faCartShopping} />
-              E-commerce
-            </StyledListItemAndIcon>
-          </StyledList>
+          {!isMobile ?
+            <StyledList style={isAtTop ? { padding: '18vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
+              <StyledListItem to="/">Home</StyledListItem>
+              <StyledListItem to="/">Produtos</StyledListItem>
+              <StyledListItem to="/">Blog</StyledListItem>
+              <ComboBoxContainer>
+                <ComboBoxButton>Institucional <IconComboBox icon={faChevronDown} /></ComboBoxButton>
+                <ComboBoxList>
+                  <ComboBoxListItem to="/">
+                    Quem Somos
+                  </ComboBoxListItem>
+                  <ComboBoxListItem to="/">
+                    Trabalhe Conosco
+                  </ComboBoxListItem>
+                </ComboBoxList>
+              </ComboBoxContainer>
+              <StyledContainer>
+                <StyledContactItem to="/">Contato</StyledContactItem>
+                <DarkModeContainer isDarkMode={isDarkMode}>
+                  <DarkModeButton isDarkMode={isDarkMode} onClick={toggleDarkMode} disabled={isDarkModeAnimationRunning ? true : false}>
+                    <DarkModeIcon icon={isDarkMode ? faSun : faMoon} rotate={rotateIcon} />
+                  </DarkModeButton>
+                </DarkModeContainer>
+              </StyledContainer>
+              <StyledListItemAndIcon to="/">
+                {/*<StyledIcon src="../img/EcommerceIcon.png" />*/}
+                <Icon icon={faCartShopping} />
+                {isSmallDesktop ? '' : 'E-commerce'}
+              </StyledListItemAndIcon>
+            </StyledList>
+            :
+            <StyledList>
+              <Icon icon={isMobile ? faBars : faCartShopping} />
+            </StyledList>
+          }
         </StyledDiv>
       </BackgroundStyle>
     </ExpandedHeaderContainer>
