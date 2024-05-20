@@ -43,7 +43,7 @@ function Home() {
       <Cards />
       <Banner link={'/'} image={'../img/banner.png'} />
       <CardCarousel />
-      <FormBanner />
+      <FormBanner />{/*Isso que ta quebrando tudo o overflow*/}
       <OptionsFooter />
       {/*<SolutionsCards />*/}
       <Footer />

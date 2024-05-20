@@ -7,65 +7,13 @@ import { faCartShopping, faChevronDown } from '@fortawesome/free-solid-svg-icons
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import TopBar from './TopBar';
 
-const StyledContainer = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-width: 20%;
-margin: 0 1vw;
-`;
-
 const fadeIn = keyframes`
-from {
-  opacity: 0;
-}
-to {
-  opacity: 1;
-}
-`;
-
-const ComboBoxContainer = styled.div`
-position: relative;
-display: inline-block;
-
-&:hover {
-  ul {
-    display: block;
-    animation: ${fadeIn} 0.2s ease;
+  from {
+    opacity: 0;
   }
-  button {
-    color: #d35400;
-    transition: color 0.3s ease;
+  to {
+    opacity: 1;
   }
-}
-`;
-
-const ComboBoxList = styled.ul`
-position: absolute;
-display: none;
-background-color: #f9f9f9;
-min-width: 170px;
-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
-z-index: 1;
-border-radius: 0.5vw;
-
-&:hover {
-  display: block;
-}
-`;
-
-const ComboBoxListItem = styled(Link)`
-font-size: 1.1rem;
-display: block;
-padding: 12px 16px;
-text-align: left;
-cursor: pointer;
-border-radius: 0.5vw;
-text-decoration: none;
-
-&:hover {
-  background-color: #ddd;
-}
 `;
 
 const retractAnimation = keyframes`
@@ -98,18 +46,6 @@ const expandForDarkMode = keyframes`
     }
   `;
 
-const expandForDarkModeTopZero = keyframes`
-    0% {
-      height: 17vh;
-    }
-    75% {
-      height: 100vh;
-    }
-    100% {
-      height: 0vh;
-    }
-  `;
-
 const fadeInForDarkMode = keyframes`
     from {
         background-color: rgba(255, 255, 255, 0.6);
@@ -127,47 +63,6 @@ const fadeOutForDarkMode = keyframes`
       background-color: rgba(255, 255, 255, 0.6);
     }
 `;
-
-const HeaderStyle = styled.div`
-    width: 100%;
-    display: flex;
-  `;
-
-const ImgStyleLogo = styled.img`
-    /*width: 5vw,
-    padding: 4vh,
-    opacity: 1*/
-`;
-
-const StyledDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  `;
-
-const StyledList = styled.ul`
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  `;
-
-const Icon = styled(FontAwesomeIcon)`
-    margin-right: 10px;
-  `;
-
-const StyledIcon = styled.img`
-    width: 2rem;
-    height: auto;
-    margin-right: 5%;
-  `;
-
-const IconComboBox = styled(FontAwesomeIcon)`
-    margin-left: 5px;
-  `;
 
 const rotateAnimation = keyframes`
     0% {
@@ -187,20 +82,108 @@ const rotateAnimation = keyframes`
     }
   `;
 
+const StyledContainer = styled.div`
+  align-items: center;  
+  display: flex;
+  justify-content: center;
+  margin: 0 2vw;
+`;
+
+const ComboBoxContainer = styled.div`
+  display: inline-block;
+  position: relative;
+
+  &:hover {
+    ul {
+      display: block;
+      animation: ${fadeIn} 0.2s ease;
+    }
+    button {
+      color: #d35400;
+      transition: color 0.3s ease;
+    }
+  }
+`;
+
+const ComboBoxList = styled.ul`
+  background-color: #f9f9f9;
+  border-radius: 0.5vw;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+  display: none;
+  position: absolute;
+  width: 11vw;
+  z-index: 1;
+
+  &:hover {
+    display: block;
+  }
+`;
+
+const ComboBoxListItem = styled(Link)`
+  border-radius: 0.5vw;
+  cursor: pointer;
+  display: block;
+  font-size: 2.2vh;
+  padding: 12px 16px;
+  text-align: left;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #ddd;
+  }
+`;
+
+const HeaderStyle = styled.div`
+    display: flex;
+  `;
+
+const ImgStyleLogo = styled.img`
+`;
+
+const StyledDiv = styled.div`
+    align-items: end;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  `;
+
+const StyledList = styled.ul`
+    align-items: center;    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    z-index: 1;
+  `;
+
+const Icon = styled(FontAwesomeIcon)`
+    margin-right: 10px;
+  `;
+
+const StyledIcon = styled.img`
+    margin-right: 5%;
+    height: auto;
+    width: 2rem;
+  `;
+
+const IconComboBox = styled(FontAwesomeIcon)`
+    margin-left: 5px;
+  `;
+
 const DarkModeIcon = styled(FontAwesomeIcon)`
-    font-size: 1rem;
     ${props =>
     props.rotate &&
     css`
-        animation: ${rotateAnimation} 0.3s linear;
-      `};
+          animation: ${rotateAnimation} 0.3s linear;
+    `};    
+    font-size: 2.2vh;  
   `;
 
 const ExpandedHeaderContainer = styled.div`
-    position: fixed;
+    background-color: transparent;    
     height: 17vh;
-    width: 100vw;
-    background-color: transparent;
+    position: fixed;
     z-index: 1000;
 `;
 
@@ -212,23 +195,6 @@ function Header() {
   const [isAtTheBannerRange, setIsAtTheBannerRange] = useState(true);
 
   const [rotateIcon, setRotateIcon] = useState(false);
-
-  const [tokyoLogo] = useState('/img/tokyoLogo.png');
-
-  const [tokyoLogoStyleZeroOpacity] = useState({
-    width: '5vw',
-    padding: '4vh 4vh 4vh 5vw',
-    opacity: 0
-  });
-
-  const [tokyoLogoStyleAtTop] = useState({
-    position: 'absolute',
-    width: '6vw',
-    height: 'auto',
-    top: '8vh',
-    left: '10vw',
-    opacity: 1
-  });
 
   const [retract, setRetract] = useState(false);
 
@@ -321,13 +287,7 @@ function Header() {
   };
 
   const BackgroundStyle = styled.div`
-    background-color: ${isAtTop ? `rgba(0, 0, 0, 0)` : `rgba(255, 255, 255, 0.6)`};
-    height: 17vh;
-    width: 100vw;
-    display: flex;
-    justify-content: left;
-    z-index: 1000;
-    animation: 
+  animation: 
     ${isAtTop ? 'none' :
       isDarkModeAnimationRunning && isAtTop ? 'none' :
         isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
@@ -336,20 +296,14 @@ function Header() {
               (isAtTheBannerRange ? expandAnimation :
                 (retract ? retractAnimation : expandAnimation)))
     } 0.2s forwards;
+    background-color: ${isAtTop ? `rgba(0, 0, 0, 0)` : `rgba(255, 255, 255, 0.6)`};
+    display: flex;
+    height: 100%;
+    width: 100vw;
   `;
 
   const BackgroundStyleBlur = styled.div`
-    z-index: -1;
-    height: 17vh;
-
     &::before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 100vw;
-      background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.6)'};
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
       animation: 
       ${isAtTop ? 'none' :
       isDarkModeAnimationRunning && isAtTop ? 'none' :
@@ -364,93 +318,89 @@ function Header() {
         isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? expandForDarkMode : 'none')} 1.5s forwards,
 
       ${(!isAtTop && isDarkModeAnimationRunning && isDarkMode ? fadeOutForDarkMode :
-        !isAtTop && isDarkModeAnimationRunning && !isDarkMode ? fadeInForDarkMode :
+      !isAtTop && isDarkModeAnimationRunning && !isDarkMode ? fadeInForDarkMode :
         !isAtTop && !isDarkModeAnimationRunning ? 'none' : 'none'
     )} 1.5s forwards;
+      background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.6)'};
+      backdrop-filter: blur(2px);
+      content: '';
+      height: 160%;
+      position: absolute;
+      -webkit-backdrop-filter: blur(2px);
+      width: 100vw;
+      z-index: -1;
     }
   `;
 
   const StyledListItem = styled(Link)`
-    font-size: 1.2rem;
+    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};  
+    font-size: 2.5vh;
     text-align: center;
-    color: black;
-    width: 7vw;
     text-decoration: none;
-    ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
+    margin-right: 3vw;
   `;
 
   const StyledListItemAndIcon = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  text-align: center;
-  padding: 5px;
-  color: black;
-  width: 9vw;
-  height: 4vh;
-  text-decoration: none;
-  ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
-  border: 1px solid red;
-  border-radius: 0.5vw;
+    align-items: center;
+    border: 1px solid red;
+    border-radius: 0.5vw;
+    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};
+    display: flex;
+    font-size: 2.2vh;
+    height: 2vw;
+    justify-content: center;
+    padding: 5px;
+    width: 9vw;
 
-  &:hover {
-    background-color: red;
-    color: white;
-  }
-`;
-
+    &:hover {
+      background-color: red;
+      color: white;
+    }
+  `;
 
   const StyledContactItem = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  text-align: center;
-  color: black;
-  padding: 5px;
-  width: 7vw;
-  height: 4vh;
-  text-decoration: none;
-  ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
-  border: 1px solid red;
-  border-radius: 0.5vw;
+    align-items: center;
+    border: 1px solid red;
+    border-radius: 0.5vw;
+    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
+    display: flex;
+    font-size: 2.2vh;
+    height: 2vw;
+    justify-content: center;
+    padding: 5px;
+    width: 7vw;
 
-  &:hover {
-    background-color: red;
-    color: white;
-  }
+    &:hover {
+      background-color: red;
+      color: white;
+    }
   `;
 
   const ComboBoxButton = styled.button`
-  font-size: 1.2rem;
-  background-color: transparent;
-  color: black;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  ${isAtTop ? `color: rgba(255, 255, 255, 1);` : `color: rgba(0, 0, 0, 1);`}
+    background-color: transparent;
+    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
+    cursor: pointer;
+    font-size: 2.5vh;
   `;
 
   const DarkModeContainer = styled.div`
     background-color: ${props => (props.isDarkMode ? '#EEA200' : isAtTop ? 'grey' : 'black')};
-    padding: 1px;
-    margin-left: 1vw;
     border: 2px solid transparent;
     border-radius: 50%;
+    height: 2.5vw;
+    margin-left: 2vw;
     width: 2.5vw;
-    height: 4vh;
   `;
 
   const DarkModeButton = styled.button`
     background-color: ${props => (props.isDarkMode ? '#EEA200' : isAtTop ? 'white' : 'black')};
-    color: ${isDarkModeAnimationRunning ? (props => (props.isDarkMode ? 'white' : isAtTop ? 'black' : 'white')) : (props => (props.isDarkMode ? 'white' : isAtTop ? 'black' : 'white'))};
     border: 1px solid ${props => (props.isDarkMode ? 'white' : isAtTop ? 'black' : 'white')};
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
     border-radius: 50%;
+    color: ${isDarkModeAnimationRunning ? (props => (props.isDarkMode ? 'white' : isAtTop ? 'black' : 'white')) : (props => (props.isDarkMode ? 'white' : isAtTop ? 'black' : 'white'))};
+    cursor: pointer;
+    height: 100%;
+    transition: background-color 0.3s ease;
+    width: 100%;
 
     ${DarkModeContainer}:hover & {
       background-color: ${props => (props.isDarkMode ? '#DE9800' : '#323232')};
@@ -464,10 +414,10 @@ function Header() {
       <BackgroundStyle>
         <BackgroundStyleBlur />
         <HeaderStyle>
-          <ImgStyleLogo src={tokyoLogo} alt="ZloLogo" style={isAtTop ? tokyoLogoStyleAtTop : tokyoLogoStyleZeroOpacity} />
+          <ImgStyleLogo src={'/img/tokyoLogo.png'} alt="ZloLogo" style={isAtTop ? { position: 'absolute', width: '15vh', height: 'auto', top: '10vh', left: '10vw', opacity: 1 } : { opacity: 0 }} />
         </HeaderStyle>
         <StyledDiv>
-          <StyledList style={isAtTop ? { padding: '10vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
+          <StyledList style={isAtTop ? { padding: '18vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
             <StyledListItem to="/">Home</StyledListItem>
             <StyledListItem to="/">Produtos</StyledListItem>
             <StyledListItem to="/">Blog</StyledListItem>
@@ -491,8 +441,8 @@ function Header() {
               </DarkModeContainer>
             </StyledContainer>
             <StyledListItemAndIcon to="/">
-              <StyledIcon src="../img/EcommerceIcon.png"/>
-              {/*<Icon icon={faCartShopping} />*/}
+              {/*<StyledIcon src="../img/EcommerceIcon.png" />*/}
+              <Icon icon={faCartShopping} />
               E-commerce
             </StyledListItemAndIcon>
           </StyledList>

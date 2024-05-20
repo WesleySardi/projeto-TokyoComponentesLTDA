@@ -2,38 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.div`
+  border-bottom: 1px solid red;
+  border-image: linear-gradient(to right, #2C0001, red) 1;
+  display: flex;
+  height: 5vh;
   position: absolute;
   top: 0;
   width: 100vw;
-  height: 5vh;
-  display: flex;
   z-index: 1000;
-  border-bottom: 1px solid red;
-  border-image: linear-gradient(to right, #2C0001, red) 1;
 `;
 
 const Section = styled.div`
-  width: 33.33%;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 33.33%;
 `;
 
 const Content = styled.div`
+  align-items: center;  
   display: flex;
-  align-items: center;
 `;
 
 const Image = styled.img`
-  width: 1vw;
   height: auto;
   margin-right: 10px;
+  width: 1vw;
 `;
 
 const Text = styled.span`
-  font-size: 0.8rem;
-  font-weight: bold;
   color: white;
+  font-size: 1.8vh;
+  font-weight: bold;
 `;
 
 const TopBar = () => {
