@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,11 @@ const Container = styled.div`
   display: flex;
   height: 40vh;
   margin: 10vh 0;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    display: block;
+    height: 100vh;
+  }
 `;
 
 const LeftPart = styled.div`
@@ -23,12 +28,16 @@ const LeftPart = styled.div`
 `;
 
 const RightPart = styled.div`
-  flex: 70%;
+  flex: 80%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    height: 100%;
+  }
 `;
 
 const Title = styled.h1`
@@ -45,6 +54,12 @@ const Text = styled.p`
 const Carousel = styled.div`
   display: flex;
   transition: transform 0.3s ease-in-out;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 const Card = styled(Link)`
@@ -67,6 +82,12 @@ const Card = styled(Link)`
     background: linear-gradient(to right, #f0f0f0, white);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    width: 90%;
+    height: 30.33%;
+    margin: 5% auto;
+  }
 `;
 
 const CardImage = styled.img`
@@ -75,6 +96,10 @@ const CardImage = styled.img`
   pointer-events: none;
   border-top-left-radius: 3%;
   border-top-right-radius: 3%;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    height: 50%;
+  }
 `;
 
 const CardTitle = styled.h3`
@@ -86,6 +111,10 @@ const CardTitle = styled.h3`
   height: 50%;
   font-weight: bold;
   user-select: none;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    height: 50%;
+  }
 `;
 
 const Tag = styled.div`
@@ -120,6 +149,13 @@ const LeftButton = styled(Button)`
   &:hover {
     background: linear-gradient(to right, #f0f0f0, transparent);
   }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    top: 5%;
+    height: 15%;
+    width: 100%;
+    background: linear-gradient(to top,  #f0f0f0, transparant);
+  }
 `;
 
 const RightButton = styled(Button)`
@@ -130,102 +166,129 @@ const RightButton = styled(Button)`
 
   &:hover {
     background: linear-gradient(to left, white, transparent);
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    top: 100%;
+    height: 25%;
+    width: 100%;
+    background: linear-gradient(to top,  #f0f0f0, transparant);
+
+    &:hover {
+      background: linear-gradient(to bottom, #f0f0f0, transparant);
+    }
+  }
 `;
 
 const IconComboBox = styled(FontAwesomeIcon)`
 `;
 
 const data = [
-    {
-        image: '../img/Card3.png',
-        title: '10 Dicas para analisar Circuitos Impressos',
-        tag: 'Eletrônica',
-        link: '/'
-    },
-    {
-        image: '../img/Card2.png',
-        title: 'Como entrar na mundo da robótica com projetos reais',
-        tag: 'Robótica',
-        link: '/'
-    },
-    {
-        image: '../img/Card1.png',
-        title: '10 Dicas para analisar Circuitos Impressos',
-        tag: 'Eletrônica',
-        link: '/'
-    },
-    {
-        image: '../img/Card3.png',
-        title: 'Como entrar na mundo da robótica com projetos reais',
-        tag: 'Robótica',
-        link: '/'
-    },
-    {
-        image: '../img/Card2.png',
-        title: '10 Dicas para analisar Circuitos Impressos',
-        tag: 'Eletrônica',
-        link: '/'
-    }
+  {
+    image: '../img/Card3.png',
+    title: '10 Dicas para analisar Circuitos Impressos',
+    tag: 'Eletrônica',
+    link: '/'
+  },
+  {
+    image: '../img/Card2.png',
+    title: 'Como entrar na mundo da robótica com projetos reais',
+    tag: 'Robótica',
+    link: '/'
+  },
+  {
+    image: '../img/Card1.png',
+    title: '10 Dicas para analisar Circuitos Impressos',
+    tag: 'Eletrônica',
+    link: '/'
+  },
+  {
+    image: '../img/Card3.png',
+    title: 'Como entrar na mundo da robótica com projetos reais',
+    tag: 'Robótica',
+    link: '/'
+  },
+  {
+    image: '../img/Card2.png',
+    title: '10 Dicas para analisar Circuitos Impressos',
+    tag: 'Eletrônica',
+    link: '/'
+  }
 ];
 
 const YourComponent = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isAnimationRunning, setIsAnimationRunning] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimationRunning, setIsAnimationRunning] = useState(false);
 
-    const timerForAnimation = () => {
-        setIsAnimationRunning(true);
-        setTimeout(() => {
-            setIsAnimationRunning(false);
-        }, 300);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 700);
+      setIsSmallDesktop(window.innerWidth <= 1279);
+    };
+
+    handleResize(); // Define o estado inicial
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const timerForAnimation = () => {
+    setIsAnimationRunning(true);
+    setTimeout(() => {
+      setIsAnimationRunning(false);
+    }, 300);
+  }
+
+  const handleRightClick = () => {
+    if (!isAnimationRunning) {
+      setCurrentIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % data.length;
+        if (nextIndex === data.length - 1) {
+          setCurrentIndex(0);
+        }
+        return nextIndex;
+      });
+      timerForAnimation();
     }
+  };
 
-    const handleRightClick = () => {
-        if (!isAnimationRunning) {
-            setCurrentIndex((prevIndex) => {
-                const nextIndex = (prevIndex + 1) % data.length;
-                if (nextIndex === data.length - 1) {
-                    setCurrentIndex(0);
-                }
-                return nextIndex;
-            });
-            timerForAnimation();
+  const handleLeftClick = () => {
+    if (!isAnimationRunning) {
+      setCurrentIndex((prevIndex) => {
+        let nextIndex = (prevIndex - 1 + data.length) % data.length;
+        if (prevIndex === 0) {
+          nextIndex = data.length - 2;
         }
-    };
+        return nextIndex;
+      });
+      timerForAnimation();
+    }
+  };
 
-    const handleLeftClick = () => {
-        if (!isAnimationRunning) {
-            setCurrentIndex((prevIndex) => {
-                let nextIndex = (prevIndex - 1 + data.length) % data.length;
-                if (prevIndex === 0) {
-                    nextIndex = data.length - 2;
-                }
-                return nextIndex;
-            });
-            timerForAnimation();
-        }
-    };
-
-    return (
-        <Container>
-            <LeftPart>
-                <Title>Posts</Title>
-                <Text>Destaques do Blog</Text>
-            </LeftPart>
-            <RightPart>
-                <LeftButton onClick={handleLeftClick}>{/*<IconComboBox icon={faChevronLeft} />*/}</LeftButton>
-                <Carousel style={{ transform: `translateX(-${currentIndex * 35.33}%)` }}>
-                    {data.map((item, index) => (
-                        <Card key={index} to={item.link}>
-                            <CardImage src={item.image} alt={`Image ${index + 1}`} />
-                            <Tag>{item.tag}</Tag>
-                            <CardTitle>{item.title}</CardTitle>
-                        </Card>
-                    ))}
-                </Carousel>
-                <RightButton onClick={handleRightClick}>{/*<IconComboBox icon={faChevronRight} />*/}</RightButton>
-            </RightPart>
-        </Container>
-    );
+  return (
+    <Container>
+      <LeftPart>
+        <Title>Posts</Title>
+        <Text>Destaques do Blog</Text>
+      </LeftPart>
+      <RightPart>
+        <LeftButton onClick={handleLeftClick}>{/*<IconComboBox icon={faChevronLeft} />*/}</LeftButton>
+        <Carousel style={isMobile ? {transform: `translateY(-${currentIndex * 33.33}%)` } : { transform: `translateX(-${currentIndex * 35.33}%)` }}>
+          {data.map((item, index) => (
+            <Card key={index} to={item.link}>
+              <CardImage src={item.image} alt={`Image ${index + 1}`} />
+              <Tag>{item.tag}</Tag>
+              <CardTitle>{item.title}</CardTitle>
+            </Card>
+          ))}
+        </Carousel>
+        <RightButton onClick={handleRightClick}>{/*<IconComboBox icon={faChevronRight} />*/}</RightButton>
+      </RightPart>
+    </Container>
+  );
 };
 
 export default YourComponent;
