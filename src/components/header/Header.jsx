@@ -155,12 +155,6 @@ const StyledList = styled.ul`
     justify-content: center;
     list-style-type: none;
     z-index: 1;
-
-    @media ${props => props.theme.breakpoints.mobile} {
-      display: flex;
-      justify-content: right;
-      width: 100%;
-    }
   `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -194,7 +188,6 @@ const DarkModeIcon = styled(FontAwesomeIcon)`
 
 const ExpandedHeaderContainer = styled.div`
     background-color: transparent;    
-    height: 17vh;
     position: fixed;
     z-index: 1000;
 `;
@@ -221,7 +214,7 @@ function Header() {
       setIsSmallDesktop(window.innerWidth <= 1279);
     };
 
-    handleResize(); // Define o estado inicial
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -315,7 +308,7 @@ function Header() {
 
   const BackgroundStyle = styled.div`
   animation: 
-    ${isAtTop ? 'none' :
+    ${isMobile ? 'none' : isAtTop ? 'none' :
       isDarkModeAnimationRunning && isAtTop ? 'none' :
         isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
           isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
@@ -332,7 +325,7 @@ function Header() {
   const BackgroundStyleBlur = styled.div`
     &::before {
       animation: 
-      ${isAtTop ? 'none' :
+      ${isMobile ? 'none' : isAtTop ? 'none' :
       isDarkModeAnimationRunning && isAtTop ? 'none' :
         isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
           isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
@@ -340,11 +333,11 @@ function Header() {
               (isAtTheBannerRange ? expandAnimation :
                 (retract ? retractAnimation : expandAnimation)))} 0.2s forwards,
 
-      ${(isDarkModeAnimationRunning && isAtTop ? 'none' :
+      ${isMobile ? 'none' : (isDarkModeAnimationRunning && isAtTop ? 'none' :
       isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? expandForDarkMode :
         isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? expandForDarkMode : 'none')} 1.5s forwards,
 
-      ${(!isAtTop && isDarkModeAnimationRunning && isDarkMode ? fadeOutForDarkMode :
+      ${isMobile ? 'none' : (!isAtTop && isDarkModeAnimationRunning && isDarkMode ? fadeOutForDarkMode :
       !isAtTop && isDarkModeAnimationRunning && !isDarkMode ? fadeInForDarkMode :
         !isAtTop && !isDarkModeAnimationRunning ? 'none' : 'none'
     )} 1.5s forwards;
@@ -356,6 +349,10 @@ function Header() {
       -webkit-backdrop-filter: blur(2px);
       width: 100vw;
       z-index: -1;
+
+      @media ${props => props.theme.breakpoints.smalldesktop} {
+        height: 100%;
+      }
     }
   `;
 
@@ -449,7 +446,7 @@ function Header() {
   `;
 
   return (
-    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{height: isMobile && isAtTop ? '17vh' : '7vh' }}>
       {isAtTop && !isMobile ? <TopBar /> : <></>}
       <BackgroundStyle>
         <BackgroundStyleBlur />

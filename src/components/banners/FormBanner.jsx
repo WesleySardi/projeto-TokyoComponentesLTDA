@@ -1,32 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-// Define a animação de rotação, rolagem e escala
-const scrollRotateAnimation = keyframes`
-0% {
-  transform: translateX(0) rotate(0deg) scale(1);
-}
-25% {
-  transform: translateX(0) rotate(10deg) scale(1.1);
-}
-50% {
-  transform: translateX(0) rotate(0deg) scale(1); /* Rotação, rolagem e escala para a direita */
-}
-75% {
-  transform: translateX(0) rotate(-10deg) scale(0.9);
-}
-100% {
-  transform: translateX(0) rotate(0deg) scale(1);
-}
-`;
-
 const AdditionalContent = styled.div`
-flex: 1;
-display: flex;
-justify-content: center;
-align-items: center;
-width: 90vw;
-height: 100%;
+width: 90%;
 
 @media ${props => props.theme.breakpoints.mobile} {
   width: 100vw;
@@ -37,7 +13,7 @@ const StyledSecondDiv = styled.div`
 width: 100%;
 height: 60%;
 display: flex;
-justify-content: space-around; /* Distribui o espaço igualmente entre as divs filhas */
+justify-content: space-around;
 align-items: center;
 border: 1px solid red;
 border-top-right-radius: 15px;
@@ -109,7 +85,7 @@ width: 100%;
 const TitleContainer = styled.div`
 display: flex;
 align-items: center;
-justify-content: center; /* Alinha verticalmente ao centro */
+justify-content: center;
 margin-bottom: 3%;
 
 @media ${props => props.theme.breakpoints.mobile} {
@@ -157,12 +133,12 @@ height: auto;
 const FieldContainer = styled.div`
 display: flex;
 flex-direction: column;
-margin-bottom: 10px;
+margin-bottom: 3%;
 `;
 
 const InputField = styled.input`
-margin-bottom: 10px;
-border-radius: 5px;
+margin-bottom: 2%;
+border-radius: 0.5vw;
 padding: 2%;
 
 @media ${props => props.theme.breakpoints.mobile} {
@@ -189,7 +165,7 @@ background-color: green;
 color: white;
 padding: 3.5%;
 border: none;
-border-radius: 5px;
+border-radius: 0.5vw;
 cursor: pointer;
 margin: 0 auto;
 margin-top: 3%;
@@ -216,8 +192,6 @@ display: flex;
 align-items: center;
 justify-content: center;
 text-align: center;
-height: 100%;
-width: 100%;
 `;
 
 const RequiredFieldsLabel = styled.label`
@@ -241,15 +215,13 @@ accent-color: green;
 
 function FormBanner() {
   const [isMobile, setIsMobile] = useState(false);
-  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 700);
-      setIsSmallDesktop(window.innerWidth <= 1279);
     };
 
-    handleResize(); // Define o estado inicial
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

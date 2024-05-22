@@ -36,12 +36,10 @@ const CenterBottomImage2 = styled.img`
 
 function Home() {
   const [isMobile, setIsMobile] = useState(false);
-  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 700);
-      setIsSmallDesktop(window.innerWidth <= 1279);
     };
 
     handleResize(); // Define o estado inicial

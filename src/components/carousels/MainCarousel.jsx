@@ -40,7 +40,7 @@ const Title = styled.h1`
 
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 5vh;
-    width: 100%;
+    width: 90%;
   }
 `;
 
@@ -71,7 +71,7 @@ const Button = styled.button`
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 3vh;
     padding: 1.5vh 0;
-    width: 25vh;
+    width: 50%;
   }
 `;
 

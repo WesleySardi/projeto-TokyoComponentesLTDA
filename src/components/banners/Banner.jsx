@@ -5,17 +5,18 @@ import { Link } from 'react-router-dom';
 const Banner = (props) => {
 
   const FullScreenImage = styled.div`
-  width: 100vw;
-  height: 70vh;
-  margin: 6% 0;
-  background-image: url(${props.image});
-  background-size: cover;
-  background-position: center;
+    width: 100vw;
   `;
+
+  const StyledImage = styled.img`
+    width: 100%;
+  `
 
   return (
     <Link to={props.link}>
-      <FullScreenImage />
+      <FullScreenImage>
+        <StyledImage src={`${props.image}`}/>
+      </FullScreenImage>
     </Link>
   );
 };
