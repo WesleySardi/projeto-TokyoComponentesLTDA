@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +12,6 @@ const Container = styled.div`
 
   @media ${props => props.theme.breakpoints.mobile} {
     display: block;
-    height: 100vh;
   }
 `;
 
@@ -25,6 +24,13 @@ const LeftPart = styled.div`
   text-align: left;
   background-color: #f0f0f0;
   padding: 0% 0% 0% 10%;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    width: 90%;
+    height: 20%;
+    margin-left: 10%;
+    padding: 0%;
+  }
 `;
 
 const RightPart = styled.div`
@@ -36,7 +42,10 @@ const RightPart = styled.div`
   position: relative;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    height: 100%;
+    width: 90%;
+    height: 60%;
+    margin-left: 10%;
+    padding: 0%;
   }
 `;
 
@@ -45,10 +54,20 @@ const Title = styled.h1`
   color: red;
   font-weight: bold;
   font-size: 3rem;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 7rem;
+    width: 100%;
+  }
 `;
 
 const Text = styled.p`
   font-size: 2vw;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 5rem;
+    width: 100%;
+  }
 `;
 
 const Carousel = styled.div`
@@ -56,9 +75,7 @@ const Carousel = styled.div`
   transition: transform 0.3s ease-in-out;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    display: block;
     height: 100%;
-    width: 100%;
   }
 `;
 
@@ -85,8 +102,7 @@ const Card = styled(Link)`
 
   @media ${props => props.theme.breakpoints.mobile} {
     width: 90%;
-    height: 30.33%;
-    margin: 5% auto;
+    height: 100%;
   }
 `;
 
@@ -114,6 +130,7 @@ const CardTitle = styled.h3`
 
   @media ${props => props.theme.breakpoints.mobile} {
     height: 50%;
+    font-size: 4rem;
   }
 `;
 
@@ -128,6 +145,10 @@ const Tag = styled.div`
   color: white;
   font-weight: bold;
   user-select: none;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 4rem;
+  }
 `;
 
 const Button = styled.button`
@@ -180,7 +201,22 @@ const RightButton = styled(Button)`
   }
 `;
 
-const IconComboBox = styled(FontAwesomeIcon)`
+const ArrowContainer = styled.div`
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: right;
+  margin-right: 3%;
+  margin-top: 5%;
+  height: 15%;
+`;
+
+const Arrow = styled.div`
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 5vh;
 `;
 
 const data = [
@@ -221,15 +257,13 @@ const YourComponent = () => {
   const [isAnimationRunning, setIsAnimationRunning] = useState(false);
 
   const [isMobile, setIsMobile] = useState(false);
-  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 700);
-      setIsSmallDesktop(window.innerWidth <= 1279);
     };
 
-    handleResize(); // Define o estado inicial
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -244,29 +278,73 @@ const YourComponent = () => {
 
   const handleRightClick = () => {
     if (!isAnimationRunning) {
-      setCurrentIndex((prevIndex) => {
-        const nextIndex = (prevIndex + 1) % data.length;
-        if (nextIndex === data.length - 1) {
-          setCurrentIndex(0);
-        }
-        return nextIndex;
-      });
-      timerForAnimation();
+      if (isMobile) {
+        setCurrentIndex((prevIndex) => {
+          const nextIndex = (prevIndex + 1) % data.length;
+          if (nextIndex === data.length) {
+            setCurrentIndex(0);
+          }
+          return nextIndex;
+        });
+        timerForAnimation();
+      } else {
+        setCurrentIndex((prevIndex) => {
+          const nextIndex = (prevIndex + 1) % data.length;
+          if (nextIndex === data.length - 1) {
+            setCurrentIndex(0);
+          }
+          return nextIndex;
+        });
+        timerForAnimation();
+      }
     }
   };
 
   const handleLeftClick = () => {
     if (!isAnimationRunning) {
-      setCurrentIndex((prevIndex) => {
-        let nextIndex = (prevIndex - 1 + data.length) % data.length;
-        if (prevIndex === 0) {
-          nextIndex = data.length - 2;
-        }
-        return nextIndex;
-      });
-      timerForAnimation();
+      if (isMobile) {
+        setCurrentIndex((prevIndex) => {
+          let nextIndex = (prevIndex - 1 + data.length) % data.length;
+          if (prevIndex === 0) {
+            nextIndex = data.length - 1;
+          }
+          return nextIndex;
+        });
+        timerForAnimation();
+      } else {
+        setCurrentIndex((prevIndex) => {
+          let nextIndex = (prevIndex - 1 + data.length) % data.length;
+          if (prevIndex === 0) {
+            nextIndex = data.length - 2;
+          }
+          return nextIndex;
+        });
+        timerForAnimation();
+      }
     }
   };
+
+  const StyledIconLeft = styled(FontAwesomeIcon)`
+  color: red;
+  ${currentIndex === 0
+        ? css`
+          opacity: 0.5;
+        `
+        : css`
+          opacity: 1;
+        `}
+  `;
+
+  const StyledIconRight = styled(FontAwesomeIcon)`
+  color: red;
+  ${currentIndex === data.length - 1
+      ? css`
+          opacity: 0.5;
+        `
+      : css`
+          opacity: 1;
+        `}
+  `;
 
   return (
     <Container>
@@ -275,8 +353,8 @@ const YourComponent = () => {
         <Text>Destaques do Blog</Text>
       </LeftPart>
       <RightPart>
-        <LeftButton onClick={handleLeftClick}>{/*<IconComboBox icon={faChevronLeft} />*/}</LeftButton>
-        <Carousel style={isMobile ? {transform: `translateY(-${currentIndex * 33.33}%)` } : { transform: `translateX(-${currentIndex * 35.33}%)` }}>
+        {isMobile ? <></> : <LeftButton onClick={handleLeftClick}>{/*<IconComboBox icon={faChevronLeft} />*/}</LeftButton>}
+        <Carousel style={isMobile ? { transform: `translateX(-${currentIndex * 92}%)` } : { transform: `translateX(-${currentIndex * 35.33}%)` }}>
           {data.map((item, index) => (
             <Card key={index} to={item.link}>
               <CardImage src={item.image} alt={`Image ${index + 1}`} />
@@ -285,8 +363,16 @@ const YourComponent = () => {
             </Card>
           ))}
         </Carousel>
-        <RightButton onClick={handleRightClick}>{/*<IconComboBox icon={faChevronRight} />*/}</RightButton>
+        {isMobile ? <></> : <RightButton onClick={handleRightClick}>{/*<IconComboBox icon={faChevronRight} />*/}</RightButton>}
       </RightPart>
+      {isMobile ?
+        <ArrowContainer>
+          <Arrow onClick={handleLeftClick}><StyledIconLeft icon={faArrowLeft} /></Arrow>
+          <Arrow onClick={handleRightClick}><StyledIconRight icon={faArrowRight} /></Arrow>
+        </ArrowContainer>
+        :
+        <></>
+      }
     </Container>
   );
 };
