@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import TopBar from './TopBar';
+import Sidebar from '../sidebar/Sidebar';
 
 const fadeIn = keyframes`
   from {
@@ -48,7 +49,7 @@ const expandForDarkMode = keyframes`
 
 const fadeInForDarkMode = keyframes`
     from {
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.7);
     }
     to {
       background-color: rgba(0, 0, 0, 0.8);
@@ -60,7 +61,7 @@ const fadeOutForDarkMode = keyframes`
       background-color: rgba(0, 0, 0, 0.8);
     }
     to {
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: rgba(255, 255, 255, 0.7);
     }
 `;
 
@@ -112,7 +113,7 @@ const ComboBoxList = styled.ul`
   display: none;
   position: absolute;
   width: 11vw;
-  z-index: 1;
+  z-index: 3;
 
   &:hover {
     display: block;
@@ -154,7 +155,7 @@ const StyledList = styled.ul`
     flex-direction: row;
     justify-content: center;
     list-style-type: none;
-    z-index: 1;
+    z-index: 2;
   `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -189,7 +190,7 @@ const DarkModeIcon = styled(FontAwesomeIcon)`
 const ExpandedHeaderContainer = styled.div`
     background-color: transparent;    
     position: fixed;
-    z-index: 1000;
+    z-index: 3;
 `;
 
 function Header() {
@@ -207,6 +208,7 @@ function Header() {
 
   const [isMobile, setIsMobile] = useState(false);
   const [isSmallDesktop, setIsSmallDesktop] = useState(false);
+  const [isSidebarActive, setIsSidebarActive] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -306,6 +308,14 @@ function Header() {
     }
   };
 
+  const toggleSidebar = () => {
+    if (isSidebarActive) {
+      setIsSidebarActive(false);
+    } else {
+      setIsSidebarActive(true);
+    }
+  };
+
   const BackgroundStyle = styled.div`
   animation: 
     ${isMobile ? 'none' : isAtTop ? 'none' :
@@ -316,10 +326,20 @@ function Header() {
               (isAtTheBannerRange ? expandAnimation :
                 (retract ? retractAnimation : expandAnimation)))
     } 0.2s forwards;
-    background-color: ${isAtTop ? `rgba(0, 0, 0, 0)` : `rgba(255, 255, 255, 0.6)`};
+    background-color: ${isAtTop ? `rgba(0, 0, 0, 0)` : `rgba(255, 255, 255, 0.7)`};
     display: flex;
     height: 100%;
     width: 100vw;
+    z-index: 1;
+
+    @media ${props => props.theme.breakpoints.mobile} {
+      height: 100%;
+      ${isMobile && isAtTop && isSidebarActive ?
+          `background-color: rgba(255, 255, 255, 0.7);`
+        :
+          `background-color: rgba(0, 0, 0, 0);`
+      }
+    }
   `;
 
   const BackgroundStyleBlur = styled.div`
@@ -341,7 +361,7 @@ function Header() {
       !isAtTop && isDarkModeAnimationRunning && !isDarkMode ? fadeInForDarkMode :
         !isAtTop && !isDarkModeAnimationRunning ? 'none' : 'none'
     )} 1.5s forwards;
-      background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.6)'};
+      background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
       backdrop-filter: blur(2px);
       content: '';
       height: 160%;
@@ -446,7 +466,12 @@ function Header() {
   `;
 
   return (
-    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{height: isMobile && isAtTop ? '17vh' : '7vh' }}>
+    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ height: isMobile ? isAtTop ? '17vh' : '7vh' : '17vh' }}>
+      {isSidebarActive ?
+        <Sidebar isAtTop={isAtTop}/>
+        :
+        <></>
+      }
       {isAtTop && !isMobile ? <TopBar /> : <></>}
       <BackgroundStyle>
         <BackgroundStyleBlur />
@@ -490,7 +515,7 @@ function Header() {
             </StyledList>
             :
             <StyledList>
-              <Icon icon={isMobile ? faBars : faCartShopping} />
+              <Icon icon={isMobile ? faBars : faCartShopping} onClick={isMobile ? () => toggleSidebar() : () => { }} />
             </StyledList>
           }
         </StyledDiv>

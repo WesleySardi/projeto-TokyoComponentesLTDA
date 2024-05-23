@@ -81,12 +81,6 @@ const AbsoluteImage = styled.img`
   left: 2%;
   width: 20%;
   height: auto;
-
-  @media ${props => props.theme.breakpoints.mobile} {
-    width: 25vh;
-    bottom: 2%;
-    left: 4%;
-  }
 `;
 
 const ArrowContainer = styled.div`
@@ -160,6 +154,18 @@ const StyledIconRight = styled(FontAwesomeIcon)`
 
 const MainCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 700);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
@@ -188,7 +194,7 @@ const MainCarousel = () => {
           </Content>
         </Slide>
       ))}
-      <AbsoluteImage src="../img/wsBalloonImage.png" alt="Descrição da imagem" />
+      {isMobile ? <></> : <AbsoluteImage src="../img/wsBalloonImage.png" alt="Descrição da imagem" />}
       <ArrowContainer>
         <Arrow onClick={prevSlide}><StyledIconLeft icon={faArrowLeft} currentIndex={currentIndex} images={images} /></Arrow>
         <Arrow onClick={nextSlide}><StyledIconRight icon={faArrowRight} currentIndex={currentIndex} images={images} /></Arrow>

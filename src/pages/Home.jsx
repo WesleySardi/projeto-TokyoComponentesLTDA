@@ -20,18 +20,28 @@ const CenterBottomImage = styled.img`
   bottom: -7.5%;
   left: 50%;
   transform: translateX(-50%);
-  width: 5%; /* Ajuste o tamanho conforme necessário */
-  height: auto; /* Ajuste o tamanho conforme necessário */
+  width: 5%;
+  height: auto;
   z-index: 1;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    bottom: -2.5%;
+    width: 12%;
+  }
 `;
 const CenterBottomImage2 = styled.img`
   position: absolute;
   bottom: 4%;
   left: 50%;
   transform: translateX(-50%);
-  width: 0.6%; /* Ajuste o tamanho conforme necessário */
-  height: auto; /* Ajuste o tamanho conforme necessário */
+  width: 0.6%;
+  height: auto;
   z-index: 1;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    bottom: 4%;
+    width: 2%;
+  }
 `;
 
 function Home() {

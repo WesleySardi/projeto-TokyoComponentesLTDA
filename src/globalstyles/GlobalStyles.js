@@ -7,6 +7,12 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     background-color: #f0f0f0;
     font-size: 1vw;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
   }
 `;
 

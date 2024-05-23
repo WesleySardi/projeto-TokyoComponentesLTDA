@@ -129,9 +129,11 @@ const Card = styled.div`
 `;
 
 const CardImage = styled.img`
-    width: 50%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    height: 70%;
+    width: auto;
+    max-width: 90%;
+    max-height: 60%;
+    margin: 0 auto;
 `;
 
 const CardTitle = styled.h3`
@@ -161,10 +163,11 @@ const CardText = styled.p`
 `;
 
 const ButtonWrapper = styled.div`
-    height: auto;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 2%;
+    margin-bottom: 2%;
 `;
 
 const Button = styled.button`
@@ -173,12 +176,6 @@ const Button = styled.button`
     border-radius: 50%;
     border: 1px solid orange;
     background-color: transparent;
-
-    @media ${props => props.theme.breakpoints.mobile} {
-        width: 4vh;
-        height: 4vh;
-        margin-right: 3%;
-    }
 `;
 
 const ThirdDiv = styled.div`
@@ -215,6 +212,7 @@ const StyledLink = styled(Link)`
 `;
 
 const ContentContainer = styled.div`
+    height: 40%;
     padding: 1vw;
 `;
 
@@ -228,7 +226,7 @@ const Cards = () => {
             setIsSmallDesktop(window.innerWidth <= 1279);
         };
 
-        handleResize(); // Define o estado inicial
+        handleResize();
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -247,8 +245,8 @@ const Cards = () => {
             </FirstDiv>
             <SecondDiv>
                 <Card>
-                    <CardImage src="../img/motherBoardImg.png" alt="Card Image" style={isMobile ? { height: '40%', margin: 'auto' } : { height: '70%', margin: 'auto' }} />
-                    <ContentContainer style={{ height: '30%' }}>
+                    <CardImage src="../img/motherBoardImg.png" alt="Card Image" />
+                    <ContentContainer>
                         <CardTitle>Mais de 12.000 itens em estoque</CardTitle>
                         <CardText>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <StyledLink to="/">muito mais!</StyledLink></CardText>
                         <ButtonWrapper>
@@ -257,8 +255,8 @@ const Cards = () => {
                     </ContentContainer>
                 </Card>
                 <Card>
-                    <CardImage src="../img/wireImg.png" alt="Card Image" style={isMobile ? { height: '55%', paddingBottom: '20%', margin: '0 auto' } : { height: '60%', paddingBottom: '5%', margin: '0 auto' }} />
-                    <ContentContainer style={{ height: '35%' }}>
+                    <CardImage src="../img/wireImg.png" alt="Card Image" />
+                    <ContentContainer>
                         <CardTitle>Montagem de Cabos Personalizados</CardTitle>
                         <CardText>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
                         <ButtonWrapper>
@@ -267,8 +265,8 @@ const Cards = () => {
                     </ContentContainer>
                 </Card>
                 <Card>
-                    <CardImage src="../img/ShopCartImg.png" alt="Card Image" style={isMobile ? { height: '30%', margin: 'auto' } : { height: '40%', margin: 'auto' }} />
-                    <ContentContainer style={{ height: '30%' }}>
+                    <CardImage src="../img/ShopCartImg.png" alt="Card Image" />
+                    <ContentContainer>
                         <CardTitle>Suprimentos de produtos personalizados</CardTitle>
                         <CardText>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
                         <ButtonWrapper>
