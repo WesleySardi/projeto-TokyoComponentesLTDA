@@ -47,6 +47,24 @@ const expandForDarkMode = keyframes`
     }
   `;
 
+const retractForMobile = keyframes`
+    from {
+      height: 17vh;
+    }
+    to {
+      height: 7vh;
+    }
+  `;
+
+const expandForMobile = keyframes`
+    0% {
+      height: 7vh;
+    }
+    100% {
+      height: 17vh;
+    }
+  `;
+
 const fadeInForDarkMode = keyframes`
     from {
         background-color: rgba(255, 255, 255, 0.7);
@@ -318,15 +336,29 @@ function Header() {
 
   const BackgroundStyle = styled.div`
   animation: 
-    ${isMobile ? 'none' : isAtTop ? 'none' :
-      isDarkModeAnimationRunning && isAtTop ? 'none' :
-        isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
-          isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
-            (!isDarkModeAnimationRunning && isAtTop ? expandAnimation :
-              (isAtTheBannerRange ? expandAnimation :
-                (retract ? retractAnimation : expandAnimation)))
+    ${isMobile
+      ? isAtTheBannerRange ? 'none' : isSidebarActive ? expandForMobile : retractAnimation
+      : isAtTop ? 'none' :
+        isDarkModeAnimationRunning && isAtTop ? 'none' :
+          isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
+            isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
+              (!isDarkModeAnimationRunning && isAtTop ? expandAnimation :
+                (isAtTheBannerRange ? expandAnimation :
+                  (retract ? retractAnimation : expandAnimation)))
     } 0.2s forwards;
     background-color: ${isAtTop ? `rgba(0, 0, 0, 0)` : `rgba(255, 255, 255, 0.7)`};
+
+    ${isMobile
+      ?
+      `
+      background-image: url('../img/BackgroundHome.png');
+      background-size: cover;
+      background-position: center;
+      `
+      :
+      ''
+    }
+
     display: flex;
     height: 100%;
     width: 100vw;
@@ -335,23 +367,25 @@ function Header() {
     @media ${props => props.theme.breakpoints.mobile} {
       height: 100%;
       ${isMobile && isAtTop && isSidebarActive ?
-          `background-color: rgba(255, 255, 255, 0.7);`
-        :
-          `background-color: rgba(0, 0, 0, 0);`
-      }
+      `background-color: rgba(255, 255, 255, 0.7);`
+      :
+      `background-color: rgba(0, 0, 0, 0);`
+    }
     }
   `;
 
   const BackgroundStyleBlur = styled.div`
     &::before {
       animation: 
-      ${isMobile ? 'none' : isAtTop ? 'none' :
-      isDarkModeAnimationRunning && isAtTop ? 'none' :
-        isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
-          isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
-            (!isDarkModeAnimationRunning && isAtTop ? expandAnimation :
-              (isAtTheBannerRange ? expandAnimation :
-                (retract ? retractAnimation : expandAnimation)))} 0.2s forwards,
+      ${isMobile
+      ? isAtTop ? 'none' : isSidebarActive ? expandForMobile : retractAnimation
+      : isAtTop ? 'none' :
+        isDarkModeAnimationRunning && isAtTop ? 'none' :
+          isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? retractAnimation :
+            isDarkModeAnimationRunning && !isAtTop && !isAtTheBannerRange ? retractAnimation :
+              (!isDarkModeAnimationRunning && isAtTop ? expandAnimation :
+                (isAtTheBannerRange ? expandAnimation :
+                  (retract ? retractAnimation : expandAnimation)))} 0.2s forwards,
 
       ${isMobile ? 'none' : (isDarkModeAnimationRunning && isAtTop ? 'none' :
       isDarkModeAnimationRunning && !isAtTop && isAtTheBannerRange ? expandForDarkMode :
@@ -466,9 +500,9 @@ function Header() {
   `;
 
   return (
-    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ height: isMobile ? isAtTop ? '17vh' : '7vh' : '17vh' }}>
+    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ height: '17vh' }}>
       {isSidebarActive ?
-        <Sidebar isAtTop={isAtTop}/>
+        <Sidebar isSidebarActive={isSidebarActive} isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange}/>
         :
         <></>
       }
@@ -515,7 +549,7 @@ function Header() {
             </StyledList>
             :
             <StyledList>
-              <Icon icon={isMobile ? faBars : faCartShopping} onClick={isMobile ? () => toggleSidebar() : () => { }} />
+              <Icon icon={isMobile ? faBars : faCartShopping} onClick={() => toggleSidebar()} />
             </StyledList>
           }
         </StyledDiv>
