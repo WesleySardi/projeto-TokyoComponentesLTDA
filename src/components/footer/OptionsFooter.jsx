@@ -89,7 +89,7 @@ const PartOneMiddle = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: left;
   margin: 4% 0 4% 0;
   font-weight: bold;
@@ -101,7 +101,7 @@ const Title = styled.h1`
 `;
 
 const Text = styled(Link)`
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: left;
   margin: 2% 0 2% 0;
   color: grey;
@@ -113,9 +113,10 @@ const Text = styled(Link)`
 `;
 
 const TitlePartOne = styled.h1`
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   text-align: left;
   margin: 6% 0 1% 0;
+  font-weight: bold;
 
   @media ${props => props.theme.breakpoints.mobile} {
   font-size: 4.5rem;
@@ -205,8 +206,8 @@ const PartFour = styled.div`
 `;
 
 const Button = styled.button`
-  font-size: 1.2rem;
-  width: 50%;
+  font-size: 1.1rem;
+  width: 40%;
   background-color: red;
   color: white;
   padding: 4% 1% 4% 1%;

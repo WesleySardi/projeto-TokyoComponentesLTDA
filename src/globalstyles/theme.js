@@ -43,10 +43,10 @@ const theme = {
     },
   },
   breakpoints: {
-    mobile: 'only screen and (max-width: 700px)',
-    tablet: 'only screen and (max-width: 768px)',
-    desktop: 'only screen and (min-width: 769px)',
-    smalldesktop: 'only screen and (max-width: 1279px)',
+    mobile: '(max-width: 700px)',
+    tablet: '(max-width: 1024px)',
+    smallDesktop: '(max-width: 1279px)',
+    largeDesktop: '(min-width: 1280px)',
   },
 };
 

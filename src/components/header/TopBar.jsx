@@ -27,16 +27,12 @@ const Content = styled.div`
 const Image = styled.img`
   height: auto;
   margin-right: 10px;
-  width: 1vw;
+  width: 2.2vh;
 `;
 
 const Text = styled.span`
   color: white;
   font-size: 1.8vh;
-
-  /*@media ${props => props.theme.breakpoints.mobile} {
-    font-size: 0.8vh;
-  }*/
 
   font-weight: bold;
 `;

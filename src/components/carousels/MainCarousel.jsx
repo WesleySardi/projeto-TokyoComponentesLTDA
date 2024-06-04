@@ -32,46 +32,80 @@ const Content = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 4rem;
   margin-bottom: 1rem;
-  width: 60%;
   margin: auto;
   font-weight: bold;
+  width: 90%;
 
-  @media ${props => props.theme.breakpoints.mobile} {
+  @media ${(props) => props.theme.breakpoints.largeDesktop} {
+    font-size: 5.5vh;
+  }
+
+  @media ${(props) => props.theme.breakpoints.smallDesktop} {
+    font-size: 5.3vh;
+  }
+
+  @media ${(props) => props.theme.breakpoints.tablet} {
     font-size: 5vh;
-    width: 90%;
+  }
+
+  @media ${(props) => props.theme.breakpoints.mobile} {
+    font-size: 5vh;
   }
 `;
 
 const Text = styled.p`
-  font-size: 1.5rem;
   width: 60%;
   margin: 2% auto 4% auto;
   color: red;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 2.5vh;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 2.5vh;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 2.5vh;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
-    margin: 2vh auto 3vh auto;
-    font-size: 3.5vh;
-    width: 80%;
+    font-size: 2.5vh;
   }
 `;
 
 const Button = styled.button`
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
   background-color: rgba(170, 0, 0, 0.7);
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 0.7vw;
-  width: 20%;
   font-weight: bold;
 
-  @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 3vh;
+  @media ${(props) => props.theme.breakpoints.largeDesktop} {
+    font-size: 2.4vh;
     padding: 1.5vh 0;
-    width: 50%;
+    width: 10vw;
+  }
+
+  @media ${(props) => props.theme.breakpoints.smallDesktop} {
+    font-size: 2.3vh;
+    padding: 1.5vh 0;
+    width: 10vw;
+  }
+
+  @media ${(props) => props.theme.breakpoints.tablet} {
+    font-size: 2.2vh;
+    padding: 1.5vh 0;
+    width: 13vw;
+  }
+
+  @media ${(props) => props.theme.breakpoints.mobile} {
+    font-size: 2vh;
+    padding: 1.5vh 0;
+    width: 30vw;
   }
 `;
 
@@ -79,8 +113,19 @@ const AbsoluteImage = styled.img`
   position: absolute;
   bottom: 5%;
   left: 2%;
-  width: 20%;
   height: auto;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    width: 25vh;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    width: 35vh;
+  }
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    width: 40vh;
+  }
 `;
 
 const ArrowContainer = styled.div`
@@ -103,7 +148,19 @@ const Arrow = styled.div`
   margin: 0 10px;
 
   @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 4vh;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
     font-size: 5vh;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 6vh;
+  }
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 7vh;
   }
 `;
 

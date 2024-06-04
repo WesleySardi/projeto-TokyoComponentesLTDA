@@ -37,9 +37,9 @@ const Sidebar = (props) => {
     justify-content: start;
     background-color: rgba(255, 255, 255, 0.7);;
 
-    background-image: url('../img/wallpaperWorld.jpg'); /* Adicione esta linha */
+    /*background-image: url('../img/wallpaperWorld.jpg'); /* Adicione esta linha */
     background-size: cover; /* Ajusta a imagem para cobrir toda a área */
-    background-position: right; /* Centraliza a imagem */
+    background-position: right; /* Centraliza a imagem */*/
 
     padding-top: 5vh;
 
