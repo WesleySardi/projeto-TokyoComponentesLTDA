@@ -3,10 +3,12 @@ import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faBars, faChevronDown, faX } from '@fortawesome/free-solid-svg-icons';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import TopBar from './TopBar';
 import Sidebar from '../sidebar/Sidebar';
+
+import { useScreenPositionContext } from '../../context/ScreenPositionProvider'
 
 const retractAnimation = keyframes`
 from {
@@ -40,19 +42,19 @@ height: 8vh;
 
 const retractForMobile = keyframes`
 from {
-height: 17vh;
+height: 12vh;
 }
 to {
-height: 7vh;
+height: 8vh;
 }
 `;
 
 const expandForMobile = keyframes`
 0% {
-height: 7vh;
+height: 8vh;
 }
 100% {
-height: 17vh;
+height: 12vh;
 }
 `;
 
@@ -204,12 +206,6 @@ animation: ${rotateAnimation} 0.3s linear;
 font-size: 2.2vh;  
 `;
 
-const ExpandedHeaderContainer = styled.div`
-background-color: transparent;    
-position: fixed;
-z-index: 3;
-`;
-
 const throttle = (func, limit) => {
   let inThrottle;
   return function () {
@@ -223,12 +219,33 @@ const throttle = (func, limit) => {
   };
 };
 
+const ExpandedHeaderContainer = styled.div`
+  position: fixed;
+  z-index: 3;
+  background-color: transparent;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    height: 17vh;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    height: 17vh;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    height: 17vh;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    height: ${props => (props.isAtTop ? '17vh' : props.isSidebarActive ? '12vh' : '8vh')};
+  }
+`;
+
 function Header() {
+  const { isAtTop, isAtTheBannerRange } = useScreenPositionContext();
+
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDarkModeAnimationRunning, setIsDarkModeAnimationRunning] = useState(false);
-
-  const [isAtTop, setIsAtTop] = useState(true);
-  const [isAtTheBannerRange, setIsAtTheBannerRange] = useState(true);
   const [retract, setRetract] = useState(true);
 
   const [rotateIcon, setRotateIcon] = useState(false);
@@ -251,20 +268,13 @@ function Header() {
 
   useEffect(() => {
     const handleScroll = throttle(() => {
-      setIsAtTheBannerRange(window.scrollY < window.innerHeight);
       setRetract(window.scrollY > window.innerHeight);
     }, 300);
 
-    const handleTopScroll = () => {
-      setIsAtTop(window.scrollY === 0);
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('scroll', handleTopScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('scroll', handleTopScroll);
     };
   }, [retract]);
 
@@ -300,28 +310,31 @@ function Header() {
   const toggleSidebar = () => {
     if (isSidebarActive) {
       setIsSidebarActive(false);
+      document.documentElement.style.overflowY = 'auto';
+      document.body.style.overflowY = 'auto';
     } else {
       setIsSidebarActive(true);
+      document.documentElement.style.overflowY = 'hidden';
+      document.body.style.overflowY = 'hidden';
     }
   };
 
   const BackgroundStyle = styled.div`
-    animation: ${isMobile
-      ? isAtTheBannerRange ? expandForMobile : isSidebarActive ? expandForMobile : retractForMobile
-      : isDarkModeAnimationRunning
-        ? isAtTop
-          ? 'none'
-          : retractAnimation
-        : isAtTop
-          ? 'none'
-          : isAtTheBannerRange
-            ? expandAnimation
-            : retract
-              ? retractAnimation
-              : expandAnimation
+    animation: ${isDarkModeAnimationRunning
+      ? isAtTop
+        ? 'none'
+        : retractAnimation
+      : isAtTop
+        ? 'none'
+        : isAtTheBannerRange
+          ? expandAnimation
+          : retract
+            ? retractAnimation
+            : expandAnimation
     } 0.2s forwards;
     
-    background-color: ${isAtTop ? `rgba(0, 0, 0, 0)` : `rgba(255, 255, 255, 0.7)`};
+    background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
+      
     display: flex;
     height: 100%;
     width: 100vw;
@@ -329,40 +342,37 @@ function Header() {
 
     @media ${props => props.theme.breakpoints.mobile} {
       height: 100%;
-      ${isMobile && isAtTop && isSidebarActive ?
-      `background-color: rgba(255, 255, 255, 0.7);`
-      :
-      `background-color: rgba(0, 0, 0, 0);`
+      ${isAtTop && isSidebarActive ?
+      `background-color: rgba(10, 10, 10, 1);`
+      : isSidebarActive ?
+        `background-color: rgba(10, 10, 10, 1);` :
+        `background-color: rgba(0, 0, 0, 0);`
     }
+      animation: ${isAtTop ? 'none' : isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
     }
   `;
 
   const BackgroundStyleBlur = styled.div`
     &::before {
-      animation: ${isMobile
-      ? isAtTheBannerRange ? expandForMobile : isSidebarActive ? expandForMobile : retractForMobile
-      : isDarkModeAnimationRunning
-        ? isAtTop
-          ? 'none'
-          : retractAnimation
-        : isAtTop
-          ? 'none'
-          : isAtTheBannerRange
-            ? expandAnimation
-            : retract
-              ? retractAnimation
-              : expandAnimation
+      animation: ${isDarkModeAnimationRunning
+      ? isAtTop
+        ? 'none'
+        : retractAnimation
+      : isAtTop
+        ? 'none'
+        : isAtTheBannerRange
+          ? expandAnimation
+          : retract
+            ? retractAnimation
+            : expandAnimation
     } 0.2s forwards,
       
-      ${isMobile
-      ? 'none'
-      : isDarkModeAnimationRunning ? !isAtTop ? expandForDarkMode : 'none' : 'none'} 1.5s forwards,
+      ${isDarkModeAnimationRunning ? !isAtTop ? expandForDarkMode : 'none' : 'none'} 1.5s forwards,
 
-      ${isMobile
-      ? 'none'
-      : !isAtTop ? isDarkModeAnimationRunning ? isDarkMode ? fadeOutForDarkMode : fadeInForDarkMode : 'none' : 'none'} 1.5s forwards;
+      ${!isAtTop ? isDarkModeAnimationRunning ? isDarkMode ? fadeInForDarkMode : fadeOutForDarkMode : 'none' : 'none'} 1.5s forwards;
 
       background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
+      
       backdrop-filter: blur(${isAtTop ? '0px' : '2px'});
       content: '';
       height: 100%;
@@ -371,8 +381,8 @@ function Header() {
       width: 100vw;
       z-index: -1;
 
-      @media ${props => props.theme.breakpoints.smalldesktop} {
-        height: 100%;
+      @media ${props => props.theme.breakpoints.mobile} {
+        animation: ${isAtTop ? 'none' : isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
       }
     }
   `;
@@ -465,13 +475,17 @@ function Header() {
     height: auto;
     left: 10vw;
     opacity: 1;
-    ${isAtTop && !isMobile ? { width: '15vh', top: '10vh' } :
-          isAtTop && isMobile ? { width: '7vh', top: '5vh' } :
-            { opacity: 0 }}
+    ${isAtTop ? { width: '15vh', top: '10vh' } :
+      { display: 'none' }}
+
+    @media ${props => props.theme.breakpoints.mobile} {
+        ${isAtTop ? { width: '7vh', top: '5vh' } :
+      { display: 'none' }}
+    }
   `;
 
   return (
-    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ height: '17vh' }}>
+    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} isAtTop={isAtTop} isSidebarActive={isSidebarActive}>
       {isSidebarActive ?
         <Sidebar isSidebarActive={isSidebarActive} isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange} />
         :
@@ -516,7 +530,7 @@ function Header() {
             </StyledList>
             :
             <StyledList>
-              <Icon icon={isMobile ? faBars : faCartShopping} onClick={() => toggleSidebar()} />
+              <Icon icon={isMobile ? isSidebarActive ? faX : faBars : faCartShopping} onClick={() => toggleSidebar()} />
             </StyledList>
           }
         </StyledDiv>

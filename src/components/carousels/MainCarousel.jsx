@@ -115,16 +115,16 @@ const AbsoluteImage = styled.img`
   left: 2%;
   height: auto;
 
-  @media ${props => props.theme.breakpoints.tablet} {
-    width: 25vh;
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    width: 40vh;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
     width: 35vh;
   }
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    width: 40vh;
+  @media ${props => props.theme.breakpoints.tablet} {
+    width: 25vh;
   }
 `;
 

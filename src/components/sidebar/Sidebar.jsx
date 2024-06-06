@@ -3,60 +3,63 @@ import styled, { keyframes } from 'styled-components';
 
 const retractForMobile = keyframes`
     from {
-      top: 17vh;
-      height: 83vh;
+      top: 12vh;
+      height: 88vh;
     }
     to {
-      top: 7vh;
-      height: 93vh;
+      top: 8vh;
+      height: 92vh;
     }
   `;
 
 const expandForMobile = keyframes`
     0% {
-      top: 7vh;
-      height: 93vh;
+      top: 8vh;
+      height: 92vh;
     }
     100% {
-      top: 17vh;
-      height: 83vh;
+      top: 12vh;
+      height: 88vh;
     }
   `;
 
 const Sidebar = (props) => {
 
   const SidebarContainer = styled.div`
-    width: 40%;
+    width: 100%;
     position: fixed;
     right: 0;
     top: 17vh;
-    height: 83vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    background-color: rgba(255, 255, 255, 0.7);;
+    height: 88vh;
+    background-color: black;
 
-    /*background-image: url('../img/wallpaperWorld.jpg'); /* Adicione esta linha */
-    background-size: cover; /* Ajusta a imagem para cobrir toda a área */
-    background-position: right; /* Centraliza a imagem */*/
+    /*background-image: url('../img/blackwallpaper.jpg');
+    background-size: cover;
+    background-position: right;*/
 
-    padding-top: 5vh;
-
-    animation: ${props.isSidebarActive ? props.isAtTop ? 'none' : props.isAtTheBannerRange ? 'none' : expandForMobile : retractForMobile
+    animation: ${props.isAtTop ? 'none' : props.isSidebarActive ? expandForMobile : 'none'
     } 0.2s forwards;
   `;
 
+  const ButtonsContainer = styled.div`
+    padding-top: 5%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  `
+
   const Button = styled.button`
-    width: 80%;
-    padding: 10px;
-    margin: 1vh 0;
-    background-color: red;
+    width: 90%;
+    height: 10%;
+    text-align: left;
+    padding-left: 3%;
+    background-color: black;
     color: #fff;
-    border: none;
-    border-radius: 5px;
+    border-left: 2px solid red;
     cursor: pointer;
-    font-size: 3.5rem;
+    font-size: 2.2vh;
     
     &:hover {
       background-color: orange;
@@ -66,22 +69,24 @@ const Sidebar = (props) => {
 
   const AbsoluteImage = styled.img`
   position: absolute;
-  bottom: 10%;
-  width: 50%;
+  bottom: 3%;
+  left: 5%;
+  width: 60%;
   height: auto;
-`;
+  `;
 
   return (
     <SidebarContainer>
-      <Button>Home</Button>
-      <Button>Produtos</Button>
-      <Button>Blog</Button>
-      <Button>Quem Somos</Button>
-      <Button>Trabalhe Conosco</Button>
-      <Button>Contato</Button>
-      <Button>Dark Mode</Button>
-      <Button>E-commerce</Button>
-      <AbsoluteImage src="../img/TokyoLogo.png" alt="Descrição da imagem" />
+      <ButtonsContainer>
+        <Button>Home</Button>
+        <Button>E-commerce</Button>
+        <Button>Produtos</Button>
+        <Button>Blog</Button>
+        <Button>Quem Somos</Button>
+        <Button>Contato</Button>
+        <Button>Trabalhe Conosco</Button>
+        <AbsoluteImage  src='../img/wsBalloonImage.png' />
+      </ButtonsContainer>
     </SidebarContainer>
   );
 };

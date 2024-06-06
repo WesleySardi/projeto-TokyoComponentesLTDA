@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -202,7 +202,7 @@ const BottomTitle = styled.h3`
     }
 `;
 
-const StyledLink = styled(Link)`
+const StyledText = styled.p`
     font-weight: bold;
     transition: all 0.3s ease;
 
@@ -219,6 +219,8 @@ const ContentContainer = styled.div`
 const Cards = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallDesktop, setIsSmallDesktop] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleResize = () => {
@@ -244,17 +246,17 @@ const Cards = () => {
                 </SecondPart>
             </FirstDiv>
             <SecondDiv>
-                <Card>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
                     <CardImage src="../img/motherBoardImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle>Mais de 12.000 itens em estoque</CardTitle>
-                        <CardText>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <StyledLink to="/">muito mais!</StyledLink></CardText>
+                        <CardText>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <StyledText>muito mais!</StyledText></CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>
                     </ContentContainer>
                 </Card>
-                <Card>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
                     <CardImage src="../img/wireImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle>Montagem de Cabos Personalizados</CardTitle>
@@ -264,7 +266,7 @@ const Cards = () => {
                         </ButtonWrapper>
                     </ContentContainer>
                 </Card>
-                <Card>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
                     <CardImage src="../img/ShopCartImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle>Suprimentos de produtos personalizados</CardTitle>

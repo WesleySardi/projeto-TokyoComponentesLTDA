@@ -64,9 +64,9 @@ function Home() {
       <CenterBottomImage2 src="../img/dotsImage.png" alt="Outra descrição da imagem" />
       <MainCarousel />
       <Cards />
-      <Banner link={'/'} image={'../img/banner.png'} />
+      <Banner link={'/'} image={isMobile ? '../img/bannerReduzido.png' : '../img/banner.png'} />
       <CardCarousel />
-      <FormBanner />{/*Isso que ta quebrando tudo o overflow*/}
+      <FormBanner />
       <OptionsFooter />
       {/*<SolutionsCards />*/}
       {isMobile ?
