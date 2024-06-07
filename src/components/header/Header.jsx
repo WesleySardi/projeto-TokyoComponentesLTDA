@@ -186,6 +186,10 @@ const DarkModeIcon = styled(FontAwesomeIcon)`
   animation: ${rotateAnimation} 0.3s linear;
   `};    
   font-size: 2.2vh;  
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 2.5vh;  
+  }
 `;
 
 const ExpandedHeaderContainer = styled.div`
@@ -236,6 +240,10 @@ const Icon = styled(FontAwesomeIcon)`
   @media ${props => props.theme.breakpoints.largeDesktop} {
     margin-right: 10px;
   }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    margin-right: ${props => props.isSidebarActive ? '12vw' : '3vw'};
+  }
 `;
 
 const BackgroundStyle = styled.div`
@@ -261,25 +269,60 @@ const BackgroundStyle = styled.div`
 
   @media ${props => props.theme.breakpoints.mobile} {
     height: 100%;
-    ${props => (props.isAtTop && props.isSidebarActive ?
+    ${props => (props.isSidebarActive ?
     `
-          background-color: grey;
-          background-image: url('../img/backgrounds/blackwallpaper.jpg');
-          background-size: cover;
-          background-position: right;
-        `
-    : props.isSidebarActive ?
+        background-color: grey;
+        background-image: url('../img/backgrounds/blackwallpaper.jpg');
+        background-size: cover;
+        background-position: right;
       `
-          background-color: grey;
-          background-image: url('../img/backgrounds/blackwallpaper.jpg');
-          background-size: cover;
-          background-position: right;
-        ` :
+    : props.isAtTop ?
       `
-          background-color: rgba(0, 0, 0, 0);
-        `
+        background-color: rgba(0, 0, 0, 0);
+      `
+      :
+      `
+        background-color: rgba(255, 255, 255, 0.7);
+      `
   )}
     animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
+  }
+`;
+
+const BackgroundStyleBlur = styled.div`
+    &::before {
+      animation: ${props => (props.isDarkModeAnimationRunning
+    ? props.isAtTop
+      ? 'none'
+      : retractAnimation
+    : props.isAtTop
+      ? 'none'
+      : props.isAtTheBannerRange
+        ? expandAnimation
+        : props.retract
+          ? retractAnimation
+          : expandAnimation
+  )} 0.2s forwards,
+      
+    ${props => (props.isDarkModeAnimationRunning ? !props.isAtTop ? expandForDarkMode : 'none' : 'none')} 1.5s forwards,
+
+    ${props => (!props.isAtTop ? props.isDarkModeAnimationRunning ? props.isDarkMode ? fadeOutForDarkMode : fadeInForDarkMode : 'none' : 'none')} 1.5s forwards;
+
+    background-color: ${props => props.isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
+    
+    backdrop-filter: blur(${props => props.isAtTop ? '0px' : '2px'});
+    content: '';
+    height: 100%;
+    position: absolute;
+    -webkit-backdrop-filter: blur(${props => props.isAtTop ? '0px' : '2px'});
+    width: 100vw;
+    z-index: -1;
+
+    @media ${props => props.theme.breakpoints.mobile} {
+      animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards,
+      ${props => (props.isDarkModeAnimationRunning ? !props.isAtTop ? expandForDarkMode : 'none' : 'none')} 1.5s forwards,
+      ${props => (!props.isAtTop ? props.isDarkModeAnimationRunning ? props.isDarkMode ? fadeInForDarkMode : fadeOutForDarkMode : 'none' : 'none')} 1.5s forwards;
+    }
   }
 `;
 
@@ -311,7 +354,7 @@ const StyledListItemAndIcon = styled(Link)`
   align-items: center;
   border: 1px solid red;
   border-radius: 0.5vw;
-  color: ${props => props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};
+  color: ${props => props.isAtTop ? 'white' : 'black'};
   display: flex;
   height: 30px;
   justify-content: center;
@@ -364,6 +407,12 @@ const DarkModeContainer = styled.div`
   height: 40px;
   margin-left: 2vw;
   width: 40px;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    height: 6vh;
+    width: 11vh;
+    margin-left: 0;
+  }
 `;
 
 const DarkModeButton = styled.button`
@@ -382,41 +431,6 @@ const DarkModeButton = styled.button`
   }
 `;
 
-const BackgroundStyleBlur = styled.div`
-    &::before {
-      animation: ${props => (props.isDarkModeAnimationRunning
-    ? props.isAtTop
-      ? 'none'
-      : retractAnimation
-    : props.isAtTop
-      ? 'none'
-      : props.isAtTheBannerRange
-        ? expandAnimation
-        : props.retract
-          ? retractAnimation
-          : expandAnimation
-  )} 0.2s forwards,
-      
-    ${props => (props.isDarkModeAnimationRunning ? !props.isAtTop ? expandForDarkMode : 'none' : 'none')} 1.5s forwards,
-
-    ${props => (!props.isAtTop ? props.isDarkModeAnimationRunning ? props.isDarkMode ? fadeInForDarkMode : fadeOutForDarkMode : 'none' : 'none')} 1.5s forwards;
-
-    background-color: ${props => props.isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
-    
-    backdrop-filter: blur(${props => props.isAtTop ? '0px' : '2px'});
-    content: '';
-    height: 100%;
-    position: absolute;
-    -webkit-backdrop-filter: blur(${props => props.isAtTop ? '0px' : '2px'});
-    width: 100vw;
-    z-index: -1;
-
-    @media ${props => props.theme.breakpoints.mobile} {
-      animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
-    }
-  }
-`;
-
 const throttle = (func, limit) => {
   let inThrottle;
   return function () {
@@ -431,9 +445,8 @@ const throttle = (func, limit) => {
 };
 
 function Header() {
-  const { isAtTop, isAtTheBannerRange, isMobile, isSmallDesktop } = useScreenPositionContext();
+  const { isAtTop, isAtTheBannerRange, isMobile, isSmallDesktop, isDarkMode, setIsDarkMode } = useScreenPositionContext();
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDarkModeAnimationRunning, setIsDarkModeAnimationRunning] = useState(false);
   const [retract, setRetract] = useState(true);
 
@@ -456,7 +469,11 @@ function Header() {
 
   const toggleDarkMode = () => {
     setRotateIcon(true);
-    setIsDarkMode(prevMode => !prevMode);
+
+    setTimeout(() => {
+      setIsDarkMode(prevMode => !prevMode);
+    }, 1000)
+
     setIsDarkModeAnimationRunning(true);
 
     document.documentElement.style.overflowY = 'hidden';
@@ -549,14 +566,21 @@ function Header() {
                   </DarkModeButton>
                 </DarkModeContainer>
               </StyledContainer>
-              <StyledListItemAndIcon to="/">
+              <StyledListItemAndIcon to="/" {...commonProps}>
                 <Icon icon={faCartShopping} {...commonProps} />
                 {isSmallDesktop ? '' : 'E-commerce'}
               </StyledListItemAndIcon>
             </StyledList>
             :
             <StyledList>
-              <Icon icon={isMobile ? isSidebarActive ? faX : faBars : faCartShopping} onClick={() => toggleSidebar()} {...commonProps} />
+              {isSidebarActive ? <></> :
+                <DarkModeContainer isDarkMode={isDarkMode}>
+                  <DarkModeButton isDarkMode={isDarkMode} onClick={toggleDarkMode} disabled={isDarkModeAnimationRunning ? true : false}>
+                    <DarkModeIcon icon={isDarkMode ? faMoon : faSun} rotate={rotateIcon} />
+                  </DarkModeButton>
+                </DarkModeContainer>
+              }
+              <Icon icon={isMobile ? isSidebarActive ? faX : faBars : faCartShopping} onClick={isDarkModeAnimationRunning ? () => { } : () => toggleSidebar()} {...commonProps} />
             </StyledList>
           }
         </StyledDiv>

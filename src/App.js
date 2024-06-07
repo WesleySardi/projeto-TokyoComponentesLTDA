@@ -12,67 +12,29 @@ import theme from './globalstyles/theme';
 // Importe suas páginas aqui
 import Home from './pages/Home';
 
-import ScreenPositionProvider from './context/ScreenPositionProvider'; // Importe o HeaderProvider
+import ScreenPositionProvider, { useScreenPositionContext } from './context/ScreenPositionProvider'; // Importe o HeaderProvider
 
-const throttle = (func, limit) => {
-  let inThrottle;
-  return function () {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
+const AppWrapper = () => {
+  const { isDarkMode } = useScreenPositionContext(); // Certifique-se de usar o hook no lugar certo
+
+  return (
+    <>
+      <GlobalStyles isDarkMode={isDarkMode} />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </Router>
+    </>
+  );
 };
 
 function App() {
-  const [isAtTop, setIsAtTop] = useState(true);
-  const [isAtTheBannerRange, setIsAtTheBannerRange] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = throttle(() => {
-      setIsAtTheBannerRange(window.scrollY < window.innerHeight);
-    }, 300);
-
-    const handleTopScroll = () => {
-      setIsAtTop(window.scrollY === 0);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('scroll', handleTopScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('scroll', handleTopScroll);
-    };
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
-      setIsSmallDesktop(window.innerWidth <= 1279);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <ScreenPositionProvider isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange} isMobile={isMobile} isSmallDesktop={isSmallDesktop}>
-        <Router>
-          <Header />
-          <Routes>
-            <Route path="/home" element={<Home />} />
-          </Routes>
-        </Router>
+      <ScreenPositionProvider>
+        <AppWrapper />
       </ScreenPositionProvider>
     </ThemeProvider>
   );

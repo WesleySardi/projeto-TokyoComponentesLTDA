@@ -10,6 +10,8 @@ const theme = {
     dark: '#34495e',
     white: '#ffffff',
     black: '#000000',
+    darkMode: '#2A2A2A',
+    lightMode: '#E9E7E7'
   },
   fonts: {
     sizes: {

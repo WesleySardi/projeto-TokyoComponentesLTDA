@@ -5,7 +5,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: ${props => (props.isDarkMode ? '#161616' : '#f0f0f0')};
     font-size: 1vw;
     overflow-x: hidden;
   }

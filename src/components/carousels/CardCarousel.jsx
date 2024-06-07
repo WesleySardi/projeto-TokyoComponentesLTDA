@@ -22,7 +22,6 @@ const LeftPart = styled.div`
   align-items: left;
   justify-content: center;
   text-align: left;
-  background-color: #f0f0f0;
   padding: 0% 0% 0% 10%;
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -252,6 +251,28 @@ const data = [
   }
 ];
 
+const StyledIconLeft = styled(FontAwesomeIcon)`
+  color: red;
+  ${(props) => (props.currentIndex === 0)
+    ? css`
+          opacity: 0.5;
+        `
+    : css`
+          opacity: 1;
+        `}
+  `;
+
+const StyledIconRight = styled(FontAwesomeIcon)`
+  color: red;
+  ${(props) => (props.currentIndex === props.data.length - 1)
+    ? css`
+          opacity: 0.5;
+        `
+    : css`
+          opacity: 1;
+        `}
+  `;
+
 const YourComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimationRunning, setIsAnimationRunning] = useState(false);
@@ -324,28 +345,6 @@ const YourComponent = () => {
     }
   };
 
-  const StyledIconLeft = styled(FontAwesomeIcon)`
-  color: red;
-  ${currentIndex === 0
-        ? css`
-          opacity: 0.5;
-        `
-        : css`
-          opacity: 1;
-        `}
-  `;
-
-  const StyledIconRight = styled(FontAwesomeIcon)`
-  color: red;
-  ${currentIndex === data.length - 1
-      ? css`
-          opacity: 0.5;
-        `
-      : css`
-          opacity: 1;
-        `}
-  `;
-
   return (
     <Container>
       <LeftPart>
@@ -367,8 +366,8 @@ const YourComponent = () => {
       </RightPart>
       {isMobile ?
         <ArrowContainer>
-          <Arrow onClick={handleLeftClick}><StyledIconLeft icon={faArrowLeft} /></Arrow>
-          <Arrow onClick={handleRightClick}><StyledIconRight icon={faArrowRight} /></Arrow>
+          <Arrow onClick={handleLeftClick}><StyledIconLeft icon={faArrowLeft} currentIndex={currentIndex} /></Arrow>
+          <Arrow onClick={handleRightClick}><StyledIconRight icon={faArrowRight} currentIndex={currentIndex} data={data} /></Arrow>
         </ArrowContainer>
         :
         <></>
