@@ -42,19 +42,19 @@ const TopBar = () => {
     <HeaderContainer>
       <Section>
         <Content>
-          <Image src="../img/phoneIcon.png" alt="Descrição 1" />
+          <Image src="../img/icones/phoneIcon.png" alt="Descrição 1" />
           <Text>(47) 3455-0015 | 3422-4249</Text>
         </Content>
       </Section>
       <Section>
         <Content>
-          <Image src="../img/locationIcon.png" alt="Descrição 2" />
+          <Image src="../img/icones/locationIcon.png" alt="Descrição 2" />
           <Text>Rua Anita Garibaldi, 439 - Anita Garibaldi | Joinville - SC</Text>
         </Content>
       </Section>
       <Section>
         <Content>
-          <Image src="../img/wsIcon.png" alt="Descrição 3" />
+          <Image src="../img/icones/wsIcon.png" alt="Descrição 3" />
           <Text>(47) 9 9708-7590 | 3455-0015 | 3422-4249</Text>
         </Content>
       </Section>

@@ -241,12 +241,12 @@ function FormBanner() {
         }
         {isMobile ?
           <ImageDiv>
-            <img src="/img/robotImg.png" alt="Imagem Centralizada" />
+            <img src="/img/banners/robotImg.png" alt="Imagem Centralizada" />
           </ImageDiv>
           :
           <StyledThirdDiv style={{ width: '20%' }}>
             <ImageDiv>
-              <img src="/img/robotImg.png" alt="Imagem Centralizada" />
+              <img src="/img/banners/robotImg.png" alt="Imagem Centralizada" />
             </ImageDiv>
           </StyledThirdDiv>
         }
@@ -260,7 +260,7 @@ function FormBanner() {
                   <TitleForm>Receba tudo em primeira mão</TitleForm>
                 }
                 <IconContainer>
-                  <StyledIcon src='../img/CardIcon.png' />
+                  <StyledIcon src='../img/icones/CardIcon.png' />
                 </IconContainer>
               </TitleContainer>
               <FieldContainer>

@@ -268,7 +268,7 @@ const OptionsFooter = () => {
           <Part>
             <PartOne>
               <PartOneTop>
-                <Image src="../img/TokyoLogo.png" alt="Descrição da imagem" />
+                <Image src="../img/logos/TokyoLogo.png" alt="Descrição da imagem" />
               </PartOneTop>
               <PartOneMiddle>
                 <TitlePartOne>Tokyo Componentes Eletrônicos</TitlePartOne>
@@ -279,11 +279,11 @@ const OptionsFooter = () => {
                 </TextPartOne>
               </PartOneMiddle>
               <PartOneBottom>
-                <StyledLink><Icon src='../img/tiktokIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/instagramIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/facebookIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/youtubeIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/linkedinIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/tiktokIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/instagramIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/facebookIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/youtubeIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/linkedinIcon.png' /></StyledLink>
               </PartOneBottom>
             </PartOne>
           </Part>
@@ -293,7 +293,7 @@ const OptionsFooter = () => {
           <Part>
             <PartOne>
               <PartOneTop>
-                <Image src="../img/TokyoLogo.png" alt="Descrição da imagem" />
+                <Image src="../img/logos/TokyoLogo.png" alt="Descrição da imagem" />
               </PartOneTop>
               <PartOneMiddle>
                 <TitlePartOne>Tokyo Componentes Eletrônicos</TitlePartOne>
@@ -304,11 +304,11 @@ const OptionsFooter = () => {
                 </TextPartOne>
               </PartOneMiddle>
               <PartOneBottom>
-                <StyledLink><Icon src='../img/tiktokIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/instagramIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/facebookIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/youtubeIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/linkedinIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/tiktokIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/instagramIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/facebookIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/youtubeIcon.png' /></StyledLink>
+                <StyledLink><Icon src='../img/icones/linkedinIcon.png' /></StyledLink>
               </PartOneBottom>
             </PartOne>
           </Part>

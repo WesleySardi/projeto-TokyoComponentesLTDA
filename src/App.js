@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Certifique-se de usar BrowserRouter se estiver usando a versão 6 do React Router
 import { ThemeProvider } from 'styled-components'; // Adicione esta linha
 
@@ -30,7 +30,9 @@ const throttle = (func, limit) => {
 function App() {
   const [isAtTop, setIsAtTop] = useState(true);
   const [isAtTheBannerRange, setIsAtTheBannerRange] = useState(true);
-  
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
+
   useEffect(() => {
     const handleScroll = throttle(() => {
       setIsAtTheBannerRange(window.scrollY < window.innerHeight);
@@ -49,10 +51,22 @@ function App() {
     };
   });
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 700);
+      setIsSmallDesktop(window.innerWidth <= 1279);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <ScreenPositionProvider isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange}>
+      <ScreenPositionProvider isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange} isMobile={isMobile} isSmallDesktop={isSmallDesktop}>
         <Router>
           <Header />
           <Routes>

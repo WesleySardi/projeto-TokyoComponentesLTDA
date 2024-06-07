@@ -2,9 +2,9 @@ import React, { createContext, useContext } from 'react';
 
 const ScreenPositionContext = createContext();
 
-const ScreenPositionProvider = ({ children, isAtTop, isAtTheBannerRange }) => {
+const ScreenPositionProvider = ({ children, isAtTop, isAtTheBannerRange, isMobile, isSmallDesktop }) => {
   return (
-    <ScreenPositionContext.Provider value={{ isAtTop, isAtTheBannerRange }}>
+    <ScreenPositionContext.Provider value={{ isAtTop, isAtTheBannerRange, isMobile, isSmallDesktop }}>
       {children}
     </ScreenPositionContext.Provider>
   );

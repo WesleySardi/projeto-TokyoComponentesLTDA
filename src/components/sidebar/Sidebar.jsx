@@ -29,16 +29,12 @@ const Sidebar = (props) => {
     width: 100%;
     position: fixed;
     right: 0;
-    top: 17vh;
+    top: 12vh;
     height: 88vh;
     background-color: black;
-
-    /*background-image: url('../img/blackwallpaper.jpg');
-    background-size: cover;
-    background-position: right;*/
-
-    animation: ${props.isAtTop ? 'none' : props.isSidebarActive ? expandForMobile : 'none'
+    animation: ${props.isSidebarActive ? expandForMobile : 'none'
     } 0.2s forwards;
+    border-top: ${props.isSidebarActive ? '1px solid white' : 'none'};
   `;
 
   const ButtonsContainer = styled.div`
@@ -85,7 +81,7 @@ const Sidebar = (props) => {
         <Button>Quem Somos</Button>
         <Button>Contato</Button>
         <Button>Trabalhe Conosco</Button>
-        <AbsoluteImage  src='../img/wsBalloonImage.png' />
+        <AbsoluteImage src='../img/icones/wsBalloonImage.png' />
       </ButtonsContainer>
     </SidebarContainer>
   );

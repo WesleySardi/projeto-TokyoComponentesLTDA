@@ -247,7 +247,7 @@ const Cards = () => {
             </FirstDiv>
             <SecondDiv>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
-                    <CardImage src="../img/motherBoardImg.png" alt="Card Image" />
+                    <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle>Mais de 12.000 itens em estoque</CardTitle>
                         <CardText>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <StyledText>muito mais!</StyledText></CardText>
@@ -257,7 +257,7 @@ const Cards = () => {
                     </ContentContainer>
                 </Card>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
-                    <CardImage src="../img/wireImg.png" alt="Card Image" />
+                    <CardImage src="../img/cards/wireImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle>Montagem de Cabos Personalizados</CardTitle>
                         <CardText>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
@@ -267,7 +267,7 @@ const Cards = () => {
                     </ContentContainer>
                 </Card>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
-                    <CardImage src="../img/ShopCartImg.png" alt="Card Image" />
+                    <CardImage src="../img/cards/ShopCartImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle>Suprimentos de produtos personalizados</CardTitle>
                         <CardText>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>

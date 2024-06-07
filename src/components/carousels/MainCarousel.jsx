@@ -166,19 +166,19 @@ const Arrow = styled.div`
 
 const images = [
   {
-    url: '../img/wallpaperWorld.jpg',
+    url: '../img/backgrounds/wallpaperWorld.jpg',
     title: 'Explore o mundo da eletrônica!',
     text: 'Mais de 12.000 itens em estoque!',
     buttonText: 'Confira já!'
   },
   {
-    url: '../img/wallpaperWorld2.jpg',
+    url: '../img/backgrounds/wallpaperWorld2.jpg',
     title: 'Explore o mundo da eletrônica!',
     text: 'Mais de 12.000 itens em estoque!',
     buttonText: 'Confira já!'
   },
   {
-    url: '../img/wallpaperWorld3.jpg',
+    url: '../img/backgrounds/wallpaperWorld3.jpg',
     title: 'Explore o mundo da eletrônica!',
     text: 'Mais de 12.000 itens em estoque!',
     buttonText: 'Confira já!'
@@ -251,7 +251,7 @@ const MainCarousel = () => {
           </Content>
         </Slide>
       ))}
-      {isMobile ? <></> : <AbsoluteImage src="../img/wsBalloonImage.png" alt="Descrição da imagem" />}
+      {isMobile ? <></> : <AbsoluteImage src="../img/icones/wsBalloonImage.png" alt="Descrição da imagem" />}
       <ArrowContainer>
         <Arrow onClick={prevSlide}><StyledIconLeft icon={faArrowLeft} currentIndex={currentIndex} images={images} /></Arrow>
         <Arrow onClick={nextSlide}><StyledIconRight icon={faArrowRight} currentIndex={currentIndex} images={images} /></Arrow>

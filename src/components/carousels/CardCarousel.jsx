@@ -221,31 +221,31 @@ const Arrow = styled.div`
 
 const data = [
   {
-    image: '../img/Card3.png',
+    image: '../img/cards/Card3.png',
     title: '10 Dicas para analisar Circuitos Impressos',
     tag: 'Eletrônica',
     link: '/'
   },
   {
-    image: '../img/Card2.png',
+    image: '../img/cards/Card2.png',
     title: 'Como entrar na mundo da robótica com projetos reais',
     tag: 'Robótica',
     link: '/'
   },
   {
-    image: '../img/Card1.png',
+    image: '../img/cards/Card1.png',
     title: '10 Dicas para analisar Circuitos Impressos',
     tag: 'Eletrônica',
     link: '/'
   },
   {
-    image: '../img/Card3.png',
+    image: '../img/cards/Card3.png',
     title: 'Como entrar na mundo da robótica com projetos reais',
     tag: 'Robótica',
     link: '/'
   },
   {
-    image: '../img/Card2.png',
+    image: '../img/cards/Card2.png',
     title: '10 Dicas para analisar Circuitos Impressos',
     tag: 'Eletrônica',
     link: '/'

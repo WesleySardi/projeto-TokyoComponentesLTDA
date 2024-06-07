@@ -175,24 +175,6 @@ list-style-type: none;
 z-index: 2;
 `;
 
-const Icon = styled(FontAwesomeIcon)`
-  @media ${props => props.theme.breakpoints.mobile} {
-    color: red;
-    font-size: 4vh;
-    margin-right: 12vw;
-  }
-
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    margin-right: 10px;
-  }
-`;
-
-const StyledIcon = styled.img`
-margin-right: 5%;
-height: auto;
-width: 2rem;
-`;
-
 const IconComboBox = styled(FontAwesomeIcon)`
 margin-left: 5px;
 `;
@@ -237,34 +219,19 @@ const ExpandedHeaderContainer = styled.div`
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    height: ${props => (props.isAtTop ? '17vh' : props.isSidebarActive ? '12vh' : '8vh')};
+    height: ${props => (props.isAtTop ? props.isSidebarActive ? '12vh' : '17vh' : props.isSidebarActive ? '12vh' : '8vh')};
   }
 `;
 
 function Header() {
-  const { isAtTop, isAtTheBannerRange } = useScreenPositionContext();
+  const { isAtTop, isAtTheBannerRange, isMobile, isSmallDesktop } = useScreenPositionContext();
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDarkModeAnimationRunning, setIsDarkModeAnimationRunning] = useState(false);
   const [retract, setRetract] = useState(true);
 
   const [rotateIcon, setRotateIcon] = useState(false);
-
-  const [isMobile, setIsMobile] = useState(false);
-  const [isSmallDesktop, setIsSmallDesktop] = useState(false);
   const [isSidebarActive, setIsSidebarActive] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
-      setIsSmallDesktop(window.innerWidth <= 1279);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -297,12 +264,16 @@ function Header() {
 
   const handleMouseEnter = () => {
     if (!isAtTheBannerRange && !isDarkModeAnimationRunning) {
+      document.documentElement.style.overflowY = 'hidden';
+      document.body.style.overflowY = 'hidden';
       setRetract(false);
     }
   };
 
   const handleMouseLeave = () => {
     if (!isAtTheBannerRange && !isDarkModeAnimationRunning) {
+      document.documentElement.style.overflowY = 'auto';
+      document.body.style.overflowY = 'auto';
       setRetract(true);
     }
   };
@@ -318,6 +289,26 @@ function Header() {
       document.body.style.overflowY = 'hidden';
     }
   };
+
+  const Icon = styled(FontAwesomeIcon)`
+  color: black;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    color: ${isSidebarActive ? 'white' : 'red'};
+    font-size: ${isSidebarActive ? '2vh' : '4vh'};
+    margin-right: 12vw;
+    font-weight: bold;
+    padding: 15%;
+    ${isSidebarActive ? `
+      border: 2px white solid;
+      border-radius: 50%;
+    ` : ''};
+  }
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    margin-right: 10px;
+  }
+`;
 
   const BackgroundStyle = styled.div`
     animation: ${isDarkModeAnimationRunning
@@ -343,12 +334,22 @@ function Header() {
     @media ${props => props.theme.breakpoints.mobile} {
       height: 100%;
       ${isAtTop && isSidebarActive ?
-      `background-color: rgba(10, 10, 10, 1);`
+      `
+          background-color: grey;
+          background-image: url('../img/backgrounds/blackwallpaper.jpg');
+          background-size: cover;
+          background-position: right;
+      `
       : isSidebarActive ?
-        `background-color: rgba(10, 10, 10, 1);` :
+        `
+          background-color: grey;
+          background-image: url('../img/backgrounds/blackwallpaper.jpg');
+          background-size: cover;
+          background-position: right;
+        ` :
         `background-color: rgba(0, 0, 0, 0);`
     }
-      animation: ${isAtTop ? 'none' : isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
+      animation: ${isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
     }
   `;
 
@@ -382,7 +383,7 @@ function Header() {
       z-index: -1;
 
       @media ${props => props.theme.breakpoints.mobile} {
-        animation: ${isAtTop ? 'none' : isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
+        animation: ${isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
       }
     }
   `;
@@ -476,16 +477,26 @@ function Header() {
     left: 10vw;
     opacity: 1;
     ${isAtTop ? { width: '15vh', top: '10vh' } :
-      { display: 'none' }}
+      isSidebarActive ? { width: '15vh', top: '10vh' } :
+        { display: 'none' }}
 
     @media ${props => props.theme.breakpoints.mobile} {
-        ${isAtTop ? { width: '7vh', top: '5vh' } :
-      { display: 'none' }}
+        ${isSidebarActive ?
+      `
+            width: 12vh;
+            top: 5vh;
+          `
+      :
+      `
+            width: 7vh;
+            top: 5vh;
+          `
+    }
     }
   `;
 
   return (
-    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} isAtTop={isAtTop} isSidebarActive={isSidebarActive}>
+    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} isSidebarActive={isSidebarActive} isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange} >
       {isSidebarActive ?
         <Sidebar isSidebarActive={isSidebarActive} isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange} />
         :
@@ -495,7 +506,7 @@ function Header() {
       <BackgroundStyle>
         <BackgroundStyleBlur />
         <HeaderStyle>
-          <ImgStyleLogo src={'/img/tokyoLogo.png'} alt="ZloLogo" />
+          <ImgStyleLogo src={isSidebarActive ? '/img/logos/tokyoLettersLogo.png' : '/img/logos/tokyoLogo.png'} alt="ZloLogo" />
         </HeaderStyle>
         <StyledDiv>
           {!isMobile ?
