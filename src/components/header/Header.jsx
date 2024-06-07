@@ -11,195 +11,182 @@ import Sidebar from '../sidebar/Sidebar';
 import { useScreenPositionContext } from '../../context/ScreenPositionProvider'
 
 const retractAnimation = keyframes`
-from {
-height: 17vh;
-}
-to {
-height: 8vh;
-}
+  from {
+    height: 17vh;
+  }
+  to {
+    height: 8vh;
+  }
 `;
 
 const expandAnimation = keyframes`
-from {
-height: 8vh;
-}
-to {
-height: 17vh;
-}
+  from {
+    height: 8vh;
+  }
+  to {
+    height: 17vh;
+  }
 `;
 
 const expandForDarkMode = keyframes`
-0% {
-height: 17vh;
-}
-75% {
-height: 100vh;
-}
-100% {
-height: 8vh;
-}
+  0% {
+    height: 17vh;
+  }
+  75% {
+    height: 100vh;
+  }
+  100% {
+    height: 8vh;
+  }
 `;
 
 const retractForMobile = keyframes`
-from {
-height: 12vh;
-}
-to {
-height: 8vh;
-}
+  from {
+   height: 12vh;
+  }
+  to {
+    height: 8vh;
+  }
 `;
 
 const expandForMobile = keyframes`
-0% {
-height: 8vh;
-}
-100% {
-height: 12vh;
-}
+  0% {
+    height: 8vh;
+  }
+  100% {
+    height: 12vh;
+  }
 `;
 
 const fadeIn = keyframes`
-from {
-opacity: 0;
-}
-to {
-opacity: 1;
-}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 `;
 
 const fadeInForDarkMode = keyframes`
-from {
-background-color: rgba(255, 255, 255, 0.7);
-}
-to {
-background-color: rgba(0, 0, 0, 0.8);
-}
+  from {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 `;
 
 const fadeOutForDarkMode = keyframes`
-from {
-background-color: rgba(0, 0, 0, 0.8);
-}
-to {
-background-color: rgba(255, 255, 255, 0.7);
-}
+  from {
+   background-color: rgba(0, 0, 0, 0.8);
+  }
+  to {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
 `;
 
 const rotateAnimation = keyframes`
-0% {
-transform: rotate(0deg);
-}
-25% {
-transform: rotate(90deg);
-}
-50% {
-transform: rotate(180deg);
-}
-75% {
-transform: rotate(270deg);
-}
-100% {
-transform: rotate(360deg);
-}
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 `;
 
 const StyledContainer = styled.div`
-align-items: center;  
-display: flex;
-justify-content: center;
-margin: 0 2vw;
+  align-items: center;  
+  display: flex;
+  justify-content: center;
+  margin: 0 2vw;
 `;
 
 const ComboBoxContainer = styled.div`
-display: inline-block;
-position: relative;
+  display: inline-block;
+  position: relative;
 
-&:hover {
-ul {
-display: block;
-animation: ${fadeIn} 0.2s ease;
-}
-button {
-color: #d35400;
-transition: color 0.3s ease;
-}
-}
+  &:hover {
+    ul {
+      display: block;
+      animation: ${fadeIn} 0.2s ease;
+    }
+    button {
+      color: #d35400;
+      transition: color 0.3s ease;
+    }
+  }
 `;
 
 const ComboBoxList = styled.ul`
-background-color: #f9f9f9;
-border-radius: 0.5vw;
-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
-display: none;
-position: absolute;
-width: 11vw;
-z-index: 3;
+  background-color: #f9f9f9;
+  border-radius: 0.5vw;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+  display: none;
+  position: absolute;
+  width: 11vw;
+  z-index: 3;
 
-&:hover {
-display: block;
-}
+  &:hover {
+  display: block;
+  }
 `;
 
 const ComboBoxListItem = styled(Link)`
-border-radius: 0.5vw;
-cursor: pointer;
-display: block;
-font-size: 2.2vh;
-padding: 12px 16px;
-text-align: left;
-text-decoration: none;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  display: block;
+  font-size: 2.2vh;
+  padding: 12px 16px;
+  text-align: left;
+  text-decoration: none;
 
-&:hover {
-background-color: #ddd;
-}
+  &:hover {
+  background-color: #ddd;
+  }
 `;
 
 const HeaderStyle = styled.div`
-display: flex;
+  display: flex;
 `;
 
 const StyledDiv = styled.div`
-align-items: end;    
-display: flex;
-flex-direction: column;
-justify-content: center;
-width: 100%;
+  align-items: end;    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 `;
 
 const StyledList = styled.ul`
-align-items: center;    
-display: flex;
-flex-direction: row;
-justify-content: center;
-list-style-type: none;
-z-index: 2;
+  align-items: center;    
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+  z-index: 2;
 `;
 
 const IconComboBox = styled(FontAwesomeIcon)`
-margin-left: 5px;
+  margin-left: 5px;
 `;
 
 const DarkModeIcon = styled(FontAwesomeIcon)`
-${props =>
+  ${props =>
     props.rotate &&
     css`
-animation: ${rotateAnimation} 0.3s linear;
-`};    
-font-size: 2.2vh;  
+  animation: ${rotateAnimation} 0.3s linear;
+  `};    
+  font-size: 2.2vh;  
 `;
-
-const throttle = (func, limit) => {
-  let inThrottle;
-  return function () {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
-};
 
 const ExpandedHeaderContainer = styled.div`
   position: fixed;
@@ -223,6 +210,226 @@ const ExpandedHeaderContainer = styled.div`
   }
 `;
 
+const StyledListItem = styled(Link)`
+  color: ${props => (props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)')};  
+  font-size: 2.5vh;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 3vw;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  color: ${props => props.isAtTop ? 'white' : 'black'};
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    color: ${props => props.isSidebarActive ? 'white' : 'red'};
+    font-size: ${props => props.isSidebarActive ? '2vh' : '4vh'};
+    margin-right: 12vw;
+    font-weight: bold;
+    padding: 15%;
+    ${props => props.isSidebarActive ? `
+      border: 2px white solid;
+      border-radius: 50%;
+    ` : ''};
+  }
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    margin-right: 10px;
+  }
+`;
+
+const BackgroundStyle = styled.div`
+  animation: ${props => (props.isDarkModeAnimationRunning
+    ? props.isAtTop
+      ? 'none'
+      : retractAnimation
+    : props.isAtTop
+      ? 'none'
+      : props.isAtTheBannerRange
+        ? expandAnimation
+        : props.retract
+          ? retractAnimation
+          : expandAnimation
+  )} 0.2s forwards;
+  
+  background-color: ${props => props.isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
+    
+  display: flex;
+  height: 100%;
+  width: 100vw;
+  z-index: 1;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    height: 100%;
+    ${props => (props.isAtTop && props.isSidebarActive ?
+    `
+          background-color: grey;
+          background-image: url('../img/backgrounds/blackwallpaper.jpg');
+          background-size: cover;
+          background-position: right;
+        `
+    : props.isSidebarActive ?
+      `
+          background-color: grey;
+          background-image: url('../img/backgrounds/blackwallpaper.jpg');
+          background-size: cover;
+          background-position: right;
+        ` :
+      `
+          background-color: rgba(0, 0, 0, 0);
+        `
+  )}
+    animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
+  }
+`;
+
+const ImgStyleLogo = styled.img`
+  position: absolute;
+  height: auto;
+  left: 10vw;
+  opacity: 1;
+  ${props => (props.isAtTop ? { width: '15vh', top: '10vh' } :
+    props.isSidebarActive ? { width: '15vh', top: '10vh' } :
+      { display: 'none' })}
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    ${props => props.isSidebarActive ?
+    `
+        width: 12vh;
+        top: 5vh;
+      `
+    :
+    `
+        width: 7vh;
+        top: 5vh;
+      `
+  }
+  }
+`;
+
+const StyledListItemAndIcon = styled(Link)`
+  align-items: center;
+  border: 1px solid red;
+  border-radius: 0.5vw;
+  color: ${props => props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  padding: 5px;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {  
+    font-size: 1.8vh;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 2.2vh;
+    padding: 5px 10px;
+  }
+
+  &:hover {
+    background-color: red;
+    color: white;
+  }
+`;
+
+const StyledContactItem = styled(Link)`
+  align-items: center;
+  border: 1px solid red;
+  border-radius: 0.5vw;
+  color: ${props => props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
+  display: flex;
+  font-size: 2.2vh;
+  height: 30px;
+  justify-content: center;
+  padding: 5px;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: red;
+    color: white;
+  }
+`;
+
+const ComboBoxButton = styled.button`
+  background-color: transparent;
+  color: ${props => props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
+  cursor: pointer;
+  font-size: 2.5vh;
+`;
+
+const DarkModeContainer = styled.div`
+  background-color: ${props => (props.isDarkMode ? props.isAtTop ? 'grey' : 'black' : '#EEA200')};
+  border: 2px solid transparent;
+  border-radius: 50%;
+  height: 40px;
+  margin-left: 2vw;
+  width: 40px;
+`;
+
+const DarkModeButton = styled.button`
+  background-color: ${props => (props.isDarkMode ? props.isAtTop ? 'white' : 'black' : '#EEA200')};
+  border: 1px solid ${props => (props.isDarkMode ? props.isAtTop ? 'black' : 'white' : 'white')};
+  border-radius: 50%;
+  color: ${(props => (props.isDarkModeAnimationRunning ? props.isDarkMode ? props.isAtTop ? 'black' : 'white' : 'white' : props.isDarkMode ? props.isAtTop ? 'black' : 'white' : 'white'))};
+  cursor: pointer;
+  height: 100%;
+  transition: background-color 0.3s ease;
+  width: 100%;
+
+  ${DarkModeContainer}:hover & {
+    background-color: ${props => (props.isDarkMode ? '#323232' : '#DE9800')};
+    color: ${props => (props.isDarkMode ? 'white' : 'white')};
+  }
+`;
+
+const BackgroundStyleBlur = styled.div`
+    &::before {
+      animation: ${props => (props.isDarkModeAnimationRunning
+    ? props.isAtTop
+      ? 'none'
+      : retractAnimation
+    : props.isAtTop
+      ? 'none'
+      : props.isAtTheBannerRange
+        ? expandAnimation
+        : props.retract
+          ? retractAnimation
+          : expandAnimation
+  )} 0.2s forwards,
+      
+    ${props => (props.isDarkModeAnimationRunning ? !props.isAtTop ? expandForDarkMode : 'none' : 'none')} 1.5s forwards,
+
+    ${props => (!props.isAtTop ? props.isDarkModeAnimationRunning ? props.isDarkMode ? fadeInForDarkMode : fadeOutForDarkMode : 'none' : 'none')} 1.5s forwards;
+
+    background-color: ${props => props.isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
+    
+    backdrop-filter: blur(${props => props.isAtTop ? '0px' : '2px'});
+    content: '';
+    height: 100%;
+    position: absolute;
+    -webkit-backdrop-filter: blur(${props => props.isAtTop ? '0px' : '2px'});
+    width: 100vw;
+    z-index: -1;
+
+    @media ${props => props.theme.breakpoints.mobile} {
+      animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
+    }
+  }
+`;
+
+const throttle = (func, limit) => {
+  let inThrottle;
+  return function () {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+};
+
 function Header() {
   const { isAtTop, isAtTheBannerRange, isMobile, isSmallDesktop } = useScreenPositionContext();
 
@@ -232,6 +439,8 @@ function Header() {
 
   const [rotateIcon, setRotateIcon] = useState(false);
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+
+  const commonProps = { isDarkModeAnimationRunning, isSidebarActive, isAtTop, isAtTheBannerRange, isDarkMode, retract };
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -290,243 +499,50 @@ function Header() {
     }
   };
 
-  const Icon = styled(FontAwesomeIcon)`
-  color: black;
-
-  @media ${props => props.theme.breakpoints.mobile} {
-    color: ${isSidebarActive ? 'white' : 'red'};
-    font-size: ${isSidebarActive ? '2vh' : '4vh'};
-    margin-right: 12vw;
-    font-weight: bold;
-    padding: 15%;
-    ${isSidebarActive ? `
-      border: 2px white solid;
-      border-radius: 50%;
-    ` : ''};
-  }
-
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    margin-right: 10px;
-  }
-`;
-
-  const BackgroundStyle = styled.div`
-    animation: ${isDarkModeAnimationRunning
-      ? isAtTop
-        ? 'none'
-        : retractAnimation
-      : isAtTop
-        ? 'none'
-        : isAtTheBannerRange
-          ? expandAnimation
-          : retract
-            ? retractAnimation
-            : expandAnimation
-    } 0.2s forwards;
-    
-    background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
-      
-    display: flex;
-    height: 100%;
-    width: 100vw;
-    z-index: 1;
-
-    @media ${props => props.theme.breakpoints.mobile} {
-      height: 100%;
-      ${isAtTop && isSidebarActive ?
-      `
-          background-color: grey;
-          background-image: url('../img/backgrounds/blackwallpaper.jpg');
-          background-size: cover;
-          background-position: right;
-      `
-      : isSidebarActive ?
-        `
-          background-color: grey;
-          background-image: url('../img/backgrounds/blackwallpaper.jpg');
-          background-size: cover;
-          background-position: right;
-        ` :
-        `background-color: rgba(0, 0, 0, 0);`
-    }
-      animation: ${isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
-    }
-  `;
-
-  const BackgroundStyleBlur = styled.div`
-    &::before {
-      animation: ${isDarkModeAnimationRunning
-      ? isAtTop
-        ? 'none'
-        : retractAnimation
-      : isAtTop
-        ? 'none'
-        : isAtTheBannerRange
-          ? expandAnimation
-          : retract
-            ? retractAnimation
-            : expandAnimation
-    } 0.2s forwards,
-      
-      ${isDarkModeAnimationRunning ? !isAtTop ? expandForDarkMode : 'none' : 'none'} 1.5s forwards,
-
-      ${!isAtTop ? isDarkModeAnimationRunning ? isDarkMode ? fadeInForDarkMode : fadeOutForDarkMode : 'none' : 'none'} 1.5s forwards;
-
-      background-color: ${isAtTop ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0.7)'};
-      
-      backdrop-filter: blur(${isAtTop ? '0px' : '2px'});
-      content: '';
-      height: 100%;
-      position: absolute;
-      -webkit-backdrop-filter: blur(${isAtTop ? '0px' : '2px'});
-      width: 100vw;
-      z-index: -1;
-
-      @media ${props => props.theme.breakpoints.mobile} {
-        animation: ${isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
-      }
-    }
-  `;
-
-  const StyledListItem = styled(Link)`
-    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};  
-    font-size: 2.5vh;
-    text-align: center;
-    text-decoration: none;
-    margin-right: 3vw;
-  `;
-
-  const StyledListItemAndIcon = styled(Link)`
-    align-items: center;
-    border: 1px solid red;
-    border-radius: 0.5vw;
-    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'color: rgba(0, 0, 0, 1)'};
-    display: flex;
-    height: 30px;
-    justify-content: center;
-    padding: 5px;
-
-    @media ${props => props.theme.breakpoints.largeDesktop} {  
-      font-size: 1.8vh;
-    }
-
-    @media ${props => props.theme.breakpoints.smallDesktop} {
-      font-size: 2.2vh;
-      padding: 5px 10px;
-    }
-
-    &:hover {
-      background-color: red;
-      color: white;
-    }
-  `;
-
-  const StyledContactItem = styled(Link)`
-    align-items: center;
-    border: 1px solid red;
-    border-radius: 0.5vw;
-    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
-    display: flex;
-    font-size: 2.2vh;
-    height: 30px;
-    justify-content: center;
-    padding: 5px;
-    padding: 5px 10px;
-
-    &:hover {
-      background-color: red;
-      color: white;
-    }
-  `;
-
-  const ComboBoxButton = styled.button`
-    background-color: transparent;
-    color: ${isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
-    cursor: pointer;
-    font-size: 2.5vh;
-  `;
-
-  const DarkModeContainer = styled.div`
-    background-color: ${props => (props.isDarkMode ? isAtTop ? 'grey' : 'black' : '#EEA200')};
-    border: 2px solid transparent;
-    border-radius: 50%;
-    height: 40px;
-    margin-left: 2vw;
-    width: 40px;
-  `;
-
-  const DarkModeButton = styled.button`
-    background-color: ${props => (props.isDarkMode ? isAtTop ? 'white' : 'black' : '#EEA200')};
-    border: 1px solid ${props => (props.isDarkMode ? isAtTop ? 'black' : 'white' : 'white')};
-    border-radius: 50%;
-    color: ${isDarkModeAnimationRunning ? (props => (props.isDarkMode ? isAtTop ? 'black' : 'white' : 'white')) : (props => (props.isDarkMode ? isAtTop ? 'black' : 'white' : 'white'))};
-    cursor: pointer;
-    height: 100%;
-    transition: background-color 0.3s ease;
-    width: 100%;
-
-    ${DarkModeContainer}:hover & {
-      background-color: ${props => (props.isDarkMode ? '#323232' : '#DE9800')};
-      color: ${props => (props.isDarkMode ? 'white' : 'white')};
-    }
-  `;
-
-  const ImgStyleLogo = styled.img`
-    position: absolute;
-    height: auto;
-    left: 10vw;
-    opacity: 1;
-    ${isAtTop ? { width: '15vh', top: '10vh' } :
-      isSidebarActive ? { width: '15vh', top: '10vh' } :
-        { display: 'none' }}
-
-    @media ${props => props.theme.breakpoints.mobile} {
-        ${isSidebarActive ?
-      `
-            width: 12vh;
-            top: 5vh;
-          `
-      :
-      `
-            width: 7vh;
-            top: 5vh;
-          `
-    }
-    }
-  `;
+  const DistributeProps = ({ children, ...props }) => {
+    return React.Children.map(children, child =>
+      React.cloneElement(child, { ...props })
+    );
+  };
 
   return (
-    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} isSidebarActive={isSidebarActive} isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange} >
+    <ExpandedHeaderContainer onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} {...commonProps}>
       {isSidebarActive ?
-        <Sidebar isSidebarActive={isSidebarActive} isAtTop={isAtTop} isAtTheBannerRange={isAtTheBannerRange} />
+        <DistributeProps {...commonProps}>
+          <Sidebar />
+        </DistributeProps>
         :
         <></>
       }
       {isAtTop && !isMobile ? <TopBar /> : <></>}
-      <BackgroundStyle>
-        <BackgroundStyleBlur />
+      <BackgroundStyle {...commonProps}>
+        <BackgroundStyleBlur {...commonProps} />
         <HeaderStyle>
-          <ImgStyleLogo src={isSidebarActive ? '/img/logos/tokyoLettersLogo.png' : '/img/logos/tokyoLogo.png'} alt="ZloLogo" />
+          <ImgStyleLogo src={isSidebarActive ? '/img/logos/tokyoLettersLogo.png' : '/img/logos/tokyoLogo.png'} alt="ZloLogo" {...commonProps} />
         </HeaderStyle>
         <StyledDiv>
           {!isMobile ?
             <StyledList style={isAtTop ? { padding: '18vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
-              <StyledListItem to="/">Home</StyledListItem>
-              <StyledListItem to="/">Produtos</StyledListItem>
-              <StyledListItem to="/">Blog</StyledListItem>
+              <DistributeProps {...commonProps}>
+                <StyledListItem to="/">Home</StyledListItem>
+                <StyledListItem to="/">Produtos</StyledListItem>
+                <StyledListItem to="/">Blog</StyledListItem>
+              </DistributeProps>
               <ComboBoxContainer>
-                <ComboBoxButton>Institucional <IconComboBox icon={faChevronDown} /></ComboBoxButton>
-                <ComboBoxList>
-                  <ComboBoxListItem to="/">
-                    Quem Somos
-                  </ComboBoxListItem>
-                  <ComboBoxListItem to="/">
-                    Trabalhe Conosco
-                  </ComboBoxListItem>
-                </ComboBoxList>
+                <DistributeProps {...commonProps}>
+                  <ComboBoxButton>Institucional <IconComboBox icon={faChevronDown} /></ComboBoxButton>
+                  <ComboBoxList>
+                    <ComboBoxListItem to="/">
+                      Quem Somos
+                    </ComboBoxListItem>
+                    <ComboBoxListItem to="/">
+                      Trabalhe Conosco
+                    </ComboBoxListItem>
+                  </ComboBoxList>
+                </DistributeProps>
               </ComboBoxContainer>
               <StyledContainer>
-                <StyledContactItem to="/">Contato</StyledContactItem>
+                <StyledContactItem to="/" {...commonProps}>Contato</StyledContactItem>
                 <DarkModeContainer isDarkMode={isDarkMode}>
                   <DarkModeButton isDarkMode={isDarkMode} onClick={toggleDarkMode} disabled={isDarkModeAnimationRunning ? true : false}>
                     <DarkModeIcon icon={isDarkMode ? faMoon : faSun} rotate={rotateIcon} />
@@ -534,14 +550,13 @@ function Header() {
                 </DarkModeContainer>
               </StyledContainer>
               <StyledListItemAndIcon to="/">
-                {/*<StyledIcon src="../img/EcommerceIcon.png" />*/}
-                <Icon icon={faCartShopping} />
+                <Icon icon={faCartShopping} {...commonProps} />
                 {isSmallDesktop ? '' : 'E-commerce'}
               </StyledListItemAndIcon>
             </StyledList>
             :
             <StyledList>
-              <Icon icon={isMobile ? isSidebarActive ? faX : faBars : faCartShopping} onClick={() => toggleSidebar()} />
+              <Icon icon={isMobile ? isSidebarActive ? faX : faBars : faCartShopping} onClick={() => toggleSidebar()} {...commonProps} />
             </StyledList>
           }
         </StyledDiv>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const retractForMobile = keyframes`
@@ -23,21 +23,18 @@ const expandForMobile = keyframes`
     }
   `;
 
-const Sidebar = (props) => {
-
-  const SidebarContainer = styled.div`
+const SidebarContainer = styled.div`
     width: 100%;
     position: fixed;
     right: 0;
     top: 12vh;
     height: 88vh;
     background-color: black;
-    animation: ${props.isSidebarActive ? expandForMobile : 'none'
-    } 0.2s forwards;
-    border-top: ${props.isSidebarActive ? '1px solid white' : 'none'};
+    animation: ${props => (props.isSidebarActive ? expandForMobile : 'none')} 0.2s forwards;
+    border-top: ${props => (props.isSidebarActive ? '1px solid white' : 'none')};
   `;
 
-  const ButtonsContainer = styled.div`
+const ButtonsContainer = styled.div`
     padding-top: 5%;
     height: 70%;
     display: flex;
@@ -46,7 +43,7 @@ const Sidebar = (props) => {
     justify-content: space-evenly;
   `
 
-  const Button = styled.button`
+const Button = styled.button`
     width: 90%;
     height: 10%;
     text-align: left;
@@ -63,7 +60,7 @@ const Sidebar = (props) => {
     }
   `;
 
-  const AbsoluteImage = styled.img`
+const AbsoluteImage = styled.img`
   position: absolute;
   bottom: 3%;
   left: 5%;
@@ -71,8 +68,10 @@ const Sidebar = (props) => {
   height: auto;
   `;
 
+const Sidebar = ({ isSidebarActive }) => {
+
   return (
-    <SidebarContainer>
+    <SidebarContainer isSidebarActive={isSidebarActive}>
       <ButtonsContainer>
         <Button>Home</Button>
         <Button>E-commerce</Button>
