@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -60,7 +62,8 @@ const Title = styled.h2`
   @media ${props => props.theme.breakpoints.mobile} {
     left: 8%;
     margin-bottom: 8%;
-    font-size: 4.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 `;
 
@@ -78,12 +81,12 @@ const SecondPart = styled.div`
 
 const UpperText = styled.p`
     font-size: 1.15rem;
-    color: grey;
+    color: ${props => props.isDarkMode ? 'white' : 'grey'};
 
     @media ${props => props.theme.breakpoints.mobile} {
         width: 76%;
         margin: 4% 15% 0% 4%;
-        font-size: 3.5rem;
+        font-size: 1rem;
     }
 `;
 
@@ -104,7 +107,7 @@ const SecondDiv = styled.div`
 const Card = styled.div`
     width: 25%;
     height: 100%;
-    border: 1px solid transparent;
+    border: 1px solid ${props => props.isDarkMode ? 'black' : 'transparent'};
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -142,9 +145,10 @@ const CardTitle = styled.h3`
     font-weight: bold;
     font-size: 1.15rem;
     padding: 1vh 0;
+    color: ${props => props.isDarkMode ? 'orange' : 'black'};
 
     @media ${props => props.theme.breakpoints.mobile} {
-        font-size: 4.5rem;
+        font-size: 1.2rem;
         padding: 0vh 2vw 2vh 2vw;
     }
 `;
@@ -152,12 +156,12 @@ const CardTitle = styled.h3`
 const CardText = styled.p`
     height: 40%;
     text-align: left;
-    color: grey;
     font-size: 1rem;
     padding: 1vh 0;
+    color: ${props => props.isDarkMode ? 'white' : 'grey'};
 
     @media ${props => props.theme.breakpoints.mobile} {
-        font-size: 3.5rem;
+        font-size: 1rem;
         padding: 1vh 2vw;
     }
 `;
@@ -198,7 +202,7 @@ const BottomTitle = styled.h3`
     font-size: 2.5rem;
 
     @media ${props => props.theme.breakpoints.mobile} {
-        font-size: 6rem;
+        font-size: 1.5rem;
     }
 `;
 
@@ -217,60 +221,47 @@ const ContentContainer = styled.div`
 `;
 
 const Cards = () => {
-    const [isMobile, setIsMobile] = useState(false);
-    const [isSmallDesktop, setIsSmallDesktop] = useState(false);
+    const { isMobile, isDarkMode } = useScreenPositionContext();
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 700);
-            setIsSmallDesktop(window.innerWidth <= 1279);
-        };
-
-        handleResize();
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     return (
         <Container>
             <FirstDiv>
                 <FirstPart>
                     <Line />
-                    <Title>Tudo que você precisa!</Title>
+                    <Title isDarkMode={isDarkMode}>Tudo que você precisa!</Title>
                 </FirstPart>
                 <SecondPart>
-                    <UpperText>De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades. Com nossa vasta gama de produtos e expertise, garantimos que você tenha tudo o que precisa para os seus projetos e desafios do dia a dia.</UpperText>
+                    <UpperText isDarkMode={isDarkMode}>De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades. Com nossa vasta gama de produtos e expertise, garantimos que você tenha tudo o que precisa para os seus projetos e desafios do dia a dia.</UpperText>
                 </SecondPart>
             </FirstDiv>
             <SecondDiv>
-                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
                     <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
                     <ContentContainer>
-                        <CardTitle>Mais de 12.000 itens em estoque</CardTitle>
-                        <CardText>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <StyledText>muito mais!</StyledText></CardText>
+                        <CardTitle isDarkMode={isDarkMode}>Mais de 12.000 itens em estoque</CardTitle>
+                        <CardText isDarkMode={isDarkMode}>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <StyledText>muito mais!</StyledText></CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>
                     </ContentContainer>
                 </Card>
-                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
                     <CardImage src="../img/cards/wireImg.png" alt="Card Image" />
                     <ContentContainer>
-                        <CardTitle>Montagem de Cabos Personalizados</CardTitle>
-                        <CardText>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
+                        <CardTitle isDarkMode={isDarkMode}>Montagem de Cabos Personalizados</CardTitle>
+                        <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>
                     </ContentContainer>
                 </Card>
-                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }}>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
                     <CardImage src="../img/cards/ShopCartImg.png" alt="Card Image" />
                     <ContentContainer>
-                        <CardTitle>Suprimentos de produtos personalizados</CardTitle>
-                        <CardText>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
+                        <CardTitle isDarkMode={isDarkMode}>Suprimentos de produtos personalizados</CardTitle>
+                        <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>
@@ -278,7 +269,7 @@ const Cards = () => {
                 </Card>
             </SecondDiv>
             <ThirdDiv>
-                <BottomTitle>As melhores ferramentas estão aqui!</BottomTitle>
+                <BottomTitle isDarkMode={isDarkMode}>As melhores ferramentas estão aqui!</BottomTitle>
             </ThirdDiv>
         </Container>
     );

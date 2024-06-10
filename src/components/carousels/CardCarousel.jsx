@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
+
 const Container = styled.div`
   display: flex;
   height: 40vh;
@@ -55,16 +57,16 @@ const Title = styled.h1`
   font-size: 3rem;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 7rem;
+    font-size: 1.5rem;
     width: 100%;
   }
 `;
 
 const Text = styled.p`
-  font-size: 2vw;
+  font-size: 2rem;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 5rem;
+    font-size: 1.2rem;
     width: 100%;
   }
 `;
@@ -84,7 +86,7 @@ const Card = styled(Link)`
   height: 37vh;
   flex-shrink: 0;
   position: relative;
-  background-color: white;
+  background-color: ${props => props.isDarkMode ? '#242424' : 'white'};
   border-radius: 3%;
   margin: 0 1%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -95,7 +97,7 @@ const Card = styled(Link)`
   transition: background 0.3s ease;
 
   &:hover {
-    background: linear-gradient(to right, #f0f0f0, white);
+    background: ${props => props.isDarkMode ? 'linear-gradient(to right, #242424, transparent)' : 'linear-gradient(to right, #f0f0f0, white)'};
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
@@ -129,7 +131,7 @@ const CardTitle = styled.h3`
 
   @media ${props => props.theme.breakpoints.mobile} {
     height: 50%;
-    font-size: 4rem;
+    font-size: 1rem;
   }
 `;
 
@@ -146,7 +148,7 @@ const Tag = styled.div`
   user-select: none;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 4rem;
+    font-size: 1rem;
   }
 `;
 
@@ -167,14 +169,14 @@ const LeftButton = styled(Button)`
   background: linear-gradient(to right, transparent, transparent);
 
   &:hover {
-    background: linear-gradient(to right, #f0f0f0, transparent);
+    background: ${props => props.isDarkMode ? 'linear-gradient(to right, #151515, transparent)' : 'linear-gradient(to right, #f0f0f0, transparent)'};
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
     top: 5%;
     height: 15%;
     width: 100%;
-    background: linear-gradient(to top,  #f0f0f0, transparant);
+    background: ${props => props.isDarkMode ? 'linear-gradient(to right, #151515, transparent)' : 'linear-gradient(to right, #f0f0f0, transparent)'};
   }
 `;
 
@@ -182,10 +184,10 @@ const RightButton = styled(Button)`
   right: 0;
   height: 100%;
   width: 7vw;
-  background: linear-gradient(to left, #f0f0f0, transparent);
+  background: ${props => props.isDarkMode ? 'linear-gradient(to left, #151515, transparent)' : 'linear-gradient(to left, #f0f0f0, transparent)'};
 
   &:hover {
-    background: linear-gradient(to left, white, transparent);
+    background: ${props => props.isDarkMode ? 'linear-gradient(to left, black, transparent)' : 'linear-gradient(to left, white, transparent)'};
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -215,7 +217,7 @@ const Arrow = styled.div`
   color: white;
   cursor: pointer;
   margin: 0 10px;
-  font-size: 5vh;
+  font-size: 2.5rem;
 `;
 
 const data = [
@@ -274,21 +276,10 @@ const StyledIconRight = styled(FontAwesomeIcon)`
   `;
 
 const YourComponent = () => {
+  const {isMobile, isDarkMode } = useScreenPositionContext();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimationRunning, setIsAnimationRunning] = useState(false);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const timerForAnimation = () => {
     setIsAnimationRunning(true);
@@ -352,17 +343,17 @@ const YourComponent = () => {
         <Text>Destaques do Blog</Text>
       </LeftPart>
       <RightPart>
-        {isMobile ? <></> : <LeftButton onClick={handleLeftClick}>{/*<IconComboBox icon={faChevronLeft} />*/}</LeftButton>}
+        {isMobile ? <></> : <LeftButton onClick={handleLeftClick} isDarkMode={isDarkMode}/>}
         <Carousel style={isMobile ? { transform: `translateX(-${currentIndex * 92}%)` } : { transform: `translateX(-${currentIndex * 35.33}%)` }}>
           {data.map((item, index) => (
-            <Card key={index} to={item.link}>
+            <Card key={index} to={item.link} isDarkMode={isDarkMode}>
               <CardImage src={item.image} alt={`Image ${index + 1}`} />
               <Tag>{item.tag}</Tag>
               <CardTitle>{item.title}</CardTitle>
             </Card>
           ))}
         </Carousel>
-        {isMobile ? <></> : <RightButton onClick={handleRightClick}>{/*<IconComboBox icon={faChevronRight} />*/}</RightButton>}
+        {isMobile ? <></> : <RightButton onClick={handleRightClick} isDarkMode={isDarkMode}/>}
       </RightPart>
       {isMobile ?
         <ArrowContainer>

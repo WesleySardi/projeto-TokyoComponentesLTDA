@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 
 const Container = styled.div`
   display: flex;
@@ -95,7 +94,7 @@ const Title = styled.h1`
   font-weight: bold;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 4.5rem;
+    font-size: 1.1rem;
     text-align: center;
   }
 `;
@@ -107,7 +106,7 @@ const Text = styled(Link)`
   color: grey;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 4rem;
+    font-size: 1rem;
     text-align: center;
   }
 `;
@@ -119,7 +118,7 @@ const TitlePartOne = styled.h1`
   font-weight: bold;
 
   @media ${props => props.theme.breakpoints.mobile} {
-  font-size: 4.5rem;
+  font-size: 1rem;
   text-align: center;
   }
 `;
@@ -131,7 +130,7 @@ const TextPartOne = styled.p`
   color: grey;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 4rem;
+    font-size: 1rem;
     text-align: center;
   }
 `;
@@ -214,7 +213,7 @@ const Button = styled.button`
   border-radius: 0.5vw;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 4rem;
+    font-size: 1rem;
     text-align: center;
     padding: 5% 0% 5% 0%;
     width: 60%;
@@ -224,18 +223,7 @@ const Button = styled.button`
 `;
 
 const OptionsFooter = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const {isMobile, isDarkMode } = useScreenPositionContext();
 
   return (
     <Container>

@@ -27,14 +27,45 @@ const Content = styled.div`
 const Image = styled.img`
   height: auto;
   margin-right: 10px;
-  width: 2.2vh;
+  width: 1.5rem;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    width: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    width: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    width: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    width: 1rem;
+  }
 `;
 
 const Text = styled.span`
   color: white;
-  font-size: 1.8vh;
-
+  font-size: 1.1rem;
   font-weight: bold;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 0.8rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 0.8rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 0.8rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 0.8rem;
+  }
 `;
 
 const TopBar = () => {

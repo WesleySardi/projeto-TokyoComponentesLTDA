@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ScreenPositionContext = createContext();
 
 const ScreenPositionProvider = ({ children }) => {
-  const [isAtTop, setIsAtTop] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const [isAtTheBannerRange, setIsAtTheBannerRange] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);

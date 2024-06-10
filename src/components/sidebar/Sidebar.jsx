@@ -52,7 +52,7 @@ const Button = styled.button`
     color: #fff;
     border-left: 2px solid red;
     cursor: pointer;
-    font-size: 2.2vh;
+    font-size: 1.2rem;
     
     &:hover {
       background-color: orange;
@@ -69,7 +69,6 @@ const AbsoluteImage = styled.img`
   `;
 
 const Sidebar = ({ isSidebarActive }) => {
-
   return (
     <SidebarContainer isSidebarActive={isSidebarActive}>
       <ButtonsContainer>

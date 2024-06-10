@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
+
 const CarouselContainer = styled.div`
   position: relative;
   width: 100vw;
@@ -38,41 +40,41 @@ const Title = styled.h1`
   width: 90%;
 
   @media ${(props) => props.theme.breakpoints.largeDesktop} {
-    font-size: 5.5vh;
+    font-size: 2.5rem;
   }
 
   @media ${(props) => props.theme.breakpoints.smallDesktop} {
-    font-size: 5.3vh;
+    font-size: 2.5rem;
   }
 
   @media ${(props) => props.theme.breakpoints.tablet} {
-    font-size: 5vh;
+    font-size: 2.2rem;
   }
 
   @media ${(props) => props.theme.breakpoints.mobile} {
-    font-size: 5vh;
+    font-size: 2rem;
   }
 `;
 
 const Text = styled.p`
-  width: 60%;
+  width: 90%;
   margin: 2% auto 4% auto;
   color: red;
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 2.5vh;
+  @media ${(props) => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.5rem;
   }
 
-  @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 2.5vh;
+  @media ${(props) => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.5rem;
   }
 
-  @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 2.5vh;
+  @media ${(props) => props.theme.breakpoints.tablet} {
+    font-size: 1.5rem;
   }
 
-  @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 2.5vh;
+  @media ${(props) => props.theme.breakpoints.mobile} {
+    font-size: 1.5rem;
   }
 `;
 
@@ -85,27 +87,27 @@ const Button = styled.button`
   font-weight: bold;
 
   @media ${(props) => props.theme.breakpoints.largeDesktop} {
-    font-size: 2.4vh;
+    font-size: 1.2rem;
     padding: 1.5vh 0;
-    width: 10vw;
+    width: 30%;
   }
 
   @media ${(props) => props.theme.breakpoints.smallDesktop} {
-    font-size: 2.3vh;
+    font-size: 1.2rem;
     padding: 1.5vh 0;
-    width: 10vw;
+    width: 35%;
   }
 
   @media ${(props) => props.theme.breakpoints.tablet} {
-    font-size: 2.2vh;
+    font-size: 1.2rem;
     padding: 1.5vh 0;
-    width: 13vw;
+    width: 35%;
   }
 
   @media ${(props) => props.theme.breakpoints.mobile} {
-    font-size: 2vh;
+    font-size: 1.2rem;
     padding: 1.5vh 0;
-    width: 30vw;
+    width: 40%;
   }
 `;
 
@@ -116,15 +118,19 @@ const AbsoluteImage = styled.img`
   height: auto;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    width: 40vh;
+    width: 30vh;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    width: 35vh;
+    width: 40vh;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    width: 25vh;
+    width: 35vh;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    width: 35vh;
   }
 `;
 
@@ -134,6 +140,21 @@ const ArrowContainer = styled.div`
   right: 8%;
   display: flex;
   align-items: center;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    bottom: 8%;
+    right: 4%;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    bottom: 8%;
+    right: 4%;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    bottom: 8%;
+    right: 4%;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     bottom: 4%;
@@ -147,20 +168,20 @@ const Arrow = styled.div`
   cursor: pointer;
   margin: 0 10px;
 
-  @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 4vh;
-  }
-
-  @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 5vh;
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 3rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 6vh;
+    font-size: 3rem;
   }
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 7vh;
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 3rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 2.5rem;
   }
 `;
 
@@ -210,19 +231,9 @@ const StyledIconRight = styled(FontAwesomeIcon)`
 `;
 
 const MainCarousel = () => {
+  const { isMobile, isDarkMode } = useScreenPositionContext();
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));

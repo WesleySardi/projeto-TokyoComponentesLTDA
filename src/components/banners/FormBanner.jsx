@@ -42,7 +42,7 @@ padding: 4vh;
 const TitleDiv = styled.div`
 color: white;
 font-weight: bold;
-font-size: 2.3rem;
+font-size: 1.3rem;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -63,7 +63,7 @@ img {
   @media ${props => props.theme.breakpoints.mobile} {
     position: absolute;
     left: 0;
-    margin-bottom: 140vw;
+    margin-bottom: 150vw;
   }
 }
 `;
@@ -101,7 +101,7 @@ text-align: right;
 color: white;
 
 @media ${props => props.theme.breakpoints.mobile} {
-  font-size: 5rem;
+  font-size: 1.3rem;
   text-align: left;
 }
 `;
@@ -126,7 +126,7 @@ width: 3rem;
 height: auto;
 
 @media ${props => props.theme.breakpoints.mobile} {
-  width: 12rem;
+  width: 4rem;
 }
 `;
 
@@ -143,7 +143,7 @@ padding: 2%;
 
 @media ${props => props.theme.breakpoints.mobile} {
   padding: 5%;
-  font-size: 5vw;
+  font-size: 1rem;
 }
 `;
 
@@ -155,7 +155,7 @@ color: white;
 padding: 0% 3%;
 
 @media ${props => props.theme.breakpoints.mobile} {
-  font-size: 4rem;
+  font-size: 1rem;
   font-weight: normal;
 }
 `;
@@ -172,7 +172,7 @@ margin-top: 3%;
 width: 30%;
 
 @media ${props => props.theme.breakpoints.mobile} {
-  font-size: 5rem;
+  font-size: 1.2rem;
   width: 40%;
 }
 `;
@@ -200,7 +200,7 @@ display: block;
 color: white;
 
 @media ${props => props.theme.breakpoints.mobile} {
-  font-size: 4rem;
+  font-size: 1rem;
   font-weight: normal;
   margin-top: 3vh;
 }

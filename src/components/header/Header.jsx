@@ -8,7 +8,7 @@ import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import TopBar from './TopBar';
 import Sidebar from '../sidebar/Sidebar';
 
-import { useScreenPositionContext } from '../../context/ScreenPositionProvider'
+import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 
 const retractAnimation = keyframes`
   from {
@@ -144,7 +144,7 @@ const ComboBoxListItem = styled(Link)`
   border-radius: 0.5vw;
   cursor: pointer;
   display: block;
-  font-size: 2.2vh;
+  font-size: 1.5rem;
   padding: 12px 16px;
   text-align: left;
   text-decoration: none;
@@ -185,10 +185,22 @@ const DarkModeIcon = styled(FontAwesomeIcon)`
     css`
   animation: ${rotateAnimation} 0.3s linear;
   `};    
-  font-size: 2.2vh;  
+  font-size: 1.5rem;  
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.5rem;  
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.5rem;  
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.5rem;  
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 2.5vh;  
+    font-size: 1.2rem;  
   }
 `;
 
@@ -216,10 +228,26 @@ const ExpandedHeaderContainer = styled.div`
 
 const StyledListItem = styled(Link)`
   color: ${props => (props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)')};  
-  font-size: 2.5vh;
+  font-size: 1.5rem;
   text-align: center;
   text-decoration: none;
   margin-right: 3vw;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {  
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.2rem;
+  }
+
+   @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 1.2rem;
+  }
 `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -227,7 +255,7 @@ const Icon = styled(FontAwesomeIcon)`
 
   @media ${props => props.theme.breakpoints.mobile} {
     color: ${props => props.isSidebarActive ? 'white' : 'red'};
-    font-size: ${props => props.isSidebarActive ? '2vh' : '4vh'};
+    font-size: ${props => props.isSidebarActive ? '1.2rem' : '2rem'};
     margin-right: 12vw;
     font-weight: bold;
     padding: 15%;
@@ -361,12 +389,19 @@ const StyledListItemAndIcon = styled(Link)`
   padding: 5px;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {  
-    font-size: 1.8vh;
+    font-size: 1.2rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 2.2vh;
-    padding: 5px 10px;
+    font-size: 1.2rem;
+  }
+
+   @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 1.2rem;
   }
 
   &:hover {
@@ -381,11 +416,27 @@ const StyledContactItem = styled(Link)`
   border-radius: 0.5vw;
   color: ${props => props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
   display: flex;
-  font-size: 2.2vh;
+  font-size: 1.5rem;
   height: 30px;
   justify-content: center;
   padding: 5px;
   padding: 5px 10px;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {  
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.2rem;
+  }
+
+   @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 1.2rem;
+  }
 
   &:hover {
     background-color: red;
@@ -397,7 +448,23 @@ const ComboBoxButton = styled.button`
   background-color: transparent;
   color: ${props => props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
   cursor: pointer;
-  font-size: 2.5vh;
+  font-size: 1.5rem;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {  
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.2rem;
+  }
+
+   @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 1.2rem;
+  }
 `;
 
 const DarkModeContainer = styled.div`
@@ -409,8 +476,8 @@ const DarkModeContainer = styled.div`
   width: 40px;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    height: 6vh;
-    width: 11vh;
+    height: 4.5vh;
+    width: 9vh;
     margin-left: 0;
   }
 `;

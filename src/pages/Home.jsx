@@ -64,7 +64,7 @@ function Home() {
       <CenterBottomImage2 src="../img/icones/dotsImage.png" alt="Outra descrição da imagem" />
       <MainCarousel />
       <Cards />
-      <Banner link={'/'} image={isMobile ? '../img/banners/bannerReduzido.png' : '../img/banner.png'} />
+      <Banner link={'/'} image={isMobile ? '../img/banners/bannerReduzido.png' : '../img/banners/banner.png'} />
       <CardCarousel />
       <FormBanner />
       <OptionsFooter />
