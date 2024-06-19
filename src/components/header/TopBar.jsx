@@ -60,7 +60,7 @@ const Text = styled.span`
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {

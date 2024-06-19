@@ -113,30 +113,19 @@ const StyledContainer = styled.div`
 const ComboBoxContainer = styled.div`
   display: inline-block;
   position: relative;
-
-  &:hover {
-    ul {
-      display: block;
-      animation: ${fadeIn} 0.2s ease;
-    }
-    button {
-      color: #d35400;
-      transition: color 0.3s ease;
-    }
-  }
 `;
 
 const ComboBoxList = styled.ul`
   background-color: #f9f9f9;
   border-radius: 0.5vw;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
-  display: none;
+  display: ${props => props.isComboBoxActive ? 'block' : 'none'};
   position: absolute;
   width: 11vw;
   z-index: 3;
 
-  &:hover {
-  display: block;
+  @media ${props => props.theme.breakpoints.tablet} {
+    width: 18vw;
   }
 `;
 
@@ -148,6 +137,22 @@ const ComboBoxListItem = styled(Link)`
   padding: 12px 16px;
   text-align: left;
   text-decoration: none;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 1rem;
+  }
 
   &:hover {
   background-color: #ddd;
@@ -188,7 +193,7 @@ const DarkModeIcon = styled(FontAwesomeIcon)`
   font-size: 1.5rem;  
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.5rem;  
+    font-size: 1.2rem;  
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -267,6 +272,7 @@ const Icon = styled(FontAwesomeIcon)`
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     margin-right: 10px;
+    font-size: 1.2rem;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -294,6 +300,12 @@ const BackgroundStyle = styled.div`
   height: 100%;
   width: 100vw;
   z-index: 1;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+      animation: none 0.2s forwards,
+      none 1.5s forwards,
+      none 1.5s forwards;
+    }
 
   @media ${props => props.theme.breakpoints.mobile} {
     height: 100%;
@@ -345,6 +357,12 @@ const BackgroundStyleBlur = styled.div`
     -webkit-backdrop-filter: blur(${props => props.isAtTop ? '0px' : '2px'});
     width: 100vw;
     z-index: -1;
+
+    @media ${props => props.theme.breakpoints.tablet} {
+      animation: none 0.2s forwards,
+      none 1.5s forwards,
+      none 1.5s forwards;
+    }
 
     @media ${props => props.theme.breakpoints.mobile} {
       animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards,
@@ -446,7 +464,7 @@ const StyledContactItem = styled(Link)`
 
 const ComboBoxButton = styled.button`
   background-color: transparent;
-  color: ${props => props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
+  color: ${props => props.isComboBoxActive ? 'orange' : props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
   cursor: pointer;
   font-size: 1.5rem;
 
@@ -512,7 +530,7 @@ const throttle = (func, limit) => {
 };
 
 function Header() {
-  const { isAtTop, isAtTheBannerRange, isMobile, isSmallDesktop, isDarkMode, setIsDarkMode } = useScreenPositionContext();
+  const { isAtTop, isAtTheBannerRange, isMobile, isTablet, isSmallDesktop, isDarkMode, setIsDarkMode } = useScreenPositionContext();
 
   const [isDarkModeAnimationRunning, setIsDarkModeAnimationRunning] = useState(false);
   const [retract, setRetract] = useState(true);
@@ -520,12 +538,14 @@ function Header() {
   const [rotateIcon, setRotateIcon] = useState(false);
   const [isSidebarActive, setIsSidebarActive] = useState(false);
 
-  const commonProps = { isDarkModeAnimationRunning, isSidebarActive, isAtTop, isAtTheBannerRange, isDarkMode, retract };
+  const [isComboBoxActive, setIsComboBoxActive] = useState(false);
+
+  const commonProps = { isDarkModeAnimationRunning, isSidebarActive, isAtTop, isAtTheBannerRange, isDarkMode, retract, isComboBoxActive };
 
   useEffect(() => {
     const handleScroll = throttle(() => {
       setRetract(window.scrollY > window.innerHeight);
-    }, 300);
+    }, 100);
 
     window.addEventListener('scroll', handleScroll);
 
@@ -556,17 +576,20 @@ function Header() {
   };
 
   const handleMouseEnter = () => {
-    if (!isAtTheBannerRange && !isDarkModeAnimationRunning) {
+    if (!isAtTop && !isAtTheBannerRange && !isDarkModeAnimationRunning && !isMobile && !isTablet) {
       document.documentElement.style.overflowY = 'hidden';
       document.body.style.overflowY = 'hidden';
+
       setRetract(false);
     }
   };
 
   const handleMouseLeave = () => {
-    if (!isAtTheBannerRange && !isDarkModeAnimationRunning) {
+    if (!isAtTop && !isAtTheBannerRange && !isDarkModeAnimationRunning && !isMobile && !isTablet) {
       document.documentElement.style.overflowY = 'auto';
       document.body.style.overflowY = 'auto';
+
+      setIsComboBoxActive(false);
       setRetract(true);
     }
   };
@@ -614,7 +637,11 @@ function Header() {
               </DistributeProps>
               <ComboBoxContainer>
                 <DistributeProps {...commonProps}>
-                  <ComboBoxButton>Institucional <IconComboBox icon={faChevronDown} /></ComboBoxButton>
+                  <ComboBoxButton onClick={
+                    isComboBoxActive ? () => setIsComboBoxActive(false) : () => setIsComboBoxActive(true)
+                  }>
+                    Institucional
+                    <IconComboBox icon={faChevronDown} /></ComboBoxButton>
                   <ComboBoxList>
                     <ComboBoxListItem to="/">
                       Quem Somos

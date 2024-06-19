@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
+
+import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 
 const AdditionalContent = styled.div`
 width: 90%;
+
+@media ${props => props.theme.breakpoints.tablet} {
+  width: 100vw;
+}
 
 @media ${props => props.theme.breakpoints.mobile} {
   width: 100vw;
@@ -22,6 +28,10 @@ background-color: #A90101;
 background-color: red;
 box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 
+@media ${props => props.theme.breakpoints.tablet} {
+  border-radius: 0;
+}
+
 @media ${props => props.theme.breakpoints.mobile} {
   border-radius: 0;
 }
@@ -33,6 +43,10 @@ display: flex;
 justify-content: center;
 align-items: center;
 padding: 4vh;
+
+@media ${props => props.theme.breakpoints.tablet} {
+  padding: 7vh 5vw 4vh 5vw;
+}
 
 @media ${props => props.theme.breakpoints.mobile} {
   padding: 7vh 5vw 4vh 5vw;
@@ -47,6 +61,22 @@ display: flex;
 justify-content: center;
 align-items: center;
 height: 100%;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 2.3rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.5rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 1.7rem;
+  }
 `;
 
 const ImageDiv = styled.div`
@@ -60,10 +90,17 @@ img {
   position: absolute;
   height: auto;
 
+  @media ${props => props.theme.breakpoints.tablet} {
+    position: absolute;
+    left: 80%;
+    margin-bottom: -32%;
+    width: 20%;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
     position: absolute;
     left: 0;
-    margin-bottom: 150vw;
+    margin-bottom: 140%;
   }
 }
 `;
@@ -80,6 +117,10 @@ const FormContainer = styled.div`
 display: flex;
 flex-direction: column;
 width: 100%;
+
+@media ${props => props.theme.breakpoints.tablet} {
+  width: 70%;
+}
 `;
 
 const TitleContainer = styled.div`
@@ -87,6 +128,10 @@ display: flex;
 align-items: center;
 justify-content: center;
 margin-bottom: 3%;
+
+@media ${props => props.theme.breakpoints.tablet} {
+  margin-bottom: 2vh;
+}
 
 @media ${props => props.theme.breakpoints.mobile} {
   margin-bottom: 2vh;
@@ -100,6 +145,16 @@ font-weight: bold;
 text-align: right;
 color: white;
 
+@media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.1rem;
+    text-align: left;
+  }
+
+@media ${props => props.theme.breakpoints.tablet} {
+  font-size: 1.3rem;
+  text-align: left;
+}
+
 @media ${props => props.theme.breakpoints.mobile} {
   font-size: 1.3rem;
   text-align: left;
@@ -109,11 +164,21 @@ color: white;
 const IconContainer = styled.div`
 flex: 30%;
 display: flex;
-justify-content: start;
+justify-content: center;
 align-items: center;
 margin-left: 5%;
 color: white;
 font-size: 1.3rem;
+
+@media ${props => props.theme.breakpoints.smallDesktop} {
+    justify-content: right;
+    margin-left: 0;
+  }
+
+@media ${props => props.theme.breakpoints.tablet} {
+  justify-content: center;
+  margin-left: 0;
+}
 
 @media ${props => props.theme.breakpoints.mobile} {
   justify-content: center;
@@ -124,6 +189,10 @@ font-size: 1.3rem;
 const StyledIcon = styled.img`
 width: 3rem;
 height: auto;
+
+@media ${props => props.theme.breakpoints.tablet} {
+  width: 4rem;
+}
 
 @media ${props => props.theme.breakpoints.mobile} {
   width: 4rem;
@@ -141,6 +210,10 @@ margin-bottom: 2%;
 border-radius: 0.5vw;
 padding: 2%;
 
+@media ${props => props.theme.breakpoints.tablet} {
+  font-size: 1rem;
+}
+
 @media ${props => props.theme.breakpoints.mobile} {
   padding: 5%;
   font-size: 1rem;
@@ -153,6 +226,11 @@ color: gray;
 text-align: center;
 color: white;
 padding: 0% 3%;
+
+@media ${props => props.theme.breakpoints.tablet} {
+  font-size: 1rem;
+  font-weight: normal;
+}
 
 @media ${props => props.theme.breakpoints.mobile} {
   font-size: 1rem;
@@ -171,6 +249,11 @@ margin: 0 auto;
 margin-top: 3%;
 width: 30%;
 
+@media ${props => props.theme.breakpoints.tablet} {
+  font-size: 1.2rem;
+  width: 40%;
+}
+
 @media ${props => props.theme.breakpoints.mobile} {
   font-size: 1.2rem;
   width: 40%;
@@ -181,6 +264,10 @@ const CheckBoxContainer = styled.div`
 display: flex;
 flex-direction: column;
 text-align: center;
+
+@media ${props => props.theme.breakpoints.tablet} {
+  margin: 2vh;
+}
 
 @media ${props => props.theme.breakpoints.mobile} {
   margin: 2vh;
@@ -199,6 +286,12 @@ margin-top: 5%;
 display: block;
 color: white;
 
+@media ${props => props.theme.breakpoints.tablet} {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 3vh;
+}
+
 @media ${props => props.theme.breakpoints.mobile} {
   font-size: 1rem;
   font-weight: normal;
@@ -214,23 +307,12 @@ accent-color: green;
 `;
 
 function FormBanner() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const { isMobile, isTablet } = useScreenPositionContext();
 
   return (
     <AdditionalContent>
       <StyledSecondDiv>
-        {isMobile ?
+        {isMobile || isTablet ?
           <></>
           :
           <StyledThirdDiv style={{ width: '40%' }}>
@@ -239,7 +321,7 @@ function FormBanner() {
             </TitleDiv>
           </StyledThirdDiv>
         }
-        {isMobile ?
+        {isMobile || isTablet ?
           <ImageDiv>
             <img src="/img/banners/robotImg.png" alt="Imagem Centralizada" />
           </ImageDiv>
@@ -250,11 +332,11 @@ function FormBanner() {
             </ImageDiv>
           </StyledThirdDiv>
         }
-        <StyledThirdDiv style={isMobile ? { width: '100%' } : { width: '40%' }}>
+        <StyledThirdDiv style={isMobile || isTablet ? { width: '100%' } : { width: '40%' }}>
           <FormDiv>
             <FormContainer>
               <TitleContainer>
-                {isMobile ?
+                {isMobile || isTablet ?
                   <TitleForm>Entre em contato e obtenha as melhores soluções!</TitleForm>
                   :
                   <TitleForm>Receba tudo em primeira mão</TitleForm>

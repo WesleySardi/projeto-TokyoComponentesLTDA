@@ -24,9 +24,24 @@ const CenterBottomImage = styled.img`
   height: auto;
   z-index: 1;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    bottom: -35px;
+    width: 75px;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    bottom: -30px;
+    width: 65px;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    bottom: -25px;
+    width: 50px;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
-    bottom: -2.5%;
-    width: 12%;
+    bottom: -25px;
+    width: 50px;
   }
 `;
 const CenterBottomImage2 = styled.img`
@@ -38,9 +53,24 @@ const CenterBottomImage2 = styled.img`
   height: auto;
   z-index: 1;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    bottom: 50px;
+    width: 15px;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    bottom: 50px;
+    width: 15px;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    bottom: 40px;
+    width: 15px;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
-    bottom: 4%;
-    width: 2%;
+    bottom: 40px;
+    width: 15px;
   }
 `;
 
@@ -52,7 +82,7 @@ function Home() {
       setIsMobile(window.innerWidth <= 700);
     };
 
-    handleResize(); // Define o estado inicial
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -68,7 +98,6 @@ function Home() {
       <CardCarousel />
       <FormBanner />
       <OptionsFooter />
-      {/*<SolutionsCards />*/}
       {isMobile ?
         <></>
         :

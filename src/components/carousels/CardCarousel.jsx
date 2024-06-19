@@ -9,8 +9,12 @@ import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 
 const Container = styled.div`
   display: flex;
-  height: 40vh;
+  height: 100%;
   margin: 10vh 0;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    display: block;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     display: block;
@@ -18,19 +22,31 @@ const Container = styled.div`
 `;
 
 const LeftPart = styled.div`
-  flex: 20%;
+  flex: 30%;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: center;
   text-align: left;
-  padding: 0% 0% 0% 10%;
+  padding-left: 7%;
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    padding-left: 5%;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+     padding-left: 0%;
+     width: 90%;
+     height: 20%;
+     margin-left: 11%;
+     margin-bottom: 1%;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     width: 90%;
     height: 20%;
     margin-left: 10%;
-    padding: 0%;
+    padding-left: 0%;
   }
 `;
 
@@ -41,6 +57,13 @@ const RightPart = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    width: 90%;
+    height: 100%;
+    margin-left: 10%;
+    padding: 0%;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     width: 90%;
@@ -56,18 +79,40 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 3rem;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 2.3rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 2.1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.9rem;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 1.5rem;
-    width: 100%;
+    font-size: 1.7rem;
   }
 `;
 
 const Text = styled.p`
   font-size: 2rem;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.5rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.3rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1.1rem;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 1.2rem;
-    width: 100%;
+    font-size: 1.1rem;
   }
 `;
 
@@ -101,6 +146,18 @@ const Card = styled(Link)`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    height: 35vh;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
     width: 90%;
     height: 100%;
@@ -123,14 +180,25 @@ const CardTitle = styled.h3`
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: left;
+  text-align: center;
   max-width: 80%;
   height: 50%;
   font-weight: bold;
   user-select: none;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 0.8rem;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
-    height: 50%;
     font-size: 1rem;
   }
 `;
@@ -146,6 +214,18 @@ const Tag = styled.div`
   color: white;
   font-weight: bold;
   user-select: none;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 0.8rem;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 1rem;

@@ -7,11 +7,8 @@ import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  margin: 5vh 0 10vh 0;
 
   @media ${props => props.theme.breakpoints.mobile} {
-     height: 100%;
   }
 `;
 
@@ -19,8 +16,8 @@ const FirstDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30%;
   width: 100%;
+  margin: 5% 0%;
 
   @media ${props => props.theme.breakpoints.mobile} {
     display: block;
@@ -56,15 +53,28 @@ const Line = styled.div`
 const Title = styled.h2`
   position: absolute;
   left: 10%;
-  margin-bottom: 3%;
   font-size: 2rem;
 
-  @media ${props => props.theme.breakpoints.mobile} {
-    left: 8%;
-    margin-bottom: 8%;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        font-size: 2rem;
+        margin-bottom: 3.5%;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        font-size: 1.5rem;
+        margin-bottom: 4%;
+    }
+
+    @media ${props => props.theme.breakpoints.tablet} {
+        font-size: 1.5rem;
+        margin-bottom: 6%;
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+        left: 8%;
+        margin-bottom: 8%;
+        font-size: 1.5rem;
+    }
 `;
 
 const SecondPart = styled.div`
@@ -93,12 +103,9 @@ const UpperText = styled.p`
 const SecondDiv = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: 60%;
 
   @media ${props => props.theme.breakpoints.mobile} {
     display: block;
-    height: 100%;
     width: 100%;
     margin-top: 5%;
 }
@@ -106,7 +113,6 @@ const SecondDiv = styled.div`
 
 const Card = styled.div`
     width: 25%;
-    height: 100%;
     border: 1px solid ${props => props.isDarkMode ? 'black' : 'transparent'};
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -119,7 +125,6 @@ const Card = styled.div`
     @media ${props => props.theme.breakpoints.mobile} {
         width: 80%;
         margin: 0 auto;
-        height: 60vh;
         margin-top: 2%;
     }
 
@@ -132,42 +137,77 @@ const Card = styled.div`
 `;
 
 const CardImage = styled.img`
-    height: 70%;
-    width: auto;
-    max-width: 90%;
-    max-height: 60%;
-    margin: 0 auto;
+    height: 50%;
 `;
 
 const CardTitle = styled.h3`
-    height: 10%;
+    display: flex; 
+    align-items: center;
     text-align: left;
     font-weight: bold;
     font-size: 1.15rem;
-    padding: 1vh 0;
+    min-height: 10vh;
+    padding: 0 1vw;
     color: ${props => props.isDarkMode ? 'orange' : 'black'};
+
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        font-size: 1.3rem;
+        min-height: 8vh;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        font-size: 1rem;
+        min-height: 8vh;
+    }
+
+    @media ${props => props.theme.breakpoints.tablet} {
+        font-size: 1rem;
+        min-height: 8vh;
+    }
 
     @media ${props => props.theme.breakpoints.mobile} {
         font-size: 1.2rem;
-        padding: 0vh 2vw 2vh 2vw;
+        min-height: 8vh;
     }
 `;
 
+
 const CardText = styled.p`
-    height: 40%;
     text-align: left;
     font-size: 1rem;
-    padding: 1vh 0;
+    min-height: 25vh;
     color: ${props => props.isDarkMode ? 'white' : 'grey'};
+    padding: 0 1vw;
+
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        font-size: 1rem;
+        min-height: 10vh;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        font-size: 1rem;
+        min-height: 17vh;
+    }
+
+    @media ${props => props.theme.breakpoints.tablet} {
+        font-size: 1rem;
+        min-height: 25vh;
+    }
 
     @media ${props => props.theme.breakpoints.mobile} {
         font-size: 1rem;
-        padding: 1vh 2vw;
+        min-height: 15vh;
+    }
+
+    span {
+        color: orange;
     }
 `;
 
 const ButtonWrapper = styled.div`
     position: absolute;
+    width: 4vh;
+    height: 4vh;
     bottom: 0;
     right: 0;
     margin-right: 2%;
@@ -187,41 +227,53 @@ const ThirdDiv = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 6%;
-    margin-top: 6%;
+    margin: 5% 0%;
+
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        margin: 10% 0%;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        margin: 10% 0%;
+    }
+
+    @media ${props => props.theme.breakpoints.tablet} {
+       margin: 10% 0%;
+    }
 
     @media ${props => props.theme.breakpoints.mobile} {
-        width: 80%;
-        margin: auto;
-        margin-top: 15%;
+        margin: 10% 0%;
     }
 `;
 
 const BottomTitle = styled.h3`
     font-weight: bold;
     font-size: 2.5rem;
+    max-width: 70%;
 
-    @media ${props => props.theme.breakpoints.mobile} {
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        font-size: 2.5rem;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        font-size: 2rem;
+    }
+
+    @media ${props => props.theme.breakpoints.tablet} {
         font-size: 1.5rem;
     }
-`;
 
-const StyledText = styled.p`
-    font-weight: bold;
-    transition: all 0.3s ease;
-
-    &:hover {
-        color: orange;
+    @media ${props => props.theme.breakpoints.mobile} {
+       font-size: 1.5rem;
     }
 `;
 
 const ContentContainer = styled.div`
-    height: 40%;
-    padding: 1vw;
+    padding: 4%;
 `;
 
 const Cards = () => {
-    const { isMobile, isDarkMode } = useScreenPositionContext();
+    const { isMobile, isTablet, isDarkMode } = useScreenPositionContext();
 
     const navigate = useNavigate();
 
@@ -233,7 +285,11 @@ const Cards = () => {
                     <Title isDarkMode={isDarkMode}>Tudo que você precisa!</Title>
                 </FirstPart>
                 <SecondPart>
-                    <UpperText isDarkMode={isDarkMode}>De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades. Com nossa vasta gama de produtos e expertise, garantimos que você tenha tudo o que precisa para os seus projetos e desafios do dia a dia.</UpperText>
+                    <UpperText isDarkMode={isDarkMode}>
+                        {isTablet ?
+                        'De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades.'
+                        : 'De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades. Com nossa vasta gama de produtos e expertise, garantimos que você tenha tudo o que precisa para os seus projetos e desafios do dia a dia.'}
+                    </UpperText>
                 </SecondPart>
             </FirstDiv>
             <SecondDiv>
@@ -241,14 +297,15 @@ const Cards = () => {
                     <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Mais de 12.000 itens em estoque</CardTitle>
-                        <CardText isDarkMode={isDarkMode}>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <StyledText>muito mais!</StyledText></CardText>
+                        <CardText isDarkMode={isDarkMode}>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <span>muito mais!</span></CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>
                     </ContentContainer>
                 </Card>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
-                    <CardImage src="../img/cards/wireImg.png" alt="Card Image" />
+                    {/*<CardImage src="../img/cards/wireImg.png" alt="Card Image" />*/}
+                    <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Montagem de Cabos Personalizados</CardTitle>
                         <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
@@ -258,7 +315,8 @@ const Cards = () => {
                     </ContentContainer>
                 </Card>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
-                    <CardImage src="../img/cards/ShopCartImg.png" alt="Card Image" />
+                    {/*<CardImage src="../img/cards/ShopCartImg.png" alt="Card Image" />*/}
+                    <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Suprimentos de produtos personalizados</CardTitle>
                         <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>

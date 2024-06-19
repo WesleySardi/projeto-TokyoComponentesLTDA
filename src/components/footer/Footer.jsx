@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const FooterContainer = styled.footer`
   width: 100vw;
   height: 7vh;
-  //background-color: #A90101;
   background-color: red;
   display: flex;
   justify-content: center;
@@ -14,6 +13,22 @@ const FooterContainer = styled.footer`
 const FooterText = styled.p`
   color: white;
   font-size: 1.2rem;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+  font-size: 1rem;
+  }
 `;
 
 const Footer = () => {

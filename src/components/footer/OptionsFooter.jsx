@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -73,7 +73,6 @@ const Image = styled.img`
 `;
 
 const PartOneMiddle = styled.div`
-  height: 47%;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -93,6 +92,18 @@ const Title = styled.h1`
   margin: 4% 0 4% 0;
   font-weight: bold;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.5rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.5rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1rem;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 1.1rem;
     text-align: center;
@@ -104,6 +115,18 @@ const Text = styled(Link)`
   text-align: left;
   margin: 2% 0 2% 0;
   color: grey;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.3rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.3rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 0.9rem;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 1rem;
@@ -117,6 +140,18 @@ const TitlePartOne = styled.h1`
   margin: 6% 0 1% 0;
   font-weight: bold;
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.5rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.5rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1rem;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
   font-size: 1rem;
   text-align: center;
@@ -126,8 +161,21 @@ const TitlePartOne = styled.h1`
 const TextPartOne = styled.p`
   font-size: 1rem;
   text-align: left;
-  margin: 1% 0 1% 0;
+  margin: 1% 0% 1% 0%;
   color: grey;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 0.8rem;
+    margin: 2% 0% 4% 0%;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 1rem;
@@ -136,10 +184,21 @@ const TextPartOne = styled.p`
 `;
 
 const PartOneBottom = styled.div`
-  height: 10%;
   display: flex;
   align-items: center;
   margin: 2% 0 2% 0;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    margin-top: 5%;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     text-align: center;
@@ -160,9 +219,21 @@ const Icon = styled.img`
  width: 1.2vw;
  height: auto;
 
- @media ${props => props.theme.breakpoints.mobile} {
-  width: 6vw;
- }
+ @media ${props => props.theme.breakpoints.largeDesktop} {
+    width: 1.5vw;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    width: 1.5vw;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    width: 1.5vw;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    width: 6vw;
+  }
 `;
 
 const PartTwo = styled.div`
@@ -211,6 +282,14 @@ const Button = styled.button`
   color: white;
   padding: 4% 1% 4% 1%;
   border-radius: 0.5vw;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 4% 0% 4% 0%;
+    width: 60%;
+    border-radius: 1vw;
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 1rem;

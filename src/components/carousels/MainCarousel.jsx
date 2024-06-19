@@ -116,21 +116,22 @@ const AbsoluteImage = styled.img`
   bottom: 5%;
   left: 2%;
   height: auto;
+  width: 300px;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    width: 30vh;
+    width: 300px;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    width: 40vh;
+    width: 300px;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    width: 35vh;
+    width: 250px;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    width: 35vh;
+    width: 300px;
   }
 `;
 
