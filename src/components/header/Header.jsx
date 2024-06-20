@@ -40,11 +40,14 @@ const expandForDarkMode = keyframes`
   }
 `;
 
-const retractForMobile = keyframes`
-  from {
-   height: 12vh;
+const expandForDarkModeTablet = keyframes`
+  0% {
+    height: 8vh;
   }
-  to {
+  75% {
+    height: 100vh;
+  }
+  100% {
     height: 8vh;
   }
 `;
@@ -55,15 +58,6 @@ const expandForMobile = keyframes`
   }
   100% {
     height: 12vh;
-  }
-`;
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 `;
 
@@ -184,31 +178,6 @@ const IconComboBox = styled(FontAwesomeIcon)`
   margin-left: 5px;
 `;
 
-const DarkModeIcon = styled(FontAwesomeIcon)`
-  ${props =>
-    props.rotate &&
-    css`
-  animation: ${rotateAnimation} 0.3s linear;
-  `};    
-  font-size: 1.5rem;  
-
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.2rem;  
-  }
-
-  @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 1.5rem;  
-  }
-
-  @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 1.5rem;  
-  }
-
-  @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 1.2rem;  
-  }
-`;
-
 const ExpandedHeaderContainer = styled.div`
   position: fixed;
   z-index: 3;
@@ -223,7 +192,7 @@ const ExpandedHeaderContainer = styled.div`
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    height: 17vh;
+    height: ${props => (props.isAtTop ? props.isSidebarActive ? '12vh' : '17vh' : '12vh')};
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -258,25 +227,40 @@ const StyledListItem = styled(Link)`
 const Icon = styled(FontAwesomeIcon)`
   color: ${props => props.isAtTop ? 'white' : 'black'};
 
-  @media ${props => props.theme.breakpoints.mobile} {
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.2rem;
+    padding: 0px 10px;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
     color: ${props => props.isSidebarActive ? 'white' : 'red'};
-    font-size: ${props => props.isSidebarActive ? '1.2rem' : '2rem'};
-    margin-right: 12vw;
+    font-size: ${props => props.isSidebarActive ? '2rem' : '3rem'};
+    margin-right: ${props => props.isSidebarActive ? '7vw' : '3vw'};
     font-weight: bold;
-    padding: 15%;
+    padding: 20% 25%;
+
     ${props => props.isSidebarActive ? `
       border: 2px white solid;
       border-radius: 50%;
     ` : ''};
   }
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
-
   @media ${props => props.theme.breakpoints.mobile} {
-    margin-right: ${props => props.isSidebarActive ? '12vw' : '3vw'};
+    color: ${props => props.isSidebarActive ? 'white' : 'red'};
+    font-size: ${props => props.isSidebarActive ? '1.2rem' : '2rem'};
+    margin-right: ${props => props.isSidebarActive ? '7vw' : '3vw'};
+    font-weight: bold;
+    padding: 20% 25%;
+
+    ${props => props.isSidebarActive ? `
+      border: 2px white solid;
+      border-radius: 50%;
+    ` : ''};
   }
 `;
 
@@ -302,9 +286,24 @@ const BackgroundStyle = styled.div`
   z-index: 1;
 
   @media ${props => props.theme.breakpoints.tablet} {
-      animation: none 0.2s forwards,
-      none 1.5s forwards,
-      none 1.5s forwards;
+      height: 100%;
+    ${props => (props.isSidebarActive ?
+    `
+        background-color: grey;
+        background-image: url('../img/backgrounds/blackwallpaper.jpg');
+        background-size: cover;
+        background-position: right;
+      `
+    : props.isAtTop ?
+      `
+        background-color: rgba(0, 0, 0, 0);
+      `
+      :
+      `
+        background-color: rgba(255, 255, 255, 0.7);
+      `
+  )}
+    animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards;
     }
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -359,9 +358,9 @@ const BackgroundStyleBlur = styled.div`
     z-index: -1;
 
     @media ${props => props.theme.breakpoints.tablet} {
-      animation: none 0.2s forwards,
-      none 1.5s forwards,
-      none 1.5s forwards;
+      animation: ${props => props.isSidebarActive ? expandForMobile : 'none'} 0.2s forwards,
+      ${props => (props.isDarkModeAnimationRunning ? !props.isAtTop ? expandForDarkModeTablet : 'none' : 'none')} 1.5s forwards,
+      ${props => (!props.isAtTop ? props.isDarkModeAnimationRunning ? props.isDarkMode ? fadeInForDarkMode : fadeOutForDarkMode : 'none' : 'none')} 1.5s forwards;
     }
 
     @media ${props => props.theme.breakpoints.mobile} {
@@ -380,6 +379,19 @@ const ImgStyleLogo = styled.img`
   ${props => (props.isAtTop ? { width: '15vh', top: '10vh' } :
     props.isSidebarActive ? { width: '15vh', top: '10vh' } :
       { display: 'none' })}
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    ${props => props.isSidebarActive ?
+    `
+        width: 12vh;
+        top: 5vh;
+      `
+    :
+    `
+        width: 8vh;
+        top: 5vh;
+      `
+  }
 
   @media ${props => props.theme.breakpoints.mobile} {
     ${props => props.isSidebarActive ?
@@ -493,9 +505,15 @@ const DarkModeContainer = styled.div`
   margin-left: 2vw;
   width: 40px;
 
+  @media ${props => props.theme.breakpoints.tablet} {
+    height: 60px;
+    width: 120px;
+    margin-left: 0;
+  }
+
   @media ${props => props.theme.breakpoints.mobile} {
-    height: 4.5vh;
-    width: 9vh;
+    height: 40px;
+    width: 80px;
     margin-left: 0;
   }
 `;
@@ -513,6 +531,31 @@ const DarkModeButton = styled.button`
   ${DarkModeContainer}:hover & {
     background-color: ${props => (props.isDarkMode ? '#323232' : '#DE9800')};
     color: ${props => (props.isDarkMode ? 'white' : 'white')};
+  }
+`;
+
+const DarkModeIcon = styled(FontAwesomeIcon)`
+  ${props =>
+    props.rotate &&
+    css`
+  animation: ${rotateAnimation} 0.3s linear;
+  `};    
+  font-size: 1.5rem;  
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.2rem;  
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1.5rem;
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 30px;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 20px;  
   }
 `;
 
@@ -540,7 +583,7 @@ function Header() {
 
   const [isComboBoxActive, setIsComboBoxActive] = useState(false);
 
-  const commonProps = { isDarkModeAnimationRunning, isSidebarActive, isAtTop, isAtTheBannerRange, isDarkMode, retract, isComboBoxActive };
+  const commonProps = { isDarkModeAnimationRunning, isSidebarActive, isAtTop, isAtTheBannerRange, isDarkMode, retract, isComboBoxActive, isTablet };
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -621,14 +664,25 @@ function Header() {
         :
         <></>
       }
-      {isAtTop && !isMobile ? <TopBar /> : <></>}
+      {isAtTop && !isMobile && !isTablet ? <TopBar /> : <></>}
       <BackgroundStyle {...commonProps}>
         <BackgroundStyleBlur {...commonProps} />
         <HeaderStyle>
           <ImgStyleLogo src={isSidebarActive ? '/img/logos/tokyoLettersLogo.png' : '/img/logos/tokyoLogo.png'} alt="ZloLogo" {...commonProps} />
         </HeaderStyle>
         <StyledDiv>
-          {!isMobile ?
+          {isMobile || isTablet ?
+            <StyledList>
+              {isSidebarActive ? <></> :
+                <DarkModeContainer isDarkMode={isDarkMode}>
+                  <DarkModeButton isDarkMode={isDarkMode} onClick={toggleDarkMode} disabled={isDarkModeAnimationRunning ? true : false}>
+                    <DarkModeIcon icon={isDarkMode ? faMoon : faSun} rotate={rotateIcon} />
+                  </DarkModeButton>
+                </DarkModeContainer>
+              }
+              <Icon icon={isSidebarActive ? faX : faBars} onClick={isDarkModeAnimationRunning ? () => { } : () => toggleSidebar()} {...commonProps} />
+            </StyledList>
+            :
             <StyledList style={isAtTop ? { padding: '18vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
               <DistributeProps {...commonProps}>
                 <StyledListItem to="/">Home</StyledListItem>
@@ -664,17 +718,6 @@ function Header() {
                 <Icon icon={faCartShopping} {...commonProps} />
                 {isSmallDesktop ? '' : 'E-commerce'}
               </StyledListItemAndIcon>
-            </StyledList>
-            :
-            <StyledList>
-              {isSidebarActive ? <></> :
-                <DarkModeContainer isDarkMode={isDarkMode}>
-                  <DarkModeButton isDarkMode={isDarkMode} onClick={toggleDarkMode} disabled={isDarkModeAnimationRunning ? true : false}>
-                    <DarkModeIcon icon={isDarkMode ? faMoon : faSun} rotate={rotateIcon} />
-                  </DarkModeButton>
-                </DarkModeContainer>
-              }
-              <Icon icon={isMobile ? isSidebarActive ? faX : faBars : faCartShopping} onClick={isDarkModeAnimationRunning ? () => { } : () => toggleSidebar()} {...commonProps} />
             </StyledList>
           }
         </StyledDiv>

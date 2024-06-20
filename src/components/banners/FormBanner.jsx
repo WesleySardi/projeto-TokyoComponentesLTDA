@@ -17,7 +17,6 @@ width: 90%;
 
 const StyledSecondDiv = styled.div`
 width: 100%;
-height: 60%;
 display: flex;
 justify-content: space-around;
 align-items: center;
@@ -38,18 +37,18 @@ box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 `;
 
 const StyledThirdDiv = styled.div`
-height: 80%;
+padding: 40px 30px 30px 30px;
 display: flex;
 justify-content: center;
 align-items: center;
-padding: 4vh;
+
 
 @media ${props => props.theme.breakpoints.tablet} {
-  padding: 7vh 5vw 4vh 5vw;
+  padding: 40px 10px 30px 10px;
 }
 
 @media ${props => props.theme.breakpoints.mobile} {
-  padding: 7vh 5vw 4vh 5vw;
+  padding: 60px 10px 30px 10px;
 }
 `;
 
@@ -60,7 +59,6 @@ font-size: 1.3rem;
 display: flex;
 justify-content: center;
 align-items: center;
-height: 100%;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 2.3rem;
@@ -88,19 +86,29 @@ img {
   width: 30%;
   margin-top: 6%;
   position: absolute;
-  height: auto;
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    position: absolute;
+    width: 500px;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    position: absolute;
+    width: 400px;
+  }
 
   @media ${props => props.theme.breakpoints.tablet} {
     position: absolute;
-    left: 80%;
-    margin-bottom: -32%;
-    width: 20%;
+    right: 0;
+    margin-bottom: -350px;
+    width: 200px;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
     position: absolute;
-    left: 0;
-    margin-bottom: 140%;
+    left: -30px;
+    margin-bottom: 650px;
+    width: 200px;
   }
 }
 `;
@@ -109,7 +117,6 @@ const FormDiv = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-height: 100%;
 width: 100%;
 `;
 
@@ -120,6 +127,10 @@ width: 100%;
 
 @media ${props => props.theme.breakpoints.tablet} {
   width: 70%;
+}
+
+@media ${props => props.theme.breakpoints.mobile} {
+  width: 90%;
 }
 `;
 
@@ -142,22 +153,23 @@ const TitleForm = styled.h3`
 flex: 70%;
 font-size: 1.3rem;
 font-weight: bold;
-text-align: right;
+text-align: left;
 color: white;
 
+@media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1.5rem;
+}
+
 @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 1.1rem;
-    text-align: left;
-  }
+    font-size: 1.2rem;
+}
 
 @media ${props => props.theme.breakpoints.tablet} {
   font-size: 1.3rem;
-  text-align: left;
 }
 
 @media ${props => props.theme.breakpoints.mobile} {
   font-size: 1.3rem;
-  text-align: left;
 }
 `;
 
@@ -188,7 +200,6 @@ font-size: 1.3rem;
 
 const StyledIcon = styled.img`
 width: 3rem;
-height: auto;
 
 @media ${props => props.theme.breakpoints.tablet} {
   width: 4rem;
@@ -208,14 +219,14 @@ margin-bottom: 3%;
 const InputField = styled.input`
 margin-bottom: 2%;
 border-radius: 0.5vw;
-padding: 2%;
+padding: 15px;
 
 @media ${props => props.theme.breakpoints.tablet} {
   font-size: 1rem;
 }
 
 @media ${props => props.theme.breakpoints.mobile} {
-  padding: 5%;
+  padding: 15px;
   font-size: 1rem;
 }
 `;
@@ -225,7 +236,7 @@ font-size: 1rem;
 color: gray;
 text-align: center;
 color: white;
-padding: 0% 3%;
+padding: 0px 10px;
 
 @media ${props => props.theme.breakpoints.tablet} {
   font-size: 1rem;
@@ -241,12 +252,12 @@ padding: 0% 3%;
 const SendButton = styled.button`
 background-color: green;
 color: white;
-padding: 3.5%;
+padding: 15px;
 border: none;
 border-radius: 0.5vw;
 cursor: pointer;
 margin: 0 auto;
-margin-top: 3%;
+margin-top: 15px;
 width: 30%;
 
 @media ${props => props.theme.breakpoints.tablet} {
@@ -301,7 +312,6 @@ color: white;
 
 const StyledCheckBox = styled.input.attrs({ type: 'checkbox' })`
 width: auto;
-height: 100%;
 cursor: pointer;
 accent-color: green;
 `;

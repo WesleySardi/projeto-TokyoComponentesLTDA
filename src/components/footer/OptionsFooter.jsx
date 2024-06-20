@@ -93,7 +93,7 @@ const Title = styled.h1`
   font-weight: bold;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -117,7 +117,7 @@ const Text = styled(Link)`
   color: grey;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -141,7 +141,7 @@ const TitlePartOne = styled.h1`
   font-weight: bold;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -165,7 +165,7 @@ const TextPartOne = styled.p`
   color: grey;
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {

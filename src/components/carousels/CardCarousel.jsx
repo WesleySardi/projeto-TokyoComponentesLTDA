@@ -156,11 +156,12 @@ const Card = styled(Link)`
 
   @media ${props => props.theme.breakpoints.tablet} {
     height: 35vh;
+    width: 49%;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
     width: 90%;
-    height: 100%;
+    height: 35vh;
   }
 `;
 
@@ -356,7 +357,7 @@ const StyledIconRight = styled(FontAwesomeIcon)`
   `;
 
 const YourComponent = () => {
-  const {isMobile, isDarkMode } = useScreenPositionContext();
+  const {isMobile, isTablet, isDarkMode } = useScreenPositionContext();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimationRunning, setIsAnimationRunning] = useState(false);
@@ -423,8 +424,8 @@ const YourComponent = () => {
         <Text>Destaques do Blog</Text>
       </LeftPart>
       <RightPart>
-        {isMobile ? <></> : <LeftButton onClick={handleLeftClick} isDarkMode={isDarkMode}/>}
-        <Carousel style={isMobile ? { transform: `translateX(-${currentIndex * 92}%)` } : { transform: `translateX(-${currentIndex * 35.33}%)` }}>
+        {isMobile || isTablet ? <></> : <LeftButton onClick={handleLeftClick} isDarkMode={isDarkMode}/>}
+        <Carousel style={isMobile ? { transform: `translateX(-${currentIndex * 92}%)` } : isTablet ? { transform: `translateX(-${currentIndex * 52}%)` } : { transform: `translateX(-${currentIndex * 35.33}%)` }}>
           {data.map((item, index) => (
             <Card key={index} to={item.link} isDarkMode={isDarkMode}>
               <CardImage src={item.image} alt={`Image ${index + 1}`} />
@@ -433,9 +434,9 @@ const YourComponent = () => {
             </Card>
           ))}
         </Carousel>
-        {isMobile ? <></> : <RightButton onClick={handleRightClick} isDarkMode={isDarkMode}/>}
+        {isMobile || isTablet ? <></> : <RightButton onClick={handleRightClick} isDarkMode={isDarkMode}/>}
       </RightPart>
-      {isMobile ?
+      {isMobile || isTablet ?
         <ArrowContainer>
           <Arrow onClick={handleLeftClick}><StyledIconLeft icon={faArrowLeft} currentIndex={currentIndex} /></Arrow>
           <Arrow onClick={handleRightClick}><StyledIconRight icon={faArrowRight} currentIndex={currentIndex} data={data} /></Arrow>
