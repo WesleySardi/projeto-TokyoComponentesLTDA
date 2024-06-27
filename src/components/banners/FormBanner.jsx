@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 const AdditionalContent = styled.div`
 width: 90%;
@@ -60,8 +63,12 @@ display: flex;
 justify-content: center;
 align-items: center;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+      font-size: 2.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -87,9 +94,14 @@ img {
   margin-top: 6%;
   position: absolute;
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
+   @media ${props => props.theme.breakpoints.hugeDesktop} {
     position: absolute;
     width: 500px;
+  }
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    position: absolute;
+    width: 450px;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -156,8 +168,12 @@ font-weight: bold;
 text-align: left;
 color: white;
 
+@media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.4rem;
+}
+
 @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -188,7 +204,7 @@ font-size: 1.3rem;
   }
 
 @media ${props => props.theme.breakpoints.tablet} {
-  justify-content: center;
+  justify-content: right;
   margin-left: 0;
 }
 
@@ -211,15 +227,21 @@ width: 3rem;
 `;
 
 const FieldContainer = styled.div`
-display: flex;
-flex-direction: column;
-margin-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+  width: 100%;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
 `;
 
 const InputField = styled.input`
 margin-bottom: 2%;
 border-radius: 0.5vw;
 padding: 15px;
+width: 100%;
 
 @media ${props => props.theme.breakpoints.tablet} {
   font-size: 1rem;
@@ -230,6 +252,31 @@ padding: 15px;
   font-size: 1rem;
 }
 `;
+
+const IncorrectFormatSpan = styled.span`
+  display: ${props => props.isValid == true ? 'none' : 'flex'};
+  
+  ${props => props.inputType === "email" || props.inputType === "phone" ? "width: 10%;" : "width: 0%;"}
+  margin-bottom: 2%;
+  border-radius: 0.5vw;
+  padding: 15px;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    font-size: 1rem;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    padding: 15px;
+    font-size: 1rem;
+  }
+`
+
+const IncorrectFormatIcon = styled(FontAwesomeIcon)`
+  text-align: center;
+  width: 100%;
+  font-size: 1.1rem;
+  color: yellow;
+`
 
 const CheckBoxLabel = styled.label`
 font-size: 1rem;
@@ -276,6 +323,14 @@ display: flex;
 flex-direction: column;
 text-align: center;
 
+@media ${props => props.theme.breakpoints.hugeDesktop} {
+  margin-top: 3vh;
+}
+
+@media ${props => props.theme.breakpoints.largeDesktop} {
+  margin-top: 3vh;
+}
+
 @media ${props => props.theme.breakpoints.tablet} {
   margin: 2vh;
 }
@@ -319,6 +374,72 @@ accent-color: green;
 function FormBanner() {
   const { isMobile, isTablet } = useScreenPositionContext();
 
+  const [text, setText] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const [emailIsValid, setEmailIsValid] = useState(true);
+  const [phoneIsValid, setPhoneIsValid] = useState(true);
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const isInputValid = (value, inputType) => {
+    if (inputType === 'email') {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(String(value).toLowerCase());
+    }
+
+    if (inputType === 'phone') {
+      const phoneRegex = /^\(\d{2}\) \d{8,9}$/;
+      return phoneRegex.test(value);
+    }
+
+    return false;
+  };
+
+  const handleInputChange = (event, inputType) => {
+    const { value } = event.target;
+    if (inputType == "phone") {
+      setPhone(formatPhone(value));
+      if (value.length <= 5) {
+        setPhoneIsValid(true);
+      } else {
+        setPhoneIsValid(isInputValid(value, inputType));
+      }
+    } else if (inputType == "email") {
+      setEmail(value);
+      if (value == "") {
+        setEmailIsValid(true);
+      } else {
+        setEmailIsValid(isInputValid(value, inputType));
+      }
+    } else {
+      setText(value);
+    }
+  };
+
+  const formatPhone = (value) => {
+    value = value.replace(/\D/g, '');
+    if (value.length > 11) {
+      value = value.slice(0, 11);
+    }
+
+    const part1 = value.slice(0, 2);
+    const part2 = value.slice(2);
+
+    if (part2.length > 0) {
+      return `(${part1}) ${part2}`;
+    } else if (part1.length > 0) {
+      return `(${part1}`;
+    } else {
+      return value;
+    }
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <AdditionalContent>
       <StyledSecondDiv>
@@ -356,18 +477,26 @@ function FormBanner() {
                 </IconContainer>
               </TitleContainer>
               <FieldContainer>
-                <InputField type="text" placeholder="Digite o seu nome completo... *" />
-                <InputField type="email" placeholder="Seu melhor e-mail... *" />
-                <InputField type="number" placeholder="Seu melhor telefone... *" />
+                <InputContainer>
+                  <InputField type="text" placeholder="Digite o seu nome completo... *" onChange={(e) => handleInputChange(e, 'text')} value={text} maxLength="50" />
+                </InputContainer>
+                <InputContainer>
+                  <InputField type="email" placeholder="Seu melhor e-mail... *" onChange={(e) => handleInputChange(e, 'email')} value={email} maxLength="50"/>
+                  <IncorrectFormatSpan isValid={emailIsValid} inputType={"email"}><IncorrectFormatIcon icon={faCircleExclamation}/></IncorrectFormatSpan>
+                </InputContainer>
+                <InputContainer>
+                  <InputField type="text" placeholder="Seu melhor telefone... *" onChange={(e) => handleInputChange(e, 'phone')} value={phone} maxLength="14"/>
+                  <IncorrectFormatSpan isValid={phoneIsValid} inputType={"phone"}><IncorrectFormatIcon icon={faCircleExclamation}/></IncorrectFormatSpan>
+                </InputContainer>
                 <CheckBoxContainer>
                   <TermsContainer>
-                    <StyledCheckBox id="termos" name="termos" />
+                    <StyledCheckBox id="termos" name="termos" checked={isChecked} onChange={handleCheckboxChange} />
                     <CheckBoxLabel htmlFor="termos">Aceito os termos de privacidade</CheckBoxLabel>
                   </TermsContainer>
                   <RequiredFieldsLabel>* Campos Obrigatórios</RequiredFieldsLabel>
                 </CheckBoxContainer>
               </FieldContainer>
-              <SendButton>Enviar</SendButton>
+              <SendButton onClick={isChecked ? () => console.log("Nome: " + text + ", E-mail: " + email + ", Telefone: " + phone) : () => { }}>Enviar</SendButton>
             </FormContainer>
           </FormDiv>
         </StyledThirdDiv>

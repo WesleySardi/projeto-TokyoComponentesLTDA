@@ -24,6 +24,11 @@ const CenterBottomImage = styled.img`
   height: auto;
   z-index: 1;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    bottom: -35px;
+    width: 75px;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     bottom: -35px;
     width: 75px;
@@ -52,6 +57,11 @@ const CenterBottomImage2 = styled.img`
   width: 0.6%;
   height: auto;
   z-index: 1;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    bottom: 50px;
+    width: 15px;
+  }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     bottom: 50px;

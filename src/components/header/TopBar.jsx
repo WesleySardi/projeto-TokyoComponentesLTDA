@@ -29,6 +29,10 @@ const Image = styled.img`
   margin-right: 10px;
   width: 1.5rem;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    width: 1rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     width: 1rem;
   }
@@ -50,6 +54,10 @@ const Text = styled.span`
   color: white;
   font-size: 1.1rem;
   font-weight: bold;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 0.8rem;
+  }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 0.8rem;

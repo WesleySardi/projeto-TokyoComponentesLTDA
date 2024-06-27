@@ -92,12 +92,16 @@ const Title = styled.h1`
   margin: 4% 0 4% 0;
   font-weight: bold;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
@@ -116,12 +120,16 @@ const Text = styled(Link)`
   margin: 2% 0 2% 0;
   color: grey;
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.1rem;
   }
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1rem;
+  }
+
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
@@ -140,12 +148,16 @@ const TitlePartOne = styled.h1`
   margin: 6% 0 1% 0;
   font-weight: bold;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
@@ -164,12 +176,17 @@ const TextPartOne = styled.p`
   margin: 1% 0% 1% 0%;
   color: grey;
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.1rem;
   }
 
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1rem;
+  }
+
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    margin: 2% 0% 6% 0%;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
@@ -187,14 +204,6 @@ const PartOneBottom = styled.div`
   display: flex;
   align-items: center;
   margin: 2% 0 2% 0;
-
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    
-  }
-
-  @media ${props => props.theme.breakpoints.smallDesktop} {
-    
-  }
 
   @media ${props => props.theme.breakpoints.tablet} {
     margin-top: 5%;
@@ -219,7 +228,11 @@ const Icon = styled.img`
  width: 1.2vw;
  height: auto;
 
- @media ${props => props.theme.breakpoints.largeDesktop} {
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    width: 1.5vw;
+  }
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
     width: 1.5vw;
   }
 
@@ -276,12 +289,36 @@ const PartFour = styled.div`
 `;
 
 const Button = styled.button`
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   width: 40%;
   background-color: red;
   color: white;
   padding: 4% 1% 4% 1%;
   border-radius: 0.5vw;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 4% 0% 4% 0%;
+    width: 40%;
+    border-radius: 0.5vw;
+  }
+
+  @media ${props => props.theme.breakpoints.largeDesktop} {
+    font-size: 1rem;
+    text-align: center;
+    padding: 4% 0% 4% 0%;
+    width: 55%;
+    border-radius: 0.5vw;
+  }
+
+  @media ${props => props.theme.breakpoints.smallDesktop} {
+    font-size: 1rem;
+    text-align: center;
+    padding: 4% 0% 4% 0%;
+    width: 55%;
+    border-radius: 0.5vw;
+  }
 
   @media ${props => props.theme.breakpoints.tablet} {
     font-size: 0.9rem;
@@ -302,7 +339,7 @@ const Button = styled.button`
 `;
 
 const OptionsFooter = () => {
-  const {isMobile, isDarkMode } = useScreenPositionContext();
+  const { isMobile, isDarkMode } = useScreenPositionContext();
 
   return (
     <Container>

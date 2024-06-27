@@ -4,17 +4,6 @@ import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCartShopping, faPhone, faUser, faQuestion, faComment, faBookmark} from '@fortawesome/free-solid-svg-icons';
 
-const retractForMobile = keyframes`
-    from {
-      top: 12vh;
-      height: 88vh;
-    }
-    to {
-      top: 8vh;
-      height: 92vh;
-    }
-  `;
-
 const expandForMobile = keyframes`
     0% {
       top: 8vh;
@@ -59,7 +48,7 @@ const Button = styled.button`
     font-size: 1.2rem;
     
     @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 2rem;
+    font-size: 1.3rem;
     }
 
     @media ${props => props.theme.breakpoints.mobile} {
@@ -80,7 +69,7 @@ const AbsoluteImage = styled.img`
   height: auto;
 
   @media ${props => props.theme.breakpoints.tablet} {
-    width: 40%;
+    width: 30%;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -93,8 +82,8 @@ const Icon = styled(FontAwesomeIcon)`
   right: 5%;
 
   @media ${props => props.theme.breakpoints.tablet} {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {

@@ -39,6 +39,10 @@ const Title = styled.h1`
   font-weight: bold;
   width: 90%;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+     font-size: 2.5rem;
+  }
+
   @media ${(props) => props.theme.breakpoints.largeDesktop} {
     font-size: 2.5rem;
   }
@@ -60,6 +64,10 @@ const Text = styled.p`
   width: 90%;
   margin: 2% auto 4% auto;
   color: red;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.5rem;
+  }
 
   @media ${(props) => props.theme.breakpoints.largeDesktop} {
     font-size: 1.5rem;
@@ -85,6 +93,12 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 0.7vw;
   font-weight: bold;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.2rem;
+    padding: 1.5vh 0;
+    width: 30%;
+  }
 
   @media ${(props) => props.theme.breakpoints.largeDesktop} {
     font-size: 1.2rem;
@@ -118,6 +132,10 @@ const AbsoluteImage = styled.img`
   height: auto;
   width: 300px;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    width: 300px;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     width: 300px;
   }
@@ -141,6 +159,11 @@ const ArrowContainer = styled.div`
   right: 8%;
   display: flex;
   align-items: center;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    bottom: 8%;
+    right: 4%;
+  }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     bottom: 8%;
@@ -168,6 +191,10 @@ const Arrow = styled.div`
   color: white;
   cursor: pointer;
   margin: 0 10px;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 3rem;
+  }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 3rem;

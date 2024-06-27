@@ -79,6 +79,10 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 3rem;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 2.3rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 2.3rem;
   }
@@ -99,6 +103,10 @@ const Title = styled.h1`
 const Text = styled.p`
   font-size: 2rem;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.5rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 1.5rem;
   }
@@ -108,7 +116,7 @@ const Text = styled.p`
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -146,14 +154,6 @@ const Card = styled(Link)`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
-  @media ${props => props.theme.breakpoints.largeDesktop} {
-    
-  }
-
-  @media ${props => props.theme.breakpoints.smallDesktop} {
-    
-  }
-
   @media ${props => props.theme.breakpoints.tablet} {
     height: 35vh;
     width: 49%;
@@ -187,6 +187,10 @@ const CardTitle = styled.h3`
   font-weight: bold;
   user-select: none;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.1rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 1.2rem;
   }
@@ -196,7 +200,7 @@ const CardTitle = styled.h3`
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 0.8rem;
+    font-size: 1.1rem;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -215,6 +219,10 @@ const Tag = styled.div`
   color: white;
   font-weight: bold;
   user-select: none;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.1rem;
+  }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 1.2rem;

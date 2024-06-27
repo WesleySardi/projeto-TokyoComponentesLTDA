@@ -33,7 +33,7 @@ const FirstPart = styled.div`
 
   @media ${props => props.theme.breakpoints.mobile} {
     width: 100%;
-    margin-top: 10%;
+    margin-top: 20%;
   }
 `;
 
@@ -44,7 +44,7 @@ const Line = styled.div`
   margin-left: 15%;
 
   @media ${props => props.theme.breakpoints.mobile} {
-    height: 4px;
+    height: 2px;
     width: 85%;
     margin: auto;
   }
@@ -55,8 +55,13 @@ const Title = styled.h2`
   left: 10%;
   font-size: 2rem;
 
-    @media ${props => props.theme.breakpoints.largeDesktop} {
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
         font-size: 2rem;
+        margin-bottom: 2.5%;
+    }
+
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        font-size: 1.5rem;
         margin-bottom: 3.5%;
     }
 
@@ -72,7 +77,7 @@ const Title = styled.h2`
 
     @media ${props => props.theme.breakpoints.mobile} {
         left: 8%;
-        margin-bottom: 8%;
+        margin-bottom: 10%;
         font-size: 1.5rem;
     }
 `;
@@ -92,6 +97,14 @@ const SecondPart = styled.div`
 const UpperText = styled.p`
     font-size: 1.15rem;
     color: ${props => props.isDarkMode ? 'white' : 'grey'};
+
+    @media ${props => props.theme.breakpoints.hugeDesktop} {
+        font-size: 1.1rem;
+    }
+
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        font-size: 1rem;
+    }
 
     @media ${props => props.theme.breakpoints.mobile} {
         width: 76%;
@@ -146,13 +159,17 @@ const CardTitle = styled.h3`
     text-align: left;
     font-weight: bold;
     font-size: 1.15rem;
-    min-height: 10vh;
     padding: 0 1vw;
     color: ${props => props.isDarkMode ? 'orange' : 'black'};
 
+    @media ${props => props.theme.breakpoints.hugeDesktop} {
+        font-size: 1.1rem;
+        min-height: 6vh;
+    }
+
     @media ${props => props.theme.breakpoints.largeDesktop} {
-        font-size: 1.3rem;
-        min-height: 8vh;
+        font-size: 1.1rem;
+        min-height: 9vh;
     }
 
     @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -175,9 +192,13 @@ const CardTitle = styled.h3`
 const CardText = styled.p`
     text-align: left;
     font-size: 1rem;
-    min-height: 25vh;
     color: ${props => props.isDarkMode ? 'white' : 'grey'};
     padding: 0 1vw;
+
+    @media ${props => props.theme.breakpoints.hugeDesktop} {
+        font-size: 1rem;
+        
+    }
 
     @media ${props => props.theme.breakpoints.largeDesktop} {
         font-size: 1rem;
@@ -206,20 +227,70 @@ const CardText = styled.p`
 
 const ButtonWrapper = styled.div`
     position: absolute;
-    width: 4vh;
-    height: 4vh;
+    width: 4vw;
+    height: 4vw;
     bottom: 0;
     right: 0;
     margin-right: 2%;
     margin-bottom: 2%;
+
+    @media ${props => props.theme.breakpoints.hugeDesktop} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.tablet} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+        width: 8vw;
+        height: 8vw;
+    }
 `;
 
 const Button = styled.button`
-    width: 4vh;
-    height: 4vh;
+    width: 4vw;
+    height: 4vw;
     border-radius: 50%;
     border: 1px solid orange;
     background-color: transparent;
+
+    @media ${props => props.theme.breakpoints.hugeDesktop} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.largeDesktop} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.smallDesktop} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.tablet} {
+        width: 3vw;
+        height: 3vw;
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+        width: 8vw;
+        height: 8vw;
+    }
 `;
 
 const ThirdDiv = styled.div`
@@ -227,23 +298,7 @@ const ThirdDiv = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 5% 0%;
-
-    @media ${props => props.theme.breakpoints.largeDesktop} {
-        margin: 10% 0%;
-    }
-
-    @media ${props => props.theme.breakpoints.smallDesktop} {
-        margin: 10% 0%;
-    }
-
-    @media ${props => props.theme.breakpoints.tablet} {
-       margin: 10% 0%;
-    }
-
-    @media ${props => props.theme.breakpoints.mobile} {
-        margin: 10% 0%;
-    }
+    margin: 10% 0%;
 `;
 
 const BottomTitle = styled.h3`
@@ -251,8 +306,12 @@ const BottomTitle = styled.h3`
     font-size: 2.5rem;
     max-width: 70%;
 
+    @media ${props => props.theme.breakpoints.hugeDesktop} {
+        font-size: 2rem;
+    }
+
     @media ${props => props.theme.breakpoints.largeDesktop} {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -287,8 +346,8 @@ const Cards = () => {
                 <SecondPart>
                     <UpperText isDarkMode={isDarkMode}>
                         {isTablet ?
-                        'De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades.'
-                        : 'De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades. Com nossa vasta gama de produtos e expertise, garantimos que você tenha tudo o que precisa para os seus projetos e desafios do dia a dia.'}
+                            'De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades.'
+                            : 'De componentes eletrônicos a cabos montados do seu jeito, oferecemos soluções personalizadas para atender exatamente às suas necessidades. Com nossa vasta gama de produtos e expertise, garantimos que você tenha tudo o que precisa para os seus projetos e desafios do dia a dia.'}
                     </UpperText>
                 </SecondPart>
             </FirstDiv>

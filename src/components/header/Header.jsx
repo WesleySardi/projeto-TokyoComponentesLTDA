@@ -132,6 +132,10 @@ const ComboBoxListItem = styled(Link)`
   text-align: left;
   text-decoration: none;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 1rem;
   }
@@ -165,15 +169,6 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
-const StyledList = styled.ul`
-  align-items: center;    
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  list-style-type: none;
-  z-index: 2;
-`;
-
 const IconComboBox = styled(FontAwesomeIcon)`
   margin-left: 5px;
 `;
@@ -182,6 +177,10 @@ const ExpandedHeaderContainer = styled.div`
   position: fixed;
   z-index: 3;
   background-color: transparent;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    height: 17vh;
+  }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     height: 17vh;
@@ -207,6 +206,10 @@ const StyledListItem = styled(Link)`
   text-decoration: none;
   margin-right: 3vw;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {  
+    font-size: 1.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {  
     font-size: 1.2rem;
   }
@@ -227,6 +230,11 @@ const StyledListItem = styled(Link)`
 const Icon = styled(FontAwesomeIcon)`
   color: ${props => props.isAtTop ? 'white' : 'black'};
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     margin-right: 10px;
     font-size: 1.2rem;
@@ -239,10 +247,9 @@ const Icon = styled(FontAwesomeIcon)`
 
   @media ${props => props.theme.breakpoints.tablet} {
     color: ${props => props.isSidebarActive ? 'white' : 'red'};
-    font-size: ${props => props.isSidebarActive ? '2rem' : '3rem'};
-    margin-right: ${props => props.isSidebarActive ? '7vw' : '3vw'};
+    font-size: ${props => props.isSidebarActive ? '1rem' : '2rem'};
+    margin-right: ${props => props.isSidebarActive ? '5vw' : '3vw'};
     font-weight: bold;
-    padding: 20% 25%;
 
     ${props => props.isSidebarActive ? `
       border: 2px white solid;
@@ -255,7 +262,6 @@ const Icon = styled(FontAwesomeIcon)`
     font-size: ${props => props.isSidebarActive ? '1.2rem' : '2rem'};
     margin-right: ${props => props.isSidebarActive ? '7vw' : '3vw'};
     font-weight: bold;
-    padding: 20% 25%;
 
     ${props => props.isSidebarActive ? `
       border: 2px white solid;
@@ -418,6 +424,10 @@ const StyledListItemAndIcon = styled(Link)`
   justify-content: center;
   padding: 5px;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {  
+    font-size: 1.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {  
     font-size: 1.2rem;
   }
@@ -452,6 +462,10 @@ const StyledContactItem = styled(Link)`
   padding: 5px;
   padding: 5px 10px;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {  
+    font-size: 1.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {  
     font-size: 1.2rem;
   }
@@ -480,6 +494,10 @@ const ComboBoxButton = styled.button`
   cursor: pointer;
   font-size: 1.5rem;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {  
+    font-size: 1.2rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {  
     font-size: 1.2rem;
   }
@@ -497,24 +515,35 @@ const ComboBoxButton = styled.button`
   }
 `;
 
+const StyledList = styled.ul`
+  align-items: center;    
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+  z-index: 2;
+`;
+
 const DarkModeContainer = styled.div`
   background-color: ${props => (props.isDarkMode ? props.isAtTop ? 'grey' : 'black' : '#EEA200')};
   border: 2px solid transparent;
   border-radius: 50%;
-  height: 40px;
   margin-left: 2vw;
+  height: 40px;
   width: 40px;
 
   @media ${props => props.theme.breakpoints.tablet} {
-    height: 60px;
-    width: 120px;
     margin-left: 0;
+    margin-right: 10px;
+    height: 40px;
+    width: 40px;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    height: 40px;
-    width: 80px;
     margin-left: 0;
+    margin-right: 10px;
+    height: 40px;
+    width: 40px;
   }
 `;
 
@@ -540,7 +569,12 @@ const DarkModeIcon = styled(FontAwesomeIcon)`
     css`
   animation: ${rotateAnimation} 0.3s linear;
   `};    
-  font-size: 1.5rem;  
+  font-size: 1.5rem;
+  width: 100%;
+
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1.2rem;  
+  }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 1.2rem;  
@@ -551,11 +585,11 @@ const DarkModeIcon = styled(FontAwesomeIcon)`
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    font-size: 30px;
+    font-size: 25px;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    font-size: 20px;  
+    font-size: 25px;
   }
 `;
 

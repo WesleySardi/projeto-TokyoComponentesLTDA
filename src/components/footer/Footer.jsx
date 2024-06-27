@@ -14,6 +14,10 @@ const FooterText = styled.p`
   color: white;
   font-size: 1.2rem;
 
+  @media ${props => props.theme.breakpoints.hugeDesktop} {
+    font-size: 1rem;
+  }
+
   @media ${props => props.theme.breakpoints.largeDesktop} {
     font-size: 1rem;
   }

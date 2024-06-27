@@ -48,7 +48,8 @@ const theme = {
     mobile: '(max-width: 700px)',
     tablet: '(max-width: 1024px)',
     smallDesktop: '(max-width: 1279px)',
-    largeDesktop: '(min-width: 1280px)',
+    largeDesktop: '(max-width: 1366px)',
+    hugeDesktop: '(min-width: 1367px)'
   },
 };
 
