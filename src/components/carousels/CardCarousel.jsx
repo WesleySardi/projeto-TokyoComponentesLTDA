@@ -141,7 +141,7 @@ const Card = styled(Link)`
   position: relative;
   background-color: ${props => props.isDarkMode ? '#242424' : 'white'};
   border-radius: 3%;
-  margin: 0 1%;
+  margin: 1% 1%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;

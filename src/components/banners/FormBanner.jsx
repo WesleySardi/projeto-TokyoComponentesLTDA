@@ -5,6 +5,7 @@ import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import ErrorPopUp from '../popup/ErrorPopup';
 
 const AdditionalContent = styled.div`
 width: 90%;
@@ -44,7 +45,7 @@ padding: 40px 30px 30px 30px;
 display: flex;
 justify-content: center;
 align-items: center;
-
+z-index: 2;
 
 @media ${props => props.theme.breakpoints.tablet} {
   padding: 40px 10px 30px 10px;
@@ -254,7 +255,7 @@ width: 100%;
 `;
 
 const IncorrectFormatSpan = styled.span`
-  display: ${props => props.isValid == true ? 'none' : 'flex'};
+  display: ${props => props.isValid === true ? 'none' : 'flex'};
   
   ${props => props.inputType === "email" || props.inputType === "phone" ? "width: 10%;" : "width: 0%;"}
   margin-bottom: 2%;
@@ -382,6 +383,11 @@ function FormBanner() {
   const [phoneIsValid, setPhoneIsValid] = useState(true);
 
   const [isChecked, setIsChecked] = useState(false);
+  const [isPopupActive, setIsPopupActive] = useState(false);
+
+  const [popupType, setPopupType] = useState("");
+  const [popupTitle, setPopupTitle] = useState("");
+  const [popupText, setPopupText] = useState("");
 
   const isInputValid = (value, inputType) => {
     if (inputType === 'email') {
@@ -399,16 +405,16 @@ function FormBanner() {
 
   const handleInputChange = (event, inputType) => {
     const { value } = event.target;
-    if (inputType == "phone") {
+    if (inputType === "phone") {
       setPhone(formatPhone(value));
-      if (value.length <= 5) {
+      if (formatPhone(value) === "") {
         setPhoneIsValid(true);
       } else {
-        setPhoneIsValid(isInputValid(value, inputType));
+        setPhoneIsValid(isInputValid(formatPhone(value), inputType));
       }
-    } else if (inputType == "email") {
+    } else if (inputType === "email") {
       setEmail(value);
-      if (value == "") {
+      if (value === "") {
         setEmailIsValid(true);
       } else {
         setEmailIsValid(isInputValid(value, inputType));
@@ -442,6 +448,15 @@ function FormBanner() {
 
   return (
     <AdditionalContent>
+      {isPopupActive ?
+        <ErrorPopUp onClose={() => {
+          setIsPopupActive(false)
+          document.documentElement.style.overflowY = 'auto';
+          document.body.style.overflowY = 'auto';
+        }} title={popupTitle} text={popupText} popupType={popupType} />
+        :
+        <></>
+      }
       <StyledSecondDiv>
         {isMobile || isTablet ?
           <></>
@@ -478,15 +493,15 @@ function FormBanner() {
               </TitleContainer>
               <FieldContainer>
                 <InputContainer>
-                  <InputField type="text" placeholder="Digite o seu nome completo... *" onChange={(e) => handleInputChange(e, 'text')} value={text} maxLength="50" />
+                  <InputField type="text" placeholder="Digite o seu nome completo... *" onInput={(e) => handleInputChange(e, 'text')} onBlur={(e) => handleInputChange(e, 'text')} value={text} maxLength="50" />
                 </InputContainer>
                 <InputContainer>
-                  <InputField type="email" placeholder="Seu melhor e-mail... *" onChange={(e) => handleInputChange(e, 'email')} value={email} maxLength="50"/>
-                  <IncorrectFormatSpan isValid={emailIsValid} inputType={"email"}><IncorrectFormatIcon icon={faCircleExclamation}/></IncorrectFormatSpan>
+                  <InputField type="email" placeholder="Seu melhor e-mail... *" onInput={(e) => handleInputChange(e, 'email')} onBlur={(e) => handleInputChange(e, 'email')} value={email} maxLength="50" />
+                  <IncorrectFormatSpan isValid={emailIsValid} inputType={"email"}><IncorrectFormatIcon icon={faCircleExclamation} /></IncorrectFormatSpan>
                 </InputContainer>
                 <InputContainer>
-                  <InputField type="text" placeholder="Seu melhor telefone... *" onChange={(e) => handleInputChange(e, 'phone')} value={phone} maxLength="14"/>
-                  <IncorrectFormatSpan isValid={phoneIsValid} inputType={"phone"}><IncorrectFormatIcon icon={faCircleExclamation}/></IncorrectFormatSpan>
+                  <InputField type="text" placeholder="Seu melhor telefone... *" onInput={(e) => handleInputChange(e, 'phone')} onBlur={(e) => handleInputChange(e, 'phone')} value={phone} maxLength="14" />
+                  <IncorrectFormatSpan isValid={phoneIsValid} inputType={"phone"}><IncorrectFormatIcon icon={faCircleExclamation} /></IncorrectFormatSpan>
                 </InputContainer>
                 <CheckBoxContainer>
                   <TermsContainer>
@@ -496,7 +511,62 @@ function FormBanner() {
                   <RequiredFieldsLabel>* Campos Obrigatórios</RequiredFieldsLabel>
                 </CheckBoxContainer>
               </FieldContainer>
-              <SendButton onClick={isChecked ? () => console.log("Nome: " + text + ", E-mail: " + email + ", Telefone: " + phone) : () => { }}>Enviar</SendButton>
+              <SendButton onClick={() => {
+                document.documentElement.style.overflowY = 'hidden';
+                document.body.style.overflowY = 'hidden';
+
+                if (email === "" || phone === "" || text === "") {
+                  setPopupType("alert");
+                  setPopupTitle("Aviso");
+                  setPopupText("Por favor, preencha todos os campos!");
+
+                  setIsPopupActive(true);
+                } else if (!emailIsValid || !phoneIsValid) {
+                  setPopupType("alert");
+                  setPopupTitle("Aviso");
+                  setPopupText("Existem campos incorretos!");
+
+                  setIsPopupActive(true);
+                } else if (!isChecked) {
+                  setPopupType("alert");
+                  setPopupTitle("Aviso");
+                  setPopupText("Por favor, aceite os termos de privacidade!");
+
+                  setIsPopupActive(true);
+                } else if (emailIsValid && phoneIsValid) {
+                  console.log("Nome: " + text + ", E-mail: " + email + ", Telefone: " + phone);
+                  console.log(isPopupActive);
+
+                  let isLoading = true;
+
+                  if (isLoading) {
+                    setPopupType("loading");
+                    setPopupTitle("Carregando");
+                    setPopupText("Carregando!");
+
+                    setIsPopupActive(true);
+
+                    setTimeout(() => {
+                      isLoading = false;
+
+                      setPopupType("success");
+                      setPopupTitle("Sucesso");
+                      setPopupText("Dados enviados com sucesso!");
+                    }, 2000);
+                  } else {
+                    setPopupType("success");
+                    setPopupTitle("Sucesso");
+                    setPopupText("Dados enviados com sucesso!");
+                    setIsPopupActive(true);
+                  }
+                } else {
+                  setPopupType("alert");
+                  setPopupTitle("Aviso");
+                  setPopupText("Erro inesperado!");
+
+                  setIsPopupActive(true);
+                }
+              }}>Enviar</SendButton>
             </FormContainer>
           </FormDiv>
         </StyledThirdDiv>
