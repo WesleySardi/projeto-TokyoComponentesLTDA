@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from 'react';
+import styled, { keyframes, useTheme } from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faCartShopping, faPhone, faUser, faQuestion, faComment, faBookmark} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCartShopping, faPhone, faUser, faQuestion, faComment, faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 const expandForMobile = keyframes`
     0% {
@@ -65,15 +65,19 @@ const AbsoluteImage = styled.img`
   position: absolute;
   bottom: 3%;
   left: 5%;
-  width: 60%;
+  width: 250px;
   height: auto;
 
   @media ${props => props.theme.breakpoints.tablet} {
-    width: 30%;
+    width: 250px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    width: 50%;
+    width: 300px;
+    left: 5%;
+    transform: translateX(0%);
   }
 `;
 
@@ -93,6 +97,8 @@ const Icon = styled(FontAwesomeIcon)`
 `;
 
 const Sidebar = ({ isSidebarActive }) => {
+  const theme = useTheme();
+
   return (
     <SidebarContainer isSidebarActive={isSidebarActive}>
       <ButtonsContainer>
@@ -103,7 +109,7 @@ const Sidebar = ({ isSidebarActive }) => {
         <Button>Quem Somos <Icon icon={faQuestion} /></Button>
         <Button>Contato <Icon icon={faPhone} /></Button>
         <Button>Trabalhe Conosco <Icon icon={faUser} /></Button>
-        <AbsoluteImage src='../img/icones/wsBalloonImage.png' />
+        <AbsoluteImage src={theme.images.mainBannerImgs.wsBalloonImg} />
       </ButtonsContainer>
     </SidebarContainer>
   );

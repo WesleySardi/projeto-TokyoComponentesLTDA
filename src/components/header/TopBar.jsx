@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 const HeaderContainer = styled.div`
   border-bottom: 1px solid red;
@@ -77,23 +77,25 @@ const Text = styled.span`
 `;
 
 const TopBar = () => {
+  const theme = useTheme();
+
   return (
     <HeaderContainer>
       <Section>
         <Content>
-          <Image src="../img/icones/phoneIcon.png" alt="Descrição 1" />
+          <Image src={theme.images.topBarIcons.phoneIcon} alt="Descrição 1" />
           <Text>(47) 3455-0015 | 3422-4249</Text>
         </Content>
       </Section>
       <Section>
         <Content>
-          <Image src="../img/icones/locationIcon.png" alt="Descrição 2" />
+          <Image src={theme.images.topBarIcons.locationIcon} alt="Descrição 2" />
           <Text>Rua Anita Garibaldi, 439 - Anita Garibaldi | Joinville - SC</Text>
         </Content>
       </Section>
       <Section>
         <Content>
-          <Image src="../img/icones/wsIcon.png" alt="Descrição 3" />
+          <Image src={theme.images.topBarIcons.wsIcon} alt="Descrição 3" />
           <Text>(47) 9 9708-7590 | 3455-0015 | 3422-4249</Text>
         </Content>
       </Section>

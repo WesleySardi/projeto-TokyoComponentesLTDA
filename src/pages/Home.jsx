@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { useTheme} from 'styled-components';
 
 import FormBanner from '../components/banners/FormBanner';
-import SolutionsCards from '../components/cards/SolutionsCards';
 import CardCarousel from '../components/carousels/CardCarousel';
 import Cards from '../components/cards/Cards';
 import Banner from '../components/banners/Banner';
@@ -86,6 +85,7 @@ const CenterBottomImage2 = styled.img`
 
 function Home() {
   const [isMobile, setIsMobile] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -100,11 +100,11 @@ function Home() {
 
   return (
     <Container>
-      <CenterBottomImage src="../img/logos/TokyoLogo.png" alt="Outra descrição da imagem" />
-      <CenterBottomImage2 src="../img/icones/dotsImage.png" alt="Outra descrição da imagem" />
+      <CenterBottomImage src={theme.images.absoluteImg} alt="Outra descrição da imagem" />
+      <CenterBottomImage2 src={theme.images.absoluteDotsImg} alt="Outra descrição da imagem" />
       <MainCarousel />
       <Cards />
-      <Banner link={'/'} image={isMobile ? '../img/banners/bannerReduzido.png' : '../img/banners/banner.png'} />
+      <Banner link={'/'} image={isMobile ? theme.images.halfBannerImg : theme.images.bannerImg} />
       <CardCarousel />
       <FormBanner />
       <OptionsFooter />

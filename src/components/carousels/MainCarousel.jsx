@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -260,6 +260,7 @@ const StyledIconRight = styled(FontAwesomeIcon)`
 
 const MainCarousel = () => {
   const { isMobile, isDarkMode } = useScreenPositionContext();
+  const theme = useTheme();
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -290,7 +291,7 @@ const MainCarousel = () => {
           </Content>
         </Slide>
       ))}
-      {isMobile ? <></> : <AbsoluteImage src="../img/icones/wsBalloonImage.png" alt="Descrição da imagem" />}
+      {isMobile ? <></> : <AbsoluteImage src={theme.images.mainBannerImgs.wsBalloonImg} alt="Descrição da imagem" />}
       <ArrowContainer>
         <Arrow onClick={prevSlide}><StyledIconLeft icon={faArrowLeft} currentIndex={currentIndex} images={images} /></Arrow>
         <Arrow onClick={nextSlide}><StyledIconRight icon={faArrowRight} currentIndex={currentIndex} images={images} /></Arrow>

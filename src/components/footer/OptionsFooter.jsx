@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
@@ -340,6 +340,7 @@ const Button = styled.button`
 
 const OptionsFooter = () => {
   const { isMobile, isDarkMode } = useScreenPositionContext();
+  const theme = useTheme();
 
   return (
     <Container>
@@ -372,7 +373,7 @@ const OptionsFooter = () => {
           <Part>
             <PartOne>
               <PartOneTop>
-                <Image src="../img/logos/TokyoLogo.png" alt="Descrição da imagem" />
+                <Image src={theme.images.footerTokyoLogo} alt="Descrição da imagem" />
               </PartOneTop>
               <PartOneMiddle>
                 <TitlePartOne>Tokyo Componentes Eletrônicos</TitlePartOne>
@@ -383,11 +384,11 @@ const OptionsFooter = () => {
                 </TextPartOne>
               </PartOneMiddle>
               <PartOneBottom>
-                <StyledLink><Icon src='../img/icones/tiktokIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/instagramIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/facebookIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/youtubeIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/linkedinIcon.png' /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon1} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon2} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon3} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon4} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon5} /></StyledLink>
               </PartOneBottom>
             </PartOne>
           </Part>
@@ -397,7 +398,7 @@ const OptionsFooter = () => {
           <Part>
             <PartOne>
               <PartOneTop>
-                <Image src="../img/logos/TokyoLogo.png" alt="Descrição da imagem" />
+                <Image src={theme.images.footerTokyoLogo} alt="Descrição da imagem" />
               </PartOneTop>
               <PartOneMiddle>
                 <TitlePartOne>Tokyo Componentes Eletrônicos</TitlePartOne>
@@ -408,11 +409,11 @@ const OptionsFooter = () => {
                 </TextPartOne>
               </PartOneMiddle>
               <PartOneBottom>
-                <StyledLink><Icon src='../img/icones/tiktokIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/instagramIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/facebookIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/youtubeIcon.png' /></StyledLink>
-                <StyledLink><Icon src='../img/icones/linkedinIcon.png' /></StyledLink>
+              <StyledLink><Icon src={theme.images.footerIcons.icon1} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon2} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon3} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon4} /></StyledLink>
+                <StyledLink><Icon src={theme.images.footerIcons.icon5} /></StyledLink>
               </PartOneBottom>
             </PartOne>
           </Part>

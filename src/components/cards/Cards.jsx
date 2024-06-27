@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
@@ -333,6 +333,7 @@ const ContentContainer = styled.div`
 
 const Cards = () => {
     const { isMobile, isTablet, isDarkMode } = useScreenPositionContext();
+    const theme = useTheme();
 
     const navigate = useNavigate();
 
@@ -353,7 +354,7 @@ const Cards = () => {
             </FirstDiv>
             <SecondDiv>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
-                    <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
+                    <CardImage src={theme.images.cardsImgs.card1Img} alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Mais de 12.000 itens em estoque</CardTitle>
                         <CardText isDarkMode={isDarkMode}>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <span>muito mais!</span></CardText>
@@ -363,8 +364,7 @@ const Cards = () => {
                     </ContentContainer>
                 </Card>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
-                    {/*<CardImage src="../img/cards/wireImg.png" alt="Card Image" />*/}
-                    <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
+                    <CardImage src={theme.images.cardsImgs.card2Img} alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Montagem de Cabos Personalizados</CardTitle>
                         <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
@@ -374,8 +374,7 @@ const Cards = () => {
                     </ContentContainer>
                 </Card>
                 <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
-                    {/*<CardImage src="../img/cards/ShopCartImg.png" alt="Card Image" />*/}
-                    <CardImage src="../img/cards/motherBoardImg.png" alt="Card Image" />
+                    <CardImage src={theme.images.cardsImgs.card3Img} alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Suprimentos de produtos personalizados</CardTitle>
                         <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>

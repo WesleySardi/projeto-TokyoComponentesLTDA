@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 
@@ -374,6 +374,7 @@ accent-color: green;
 
 function FormBanner() {
   const { isMobile, isTablet } = useScreenPositionContext();
+  const theme = useTheme();
 
   const [text, setText] = useState("");
   const [email, setEmail] = useState("");
@@ -469,12 +470,12 @@ function FormBanner() {
         }
         {isMobile || isTablet ?
           <ImageDiv>
-            <img src="/img/banners/robotImg.png" alt="Imagem Centralizada" />
+            <img src={theme.images.formImgs.robotImg} alt="Imagem Centralizada" />
           </ImageDiv>
           :
           <StyledThirdDiv style={{ width: '20%' }}>
             <ImageDiv>
-              <img src="/img/banners/robotImg.png" alt="Imagem Centralizada" />
+              <img src={theme.images.formImgs.robotImg} alt="Imagem Centralizada" />
             </ImageDiv>
           </StyledThirdDiv>
         }
@@ -488,7 +489,7 @@ function FormBanner() {
                   <TitleForm>Receba tudo em primeira mão</TitleForm>
                 }
                 <IconContainer>
-                  <StyledIcon src='../img/icones/CardIcon.png' />
+                  <StyledIcon src={theme.images.formImgs.envelopeImg} />
                 </IconContainer>
               </TitleContainer>
               <FieldContainer>

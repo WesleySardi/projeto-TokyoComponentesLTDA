@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes, css, useTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -42,13 +42,13 @@ const expandForDarkMode = keyframes`
 
 const expandForDarkModeTablet = keyframes`
   0% {
-    height: 8vh;
+    height: 12vh;
   }
   75% {
     height: 100vh;
   }
   100% {
-    height: 8vh;
+    height: 12vh;
   }
 `;
 
@@ -131,6 +131,7 @@ const ComboBoxListItem = styled(Link)`
   padding: 12px 16px;
   text-align: left;
   text-decoration: none;
+  color: black;
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1rem;
@@ -250,6 +251,8 @@ const Icon = styled(FontAwesomeIcon)`
     font-size: ${props => props.isSidebarActive ? '1rem' : '2rem'};
     margin-right: ${props => props.isSidebarActive ? '5vw' : '3vw'};
     font-weight: bold;
+    height: 40px;
+    width: 20px;
 
     ${props => props.isSidebarActive ? `
       border: 2px white solid;
@@ -262,6 +265,8 @@ const Icon = styled(FontAwesomeIcon)`
     font-size: ${props => props.isSidebarActive ? '1.2rem' : '2rem'};
     margin-right: ${props => props.isSidebarActive ? '7vw' : '3vw'};
     font-weight: bold;
+    height: 40px;
+    width: 20px;
 
     ${props => props.isSidebarActive ? `
       border: 2px white solid;
@@ -608,6 +613,7 @@ const throttle = (func, limit) => {
 
 function Header() {
   const { isAtTop, isAtTheBannerRange, isMobile, isTablet, isSmallDesktop, isDarkMode, setIsDarkMode } = useScreenPositionContext();
+  const theme = useTheme();
 
   const [isDarkModeAnimationRunning, setIsDarkModeAnimationRunning] = useState(false);
   const [retract, setRetract] = useState(true);
@@ -702,7 +708,7 @@ function Header() {
       <BackgroundStyle {...commonProps}>
         <BackgroundStyleBlur {...commonProps} />
         <HeaderStyle>
-          <ImgStyleLogo src={isSidebarActive ? '/img/logos/tokyoLettersLogo.png' : '/img/logos/tokyoLogo.png'} alt="ZloLogo" {...commonProps} />
+          <ImgStyleLogo src={isSidebarActive ? theme.images.headerCompanyLettersLogo : theme.images.headerCompanyLogo} alt="ZloLogo" {...commonProps} />
         </HeaderStyle>
         <StyledDiv>
           {isMobile || isTablet ?
@@ -726,7 +732,11 @@ function Header() {
               <ComboBoxContainer>
                 <DistributeProps {...commonProps}>
                   <ComboBoxButton onClick={
-                    isComboBoxActive ? () => setIsComboBoxActive(false) : () => setIsComboBoxActive(true)
+                    isComboBoxActive ? () => {
+                      setIsComboBoxActive(false)
+                      document.documentElement.style.overflowY = 'auto';
+                      document.body.style.overflowY = 'auto';
+                    } : () => setIsComboBoxActive(true)
                   }>
                     Institucional
                     <IconComboBox icon={faChevronDown} /></ComboBoxButton>
