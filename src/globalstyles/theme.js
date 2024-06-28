@@ -141,7 +141,7 @@ const theme = {
     quemSomos: '/',
     trabalheConosco: '/',
     nossaCultura: '/',
-    ninjaAI: '/',
+    ninjaAi: '/',
     calculadoraDeResistores: '/',
     tabelasDeConversao: '/',
   },
