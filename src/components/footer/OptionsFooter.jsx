@@ -118,10 +118,18 @@ const Text = styled(Link)`
   font-size: 1rem;
   text-align: left;
   margin: 2% 0 2% 0;
-  color: grey;
+  color: ${props => props.theme.colors.grey};
+  transition: transform 0.1s ease-in-out;
+  width: 200px;
+
+  &:hover {
+      transform: scale(1.015);
+      color: ${props => props.theme.colors.orange};
+  }
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.1rem;
+    width: 220px;
   }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
@@ -134,11 +142,13 @@ const Text = styled(Link)`
 
   @media ${props => props.theme.breakpoints.tablet} {
     font-size: 0.9rem;
+    width: 180px;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 1rem;
     text-align: center;
+    width: 220px;
   }
 `;
 
@@ -174,7 +184,7 @@ const TextPartOne = styled.p`
   font-size: 1rem;
   text-align: left;
   margin: 1% 0% 1% 0%;
-  color: grey;
+  color: ${props => props.theme.colors.grey};
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.1rem;
@@ -221,6 +231,11 @@ const StyledLink = styled(Link)`
   width: auto;
   height: auto;
   margin-right: 2vw;
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+      transform: scale(1.1);
+  }
 `;
 
 
@@ -296,6 +311,11 @@ const Button = styled.button`
   padding: 4% 1% 4% 1%;
   border-radius: 0.5vw;
   cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.1rem;

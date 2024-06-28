@@ -42,7 +42,7 @@ const Button = styled.button`
     text-align: left;
     padding-left: 3%;
     background-color: ${props => props.theme.colors.black};
-    color: #fff;
+    color: ${props => props.theme.colors.white};
     border-left: 2px solid red;
     border-bottom: 2px solid #161616;
     cursor: pointer;
@@ -57,7 +57,7 @@ const Button = styled.button`
     }
     
     &:hover {
-      background-color: orange;
+      background-color: ${props => props.theme.colors.orange};
       color: ${props => props.theme.colors.black};
     }
   `;

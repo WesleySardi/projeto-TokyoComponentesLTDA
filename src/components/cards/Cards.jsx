@@ -40,7 +40,7 @@ const FirstPart = styled.div`
 const Line = styled.div`
   width: 85%;
   height: 2px;
-  background-color: orange;
+  background-color: ${props => props.theme.colors.orange};
   margin-left: 15%;
 
   @media ${props => props.theme.breakpoints.mobile} {
@@ -96,7 +96,7 @@ const SecondPart = styled.div`
 
 const UpperText = styled.p`
     font-size: 1.15rem;
-    color: ${props => props.isDarkMode ? props => props.theme.colors.white : 'grey'};
+    color: ${props => props.isDarkMode ? props => props.theme.colors.white : props => props.theme.colors.grey};
 
     @media ${props => props.theme.breakpoints.hugeDesktop} {
         font-size: 1.1rem;
@@ -134,6 +134,7 @@ const Card = styled.div`
     flex-direction: column;
     position: relative;
     cursor: pointer;
+    background-color: ${props => props.isDarkMode ? props => props.theme.colors.lightBlack : props => props.theme.colors.lightWhite};
 
     @media ${props => props.theme.breakpoints.mobile} {
         width: 80%;
@@ -142,9 +143,9 @@ const Card = styled.div`
     }
 
     &:hover {
-        border-color: orange;
+        border-color: ${props => props.theme.colors.orange};
         button {
-        background-color: orange;
+        background-color: ${props => props.theme.colors.orange};
         }
   }
 `;
@@ -160,7 +161,7 @@ const CardTitle = styled.h3`
     font-weight: bold;
     font-size: 1.15rem;
     padding: 0 1vw;
-    color: ${props => props.isDarkMode ? 'orange' : props => props.theme.colors.black};
+    color: ${props => props.isDarkMode ? props => props.theme.colors.orange : props => props.theme.colors.black};
 
     @media ${props => props.theme.breakpoints.hugeDesktop} {
         font-size: 1.1rem;
@@ -192,7 +193,7 @@ const CardTitle = styled.h3`
 const CardText = styled.p`
     text-align: left;
     font-size: 1rem;
-    color: ${props => props.isDarkMode ? props => props.theme.colors.white : 'grey'};
+    color: ${props => props.isDarkMode ? props => props.theme.colors.white : props => props.theme.colors.grey};
     padding: 0 1vw;
 
     @media ${props => props.theme.breakpoints.hugeDesktop} {
@@ -221,7 +222,7 @@ const CardText = styled.p`
     }
 
     span {
-        color: orange;
+        color: ${props => props.theme.colors.orange};
     }
 `;
 
@@ -264,7 +265,7 @@ const Button = styled.button`
     width: 4vw;
     height: 4vw;
     border-radius: 50%;
-    border: 1px solid orange;
+    border: 1px solid ${props => props.theme.colors.orange};
     background-color: transparent;
 
     @media ${props => props.theme.breakpoints.hugeDesktop} {

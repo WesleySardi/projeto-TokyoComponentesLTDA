@@ -24,18 +24,18 @@ const CenterBottomImage = styled.img`
   z-index: 1;
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
-    bottom: -35px;
-    width: 75px;
+    bottom: -28px;
+    width: 55px;
   }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    bottom: -35px;
-    width: 75px;
+    bottom: -28px;
+    width: 55px;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    bottom: -30px;
-    width: 65px;
+    bottom: -28px;
+    width: 55px;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
@@ -58,28 +58,28 @@ const CenterBottomImage2 = styled.img`
   z-index: 1;
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
-    bottom: 50px;
-    width: 15px;
+    bottom: 35px;
+    width: 10px;
   }
 
   @media ${props => props.theme.breakpoints.largeDesktop} {
-    bottom: 50px;
-    width: 15px;
+    bottom: 35px;
+    width: 10px;
   }
 
   @media ${props => props.theme.breakpoints.smallDesktop} {
-    bottom: 50px;
-    width: 15px;
+    bottom: 35px;
+    width: 10px;
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    bottom: 40px;
-    width: 15px;
+    bottom: 35px;
+    width: 10px;
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    bottom: 40px;
-    width: 15px;
+    bottom: 35px;
+    width: 10px;
   }
 `;
 

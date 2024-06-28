@@ -296,7 +296,7 @@ padding: 0px 10px;
 `;
 
 const SendButton = styled.button`
-background-color: green;
+background-color: ${props => props.theme.colors.lightGreen};
 color: ${props => props.theme.colors.white};
 padding: 15px;
 border: none;
@@ -305,6 +305,11 @@ cursor: pointer;
 margin: 0 auto;
 margin-top: 15px;
 width: 30%;
+transition: transform 0.1s ease-in-out;
+
+&:hover {
+    transform: scale(1.05);
+}
 
 @media ${props => props.theme.breakpoints.tablet} {
   font-size: 1.2rem;
@@ -551,12 +556,20 @@ function FormBanner() {
                       setPopupType("success");
                       setPopupTitle("Sucesso");
                       setPopupText("Dados enviados com sucesso!");
+
+                      setText("");
+                      setEmail("");
+                      setPhone("");
                     }, 2000);
                   } else {
                     setPopupType("success");
                     setPopupTitle("Sucesso");
                     setPopupText("Dados enviados com sucesso!");
                     setIsPopupActive(true);
+
+                    setText("");
+                    setEmail("");
+                    setPhone("");
                   }
                 } else {
                   setPopupType("alert");

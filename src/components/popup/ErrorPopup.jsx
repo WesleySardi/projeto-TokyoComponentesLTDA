@@ -49,7 +49,7 @@ const Text = styled.p`
 `;
 
 const CloseButton = styled.button`
-  background: ${props => props.popupType === "alert" ? "orange" : "#007bff"};
+  background: ${props => props.popupType === "alert" ? props => props.theme.colors.orange : "#007bff"};
   color: ${props => props.theme.colors.white};
   border: none;
   padding: 10px 20px;
@@ -60,7 +60,7 @@ const CloseButton = styled.button`
   display: block;
 
   &:hover {
-    background: ${props => props.popupType === "alert" ? "grey" : "#0056b3"};
+    background: ${props => props.popupType === "alert" ? props => props.theme.colors.grey : "#0056b3"};
   }
 `;
 

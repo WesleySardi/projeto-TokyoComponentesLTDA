@@ -2,15 +2,36 @@ const theme = {
   colors: {
     red: '#E90000',
     white: '#F5F5F5',
+    lightWhite: '#F7F7F7',
     green: '#6c7d47',
+    lightGreen: '#307615',
     black: '#202020',
+    lightBlack: '#1D1B1B',
+    grey: '#919191',
     blue: '#005F73',
     yellow: '#e1ad01',
+    orange: '#FE9900',
     darkMode: '#2A2A2A',
-    lightMode: '#E9E7E7'
+    bgDarkMode: '#161616',
+    lightMode: '#E9E7E7',
+    bgLightMode: '#f0f0f0',
+
+    /* ScrollBar */
+
+    // Chrome and Safari
+    thumbBgColor: '#8b0000',
+    trackBgColor: '#f0f0f0',
+
+    // Firefox
+    scrollbarColor: '#8b0000 #f0f0f0',
+
+    // IE and Edge
+    scrollbarThumb: '#8b0000',
+    scrollbarTrack: '#f0f0f0'
   },
   fonts: {
     sizes: {
+      primary: '17px',
       small: '12px',
       medium: '16px',
       large: '24px',

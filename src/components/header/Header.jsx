@@ -110,12 +110,13 @@ const ComboBoxContainer = styled.div`
 `;
 
 const ComboBoxList = styled.ul`
-  background-color: #f9f9f9;
+  background-color: ${props => props.theme.colors.white};
   border-radius: 0.5vw;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
   display: ${props => props.isComboBoxActive ? 'block' : 'none'};
   position: absolute;
-  width: 11vw;
+  width: 170px;
+  margin-top: 1vh;
   z-index: 3;
 
   @media ${props => props.theme.breakpoints.tablet} {
@@ -132,6 +133,10 @@ const ComboBoxListItem = styled(Link)`
   text-align: left;
   text-decoration: none;
   color: ${props => props.theme.colors.black};
+
+  &:hover {
+    background-color: ${props => props.theme.colors.orange};
+  }
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1rem;
@@ -151,10 +156,6 @@ const ComboBoxListItem = styled(Link)`
 
   @media ${props => props.theme.breakpoints.mobile} {
     font-size: 1rem;
-  }
-
-  &:hover {
-  background-color: #ddd;
   }
 `;
 
@@ -229,7 +230,7 @@ const StyledListItem = styled(Link)`
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-  color: ${props => props.isAtTop ? props => props.theme.colors.white : 'black'};
+  color: ${props => props.isAtTop ? props => props.theme.colors.white : props => props.theme.colors.black};
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     margin-right: 10px;
@@ -300,7 +301,7 @@ const BackgroundStyle = styled.div`
       height: 100%;
     ${props => (props.isSidebarActive ?
     `
-        background-color: grey;
+        background-color: ${props => props.theme.colors.grey};
         background-image: url('../img/backgrounds/blackwallpaper.jpg');
         background-size: cover;
         background-position: right;
@@ -321,7 +322,7 @@ const BackgroundStyle = styled.div`
     height: 100%;
     ${props => (props.isSidebarActive ?
     `
-        background-color: grey;
+        background-color: ${props => props.theme.colors.grey};
         background-image: url('../img/backgrounds/blackwallpaper.jpg');
         background-size: cover;
         background-position: right;
@@ -452,6 +453,10 @@ const StyledListItemAndIcon = styled(Link)`
   &:hover {
     background-color: ${props => props.theme.colors.red};
     color: ${props => props.theme.colors.white};
+
+    & ${Icon} {
+      color: ${props => props.theme.colors.white};
+    }
   }
 `;
 
@@ -495,7 +500,7 @@ const StyledContactItem = styled(Link)`
 
 const ComboBoxButton = styled.button`
   background-color: transparent;
-  color: ${props => props.isComboBoxActive ? 'orange' : props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
+  color: ${props => props.isComboBoxActive ? props => props.theme.colors.orange : props.isAtTop ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)'};
   cursor: pointer;
   font-size: 1.5rem;
 
@@ -530,7 +535,7 @@ const StyledList = styled.ul`
 `;
 
 const DarkModeContainer = styled.div`
-  background-color: ${props => (props.isDarkMode ? props.isAtTop ? 'grey' : props => props.theme.colors.black : '#EEA200')};
+  background-color: ${props => (props.isDarkMode ? props.isAtTop ? props => props.theme.colors.grey : props => props.theme.colors.black : '#EEA200')};
   border: 2px solid transparent;
   border-radius: 50%;
   margin-left: 2vw;
