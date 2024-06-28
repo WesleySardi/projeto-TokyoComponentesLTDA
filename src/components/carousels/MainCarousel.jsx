@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css, useTheme } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +31,7 @@ const Slide = styled.div`
 
 const Content = styled.div`
   text-align: center;
-  color: white;
+  color: ${props => props.theme.colors.white};
 `;
 
 const Title = styled.h1`
@@ -63,7 +64,7 @@ const Title = styled.h1`
 const Text = styled.p`
   width: 90%;
   margin: 2% auto 4% auto;
-  color: red;
+  color: ${props => props.theme.colors.red};
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.5rem;
@@ -88,7 +89,7 @@ const Text = styled.p`
 
 const Button = styled.button`
   background-color: rgba(170, 0, 0, 0.7);
-  color: white;
+  color: ${props => props.theme.colors.white};
   border: none;
   cursor: pointer;
   border-radius: 0.7vw;
@@ -188,7 +189,7 @@ const ArrowContainer = styled.div`
 
 const Arrow = styled.div`
   font-size: 3rem;
-  color: white;
+  color: ${props => props.theme.colors.white};
   cursor: pointer;
   margin: 0 10px;
 
@@ -235,7 +236,7 @@ const images = [
 ];
 
 const StyledIconLeft = styled(FontAwesomeIcon)`
-  color: red;
+  color: ${props => props.theme.colors.red};
   ${({ currentIndex, images }) =>
     currentIndex === 0
       ? css`
@@ -247,7 +248,7 @@ const StyledIconLeft = styled(FontAwesomeIcon)`
 `;
 
 const StyledIconRight = styled(FontAwesomeIcon)`
-  color: red;
+  color: ${props => props.theme.colors.red};
   ${({ currentIndex, images }) =>
     currentIndex === images.length - 1
       ? css`
@@ -259,8 +260,9 @@ const StyledIconRight = styled(FontAwesomeIcon)`
 `;
 
 const MainCarousel = () => {
-  const { isMobile, isDarkMode } = useScreenPositionContext();
+  const { isMobile } = useScreenPositionContext();
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -287,7 +289,7 @@ const MainCarousel = () => {
           <Content>
             <Title>{image.title}</Title>
             <Text>{image.text}</Text>
-            <Button>{image.buttonText}</Button>
+            <Button onClick={() => navigate(theme.links.confiraJa)}>{image.buttonText}</Button>
           </Content>
         </Slide>
       ))}

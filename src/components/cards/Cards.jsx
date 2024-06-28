@@ -96,7 +96,7 @@ const SecondPart = styled.div`
 
 const UpperText = styled.p`
     font-size: 1.15rem;
-    color: ${props => props.isDarkMode ? 'white' : 'grey'};
+    color: ${props => props.isDarkMode ? props => props.theme.colors.white : 'grey'};
 
     @media ${props => props.theme.breakpoints.hugeDesktop} {
         font-size: 1.1rem;
@@ -160,7 +160,7 @@ const CardTitle = styled.h3`
     font-weight: bold;
     font-size: 1.15rem;
     padding: 0 1vw;
-    color: ${props => props.isDarkMode ? 'orange' : 'black'};
+    color: ${props => props.isDarkMode ? 'orange' : props => props.theme.colors.black};
 
     @media ${props => props.theme.breakpoints.hugeDesktop} {
         font-size: 1.1rem;
@@ -192,7 +192,7 @@ const CardTitle = styled.h3`
 const CardText = styled.p`
     text-align: left;
     font-size: 1rem;
-    color: ${props => props.isDarkMode ? 'white' : 'grey'};
+    color: ${props => props.isDarkMode ? props => props.theme.colors.white : 'grey'};
     padding: 0 1vw;
 
     @media ${props => props.theme.breakpoints.hugeDesktop} {
@@ -353,31 +353,31 @@ const Cards = () => {
                 </SecondPart>
             </FirstDiv>
             <SecondDiv>
-                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate(theme.links.card1) }, 1000) : () => { navigate(theme.links.card1) }} isDarkMode={isDarkMode}>
                     <CardImage src={theme.images.cardsImgs.card1Img} alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Mais de 12.000 itens em estoque</CardTitle>
-                        <CardText isDarkMode={isDarkMode}>Componentes Eletrônicos, Cabos e Fios, Químicos, Ferramentas, Pilhas e Baterias, Informática, Elétrica, Conversores, Adaptadores, Rede, Robótica, IOT e <span>muito mais!</span></CardText>
+                        <CardText isDarkMode={isDarkMode}>{theme.mainTexts.card1Text}<span>muito mais!</span></CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>
                     </ContentContainer>
                 </Card>
-                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate(theme.links.card2) }, 1000) : () => { navigate(theme.links.card2) }} isDarkMode={isDarkMode}>
                     <CardImage src={theme.images.cardsImgs.card2Img} alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Montagem de Cabos Personalizados</CardTitle>
-                        <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
+                        <CardText isDarkMode={isDarkMode}>{theme.mainTexts.card2Text}</CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>
                     </ContentContainer>
                 </Card>
-                <Card onClick={isMobile ? () => setTimeout(() => { navigate('/') }, 1000) : () => { navigate('/') }} isDarkMode={isDarkMode}>
+                <Card onClick={isMobile ? () => setTimeout(() => { navigate(theme.links.card3) }, 1000) : () => { navigate(theme.links.card3) }} isDarkMode={isDarkMode}>
                     <CardImage src={theme.images.cardsImgs.card3Img} alt="Card Image" />
                     <ContentContainer>
                         <CardTitle isDarkMode={isDarkMode}>Suprimentos de produtos personalizados</CardTitle>
-                        <CardText isDarkMode={isDarkMode}>Profissionais especializados na montagem de cabos de áudio, vídeo, dados/serial, energia para facilitar ainda mais o seu dia a dia ou da sua empresa!</CardText>
+                        <CardText isDarkMode={isDarkMode}>{theme.mainTexts.card3Text}</CardText>
                         <ButtonWrapper>
                             <Button></Button>
                         </ButtonWrapper>

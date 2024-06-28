@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes, css, useTheme } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBars, faChevronDown, faX } from '@fortawesome/free-solid-svg-icons';
@@ -131,7 +131,7 @@ const ComboBoxListItem = styled(Link)`
   padding: 12px 16px;
   text-align: left;
   text-decoration: none;
-  color: black;
+  color: ${props => props.theme.colors.black};
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1rem;
@@ -229,7 +229,7 @@ const StyledListItem = styled(Link)`
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-  color: ${props => props.isAtTop ? 'white' : 'black'};
+  color: ${props => props.isAtTop ? props => props.theme.colors.white : 'black'};
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     margin-right: 10px;
@@ -247,7 +247,7 @@ const Icon = styled(FontAwesomeIcon)`
   }
 
   @media ${props => props.theme.breakpoints.tablet} {
-    color: ${props => props.isSidebarActive ? 'white' : 'red'};
+    color: ${props => props.isSidebarActive ? props => props.theme.colors.white : props => props.theme.colors.red};
     font-size: ${props => props.isSidebarActive ? '1rem' : '2rem'};
     margin-right: ${props => props.isSidebarActive ? '5vw' : '3vw'};
     font-weight: bold;
@@ -261,7 +261,7 @@ const Icon = styled(FontAwesomeIcon)`
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    color: ${props => props.isSidebarActive ? 'white' : 'red'};
+    color: ${props => props.isSidebarActive ? props => props.theme.colors.white : props => props.theme.colors.red};
     font-size: ${props => props.isSidebarActive ? '1.2rem' : '2rem'};
     margin-right: ${props => props.isSidebarActive ? '7vw' : '3vw'};
     font-weight: bold;
@@ -423,7 +423,7 @@ const StyledListItemAndIcon = styled(Link)`
   align-items: center;
   border: 1px solid red;
   border-radius: 0.5vw;
-  color: ${props => props.isAtTop ? 'white' : 'black'};
+  color: ${props => props.isAtTop ? props => props.theme.colors.white : props => props.theme.colors.black};
   display: flex;
   height: 30px;
   justify-content: center;
@@ -450,8 +450,8 @@ const StyledListItemAndIcon = styled(Link)`
   }
 
   &:hover {
-    background-color: red;
-    color: white;
+    background-color: ${props => props.theme.colors.red};
+    color: ${props => props.theme.colors.white};
   }
 `;
 
@@ -488,8 +488,8 @@ const StyledContactItem = styled(Link)`
   }
 
   &:hover {
-    background-color: red;
-    color: white;
+    background-color: ${props => props.theme.colors.red};
+    color: ${props => props.theme.colors.white};
   }
 `;
 
@@ -530,7 +530,7 @@ const StyledList = styled.ul`
 `;
 
 const DarkModeContainer = styled.div`
-  background-color: ${props => (props.isDarkMode ? props.isAtTop ? 'grey' : 'black' : '#EEA200')};
+  background-color: ${props => (props.isDarkMode ? props.isAtTop ? 'grey' : props => props.theme.colors.black : '#EEA200')};
   border: 2px solid transparent;
   border-radius: 50%;
   margin-left: 2vw;
@@ -553,10 +553,10 @@ const DarkModeContainer = styled.div`
 `;
 
 const DarkModeButton = styled.button`
-  background-color: ${props => (props.isDarkMode ? props.isAtTop ? 'white' : 'black' : '#EEA200')};
-  border: 1px solid ${props => (props.isDarkMode ? props.isAtTop ? 'black' : 'white' : 'white')};
+  background-color: ${props => (props.isDarkMode ? props.isAtTop ? props => props.theme.colors.white : props => props.theme.colors.black : '#EEA200')};
+  border: 1px solid ${props => (props.isDarkMode ? props.isAtTop ? props => props.theme.colors.black : props => props.theme.colors.white : props => props.theme.colors.white)};
   border-radius: 50%;
-  color: ${(props => (props.isDarkModeAnimationRunning ? props.isDarkMode ? props.isAtTop ? 'black' : 'white' : 'white' : props.isDarkMode ? props.isAtTop ? 'black' : 'white' : 'white'))};
+  color: ${(props => (props.isDarkModeAnimationRunning ? props.isDarkMode ? props.isAtTop ? props => props.theme.colors.black : props => props.theme.colors.white : props => props.theme.colors.white : props.isDarkMode ? props.isAtTop ? props => props.theme.colors.black : props => props.theme.colors.white : props => props.theme.colors.white))};
   cursor: pointer;
   height: 100%;
   transition: background-color 0.3s ease;
@@ -564,7 +564,7 @@ const DarkModeButton = styled.button`
 
   ${DarkModeContainer}:hover & {
     background-color: ${props => (props.isDarkMode ? '#323232' : '#DE9800')};
-    color: ${props => (props.isDarkMode ? 'white' : 'white')};
+    color: ${props => (props.isDarkMode ? props => props.theme.colors.white : props => props.theme.colors.white)};
   }
 `;
 
@@ -614,6 +614,7 @@ const throttle = (func, limit) => {
 function Header() {
   const { isAtTop, isAtTheBannerRange, isMobile, isTablet, isSmallDesktop, isDarkMode, setIsDarkMode } = useScreenPositionContext();
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const [isDarkModeAnimationRunning, setIsDarkModeAnimationRunning] = useState(false);
   const [retract, setRetract] = useState(true);
@@ -725,9 +726,9 @@ function Header() {
             :
             <StyledList style={isAtTop ? { padding: '18vh 5vw 0 0' } : { padding: '0 5vw 0 0' }}>
               <DistributeProps {...commonProps}>
-                <StyledListItem to="/">Home</StyledListItem>
-                <StyledListItem to="/">Produtos</StyledListItem>
-                <StyledListItem to="/">Blog</StyledListItem>
+                <StyledListItem to={theme.links.home}>Home</StyledListItem>
+                <StyledListItem to={theme.links.produtos}>Produtos</StyledListItem>
+                <StyledListItem to={theme.links.blog}>Blog</StyledListItem>
               </DistributeProps>
               <ComboBoxContainer>
                 <DistributeProps {...commonProps}>
@@ -741,24 +742,24 @@ function Header() {
                     Institucional
                     <IconComboBox icon={faChevronDown} /></ComboBoxButton>
                   <ComboBoxList>
-                    <ComboBoxListItem to="/">
+                    <ComboBoxListItem to={theme.links.quemSomos}>
                       Quem Somos
                     </ComboBoxListItem>
-                    <ComboBoxListItem to="/">
+                    <ComboBoxListItem to={theme.links.trabalheConosco}>
                       Trabalhe Conosco
                     </ComboBoxListItem>
                   </ComboBoxList>
                 </DistributeProps>
               </ComboBoxContainer>
               <StyledContainer>
-                <StyledContactItem to="/" {...commonProps}>Contato</StyledContactItem>
+                <StyledContactItem to={theme.links.contato} {...commonProps}>Contato</StyledContactItem>
                 <DarkModeContainer isDarkMode={isDarkMode}>
                   <DarkModeButton isDarkMode={isDarkMode} onClick={toggleDarkMode} disabled={isDarkModeAnimationRunning ? true : false}>
                     <DarkModeIcon icon={isDarkMode ? faMoon : faSun} rotate={rotateIcon} />
                   </DarkModeButton>
                 </DarkModeContainer>
               </StyledContainer>
-              <StyledListItemAndIcon to="/" {...commonProps}>
+              <StyledListItemAndIcon to={theme.links.ecommerce} {...commonProps}>
                 <Icon icon={faCartShopping} {...commonProps} />
                 {isSmallDesktop ? '' : 'E-commerce'}
               </StyledListItemAndIcon>

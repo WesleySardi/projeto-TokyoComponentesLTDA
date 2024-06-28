@@ -104,7 +104,7 @@ function Home() {
       <CenterBottomImage2 src={theme.images.absoluteDotsImg} alt="Outra descrição da imagem" />
       <MainCarousel />
       <Cards />
-      <Banner link={'/'} image={isMobile ? theme.images.halfBannerImg : theme.images.bannerImg} />
+      <Banner link={theme.links.banner} image={isMobile ? theme.images.halfBannerImg : theme.images.bannerImg} />
       <CardCarousel />
       <FormBanner />
       <OptionsFooter />

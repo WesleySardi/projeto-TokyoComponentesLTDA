@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes, useTheme } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCartShopping, faPhone, faUser, faQuestion, faComment, faBookmark } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +22,7 @@ const SidebarContainer = styled.div`
     right: 0;
     top: 12vh;
     height: 88vh;
-    background-color: black;
+    background-color: ${props => props.theme.colors.black};
     animation: ${props => (props.isSidebarActive ? expandForMobile : 'none')} 0.2s forwards;
     border-top: ${props => (props.isSidebarActive ? '1px solid white' : 'none')};
   `;
@@ -40,7 +41,7 @@ const Button = styled.button`
     height: 10%;
     text-align: left;
     padding-left: 3%;
-    background-color: black;
+    background-color: ${props => props.theme.colors.black};
     color: #fff;
     border-left: 2px solid red;
     border-bottom: 2px solid #161616;
@@ -57,7 +58,7 @@ const Button = styled.button`
     
     &:hover {
       background-color: orange;
-      color: black;
+      color: ${props => props.theme.colors.black};
     }
   `;
 
@@ -98,17 +99,18 @@ const Icon = styled(FontAwesomeIcon)`
 
 const Sidebar = ({ isSidebarActive }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <SidebarContainer isSidebarActive={isSidebarActive}>
       <ButtonsContainer>
-        <Button>Home <Icon icon={faHouse} /></Button>
-        <Button>E-commerce <Icon icon={faCartShopping} /></Button>
-        <Button>Produtos <Icon icon={faBookmark} /></Button>
-        <Button>Blog <Icon icon={faComment} /></Button>
-        <Button>Quem Somos <Icon icon={faQuestion} /></Button>
-        <Button>Contato <Icon icon={faPhone} /></Button>
-        <Button>Trabalhe Conosco <Icon icon={faUser} /></Button>
+        <Button onClick={() => navigate(theme.links.home)}>Home <Icon icon={faHouse} /></Button>
+        <Button onClick={() => navigate(theme.links.ecommerce)}>E-commerce <Icon icon={faCartShopping} /></Button>
+        <Button onClick={() => navigate(theme.links.produtos)}>Produtos <Icon icon={faBookmark} /></Button>
+        <Button onClick={() => navigate(theme.links.blog)}>Blog <Icon icon={faComment} /></Button>
+        <Button onClick={() => navigate(theme.links.quemsomos)}>Quem Somos <Icon icon={faQuestion} /></Button>
+        <Button onClick={() => navigate(theme.links.contato)}>Contato <Icon icon={faPhone} /></Button>
+        <Button onClick={() => navigate(theme.links.trabalheConosco)}>Trabalhe Conosco <Icon icon={faUser} /></Button>
         <AbsoluteImage src={theme.images.mainBannerImgs.wsBalloonImg} />
       </ButtonsContainer>
     </SidebarContainer>

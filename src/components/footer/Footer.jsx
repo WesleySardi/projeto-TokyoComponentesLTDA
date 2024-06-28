@@ -4,14 +4,14 @@ import styled from 'styled-components';
 const FooterContainer = styled.footer`
   width: 100vw;
   height: 7vh;
-  background-color: red;
+  background-color: ${props => props.theme.colors.red};
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const FooterText = styled.p`
-  color: white;
+  color: ${props => props.theme.colors.white};
   font-size: 1.2rem;
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {

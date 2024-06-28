@@ -51,7 +51,7 @@ const Image = styled.img`
 `;
 
 const Text = styled.span`
-  color: white;
+  color: ${props => props.theme.colors.white};
   font-size: 1.1rem;
   font-weight: bold;
 

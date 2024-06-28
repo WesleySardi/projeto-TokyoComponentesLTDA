@@ -50,7 +50,7 @@ const Text = styled.p`
 
 const CloseButton = styled.button`
   background: ${props => props.popupType === "alert" ? "orange" : "#007bff"};
-  color: white;
+  color: ${props => props.theme.colors.white};
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -68,7 +68,7 @@ const LoadingIcon = styled(FontAwesomeIcon)`
   text-align: center;
   width: 100%;
   font-size: 3rem;
-  color: black;
+  color: ${props => props.theme.colors.black};
   animation: ${rotate} 1.5s linear infinite;
 `
 

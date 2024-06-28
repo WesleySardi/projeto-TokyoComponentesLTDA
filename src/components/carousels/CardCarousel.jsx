@@ -75,7 +75,7 @@ const RightPart = styled.div`
 
 const Title = styled.h1`
   margin-bottom: 1%;
-  color: red;
+  color: ${props => props.theme.colors.red};
   font-weight: bold;
   font-size: 3rem;
 
@@ -213,10 +213,9 @@ const Tag = styled.div`
   right: 0;
   top: 50%;
   transform: translateY(-150%);
-  //background-color: orange;
-  background-color: red;
+  background-color: ${props => props.theme.colors.red};
   padding: 5px;
-  color: white;
+  color: ${props => props.theme.colors.white};
   font-weight: bold;
   user-select: none;
 
@@ -303,10 +302,18 @@ const ArrowContainer = styled.div`
 
 const Arrow = styled.div`
   font-size: 3rem;
-  color: white;
+  color: ${props => props.theme.colors.white};
   cursor: pointer;
   margin: 0 10px;
   font-size: 2.5rem;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    margin-bottom: 70px;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    margin-bottom: 70px;
+  }
 `;
 
 const data = [
@@ -343,7 +350,7 @@ const data = [
 ];
 
 const StyledIconLeft = styled(FontAwesomeIcon)`
-  color: red;
+  color: ${props => props.theme.colors.red};
   ${(props) => (props.currentIndex === 0)
     ? css`
           opacity: 0.5;
@@ -354,7 +361,7 @@ const StyledIconLeft = styled(FontAwesomeIcon)`
   `;
 
 const StyledIconRight = styled(FontAwesomeIcon)`
-  color: red;
+  color: ${props => props.theme.colors.red};
   ${(props) => (props.currentIndex === props.data.length - 1)
     ? css`
           opacity: 0.5;
@@ -365,7 +372,7 @@ const StyledIconRight = styled(FontAwesomeIcon)`
   `;
 
 const YourComponent = () => {
-  const {isMobile, isTablet, isDarkMode } = useScreenPositionContext();
+  const { isMobile, isTablet, isDarkMode } = useScreenPositionContext();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimationRunning, setIsAnimationRunning] = useState(false);
@@ -432,7 +439,7 @@ const YourComponent = () => {
         <Text>Destaques do Blog</Text>
       </LeftPart>
       <RightPart>
-        {isMobile || isTablet ? <></> : <LeftButton onClick={handleLeftClick} isDarkMode={isDarkMode}/>}
+        {isMobile || isTablet ? <></> : <LeftButton onClick={handleLeftClick} isDarkMode={isDarkMode} />}
         <Carousel style={isMobile ? { transform: `translateX(-${currentIndex * 92}%)` } : isTablet ? { transform: `translateX(-${currentIndex * 52}%)` } : { transform: `translateX(-${currentIndex * 35.33}%)` }}>
           {data.map((item, index) => (
             <Card key={index} to={item.link} isDarkMode={isDarkMode}>
@@ -442,7 +449,7 @@ const YourComponent = () => {
             </Card>
           ))}
         </Carousel>
-        {isMobile || isTablet ? <></> : <RightButton onClick={handleRightClick} isDarkMode={isDarkMode}/>}
+        {isMobile || isTablet ? <></> : <RightButton onClick={handleRightClick} isDarkMode={isDarkMode} />}
       </RightPart>
       {isMobile || isTablet ?
         <ArrowContainer>

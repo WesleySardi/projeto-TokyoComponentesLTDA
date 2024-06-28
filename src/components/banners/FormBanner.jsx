@@ -27,8 +27,7 @@ align-items: center;
 border: 1px solid red;
 border-top-right-radius: 15px;
 border-bottom-right-radius: 15px;
-background-color: #A90101;
-background-color: red;
+background-color: ${props => props.theme.colors.red};
 box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 
 @media ${props => props.theme.breakpoints.tablet} {
@@ -57,7 +56,7 @@ z-index: 2;
 `;
 
 const TitleDiv = styled.div`
-color: white;
+color: ${props => props.theme.colors.white};
 font-weight: bold;
 font-size: 1.3rem;
 display: flex;
@@ -167,7 +166,7 @@ flex: 70%;
 font-size: 1.3rem;
 font-weight: bold;
 text-align: left;
-color: white;
+color: ${props => props.theme.colors.white};
 
 @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.4rem;
@@ -196,7 +195,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 margin-left: 5%;
-color: white;
+color: ${props => props.theme.colors.white};
 font-size: 1.3rem;
 
 @media ${props => props.theme.breakpoints.smallDesktop} {
@@ -276,14 +275,13 @@ const IncorrectFormatIcon = styled(FontAwesomeIcon)`
   text-align: center;
   width: 100%;
   font-size: 1.1rem;
-  color: yellow;
+  color: ${props => props.theme.colors.yellow};
 `
 
 const CheckBoxLabel = styled.label`
 font-size: 1rem;
-color: gray;
+color: ${props => props.theme.colors.white};
 text-align: center;
-color: white;
 padding: 0px 10px;
 
 @media ${props => props.theme.breakpoints.tablet} {
@@ -299,7 +297,7 @@ padding: 0px 10px;
 
 const SendButton = styled.button`
 background-color: green;
-color: white;
+color: ${props => props.theme.colors.white};
 padding: 15px;
 border: none;
 border-radius: 0.5vw;
@@ -351,7 +349,7 @@ text-align: center;
 const RequiredFieldsLabel = styled.label`
 margin-top: 5%;
 display: block;
-color: white;
+color: ${props => props.theme.colors.white};
 
 @media ${props => props.theme.breakpoints.tablet} {
   font-size: 1rem;
@@ -369,7 +367,7 @@ color: white;
 const StyledCheckBox = styled.input.attrs({ type: 'checkbox' })`
 width: auto;
 cursor: pointer;
-accent-color: green;
+accent-color: ${props => props.theme.colors.green};
 `;
 
 function FormBanner() {

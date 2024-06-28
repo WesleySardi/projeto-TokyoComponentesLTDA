@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useScreenPositionContext } from '../../context/ScreenPositionProvider';
 
@@ -291,10 +291,11 @@ const PartFour = styled.div`
 const Button = styled.button`
   font-size: 0.9rem;
   width: 40%;
-  background-color: red;
-  color: white;
+  background-color: ${props => props.theme.colors.red};
+  color: ${props => props.theme.colors.white};
   padding: 4% 1% 4% 1%;
   border-radius: 0.5vw;
+  cursor: pointer;
 
   @media ${props => props.theme.breakpoints.hugeDesktop} {
     font-size: 1.1rem;
@@ -339,8 +340,9 @@ const Button = styled.button`
 `;
 
 const OptionsFooter = () => {
-  const { isMobile, isDarkMode } = useScreenPositionContext();
+  const { isMobile } = useScreenPositionContext();
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -349,25 +351,25 @@ const OptionsFooter = () => {
           <Part>
             <PartTwo>
               <Title>Fale conosco</Title>
-              <Button>Entrar em contato</Button>
+              <Button onClick={() => navigate(theme.links.entrarEmContato)}>Entrar em contato</Button>
             </PartTwo>
           </Part>
           <Part>
             <PartThree>
               <Title>Links úteis</Title>
-              <Text>Fale conosco</Text>
-              <Text>Quem somos</Text>
-              <Text>Trabalhe conosco</Text>
-              <Text>Nossa cultura</Text>
-              <Text>Blog</Text>
+              <Text to={theme.links.faleConosco}>Fale conosco</Text>
+              <Text to={theme.links.quemSomos}>Quem somos</Text>
+              <Text to={theme.links.trabalheConosco}>Trabalhe conosco</Text>
+              <Text to={theme.links.nossaCultura}>Nossa cultura</Text>
+              <Text to={theme.links.blog}>Blog</Text>
             </PartThree>
           </Part>
           <Part>
             <PartFour>
               <Title>Ferramentas</Title>
-              <Text>Ninja Ai</Text>
-              <Text>Calculadora de Resistores</Text>
-              <Text>Tabelas de Conversão</Text>
+              <Text to={theme.links.ninjaAi}>Ninja Ai</Text>
+              <Text to={theme.links.calculadoraDeResistores}>Calculadora de Resistores</Text>
+              <Text to={theme.links.tabelasDeConversao}>Tabelas de Conversão</Text>
             </PartFour>
           </Part>
           <Part>
@@ -377,18 +379,14 @@ const OptionsFooter = () => {
               </PartOneTop>
               <PartOneMiddle>
                 <TitlePartOne>Tokyo Componentes Eletrônicos</TitlePartOne>
-                <TextPartOne>
-                  Somos uma empresa de tecnologia com mais de 12.000 itens em eletrônica,
-                  automação e robótica. Desde 2010, oferecemos soluções inovadoras e um
-                  atendimento que compreende suas necessidades.
-                </TextPartOne>
+                <TextPartOne>{theme.mainTexts.footerTokyoLogoText}</TextPartOne>
               </PartOneMiddle>
               <PartOneBottom>
-                <StyledLink><Icon src={theme.images.footerIcons.icon1} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon2} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon3} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon4} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon5} /></StyledLink>
+                <StyledLink to={theme.links.tiktok}><Icon src={theme.images.footerIcons.icon1} /></StyledLink>
+                <StyledLink to={theme.links.instagram}><Icon src={theme.images.footerIcons.icon2} /></StyledLink>
+                <StyledLink to={theme.links.facebook}><Icon src={theme.images.footerIcons.icon3} /></StyledLink>
+                <StyledLink to={theme.links.youtube}><Icon src={theme.images.footerIcons.icon4} /></StyledLink>
+                <StyledLink to={theme.links.linkedin}><Icon src={theme.images.footerIcons.icon5} /></StyledLink>
               </PartOneBottom>
             </PartOne>
           </Part>
@@ -402,43 +400,39 @@ const OptionsFooter = () => {
               </PartOneTop>
               <PartOneMiddle>
                 <TitlePartOne>Tokyo Componentes Eletrônicos</TitlePartOne>
-                <TextPartOne>
-                  Somos uma empresa de tecnologia com mais de 12.000 itens em eletrônica,
-                  automação e robótica. Desde 2010, oferecemos soluções inovadoras e um
-                  atendimento que compreende suas necessidades.
-                </TextPartOne>
+                <TextPartOne>{theme.mainTexts.footerTokyoLogoText}</TextPartOne>
               </PartOneMiddle>
               <PartOneBottom>
-              <StyledLink><Icon src={theme.images.footerIcons.icon1} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon2} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon3} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon4} /></StyledLink>
-                <StyledLink><Icon src={theme.images.footerIcons.icon5} /></StyledLink>
+                <StyledLink to={theme.links.tiktok}><Icon src={theme.images.footerIcons.icon1} /></StyledLink>
+                <StyledLink to={theme.links.instagram}><Icon src={theme.images.footerIcons.icon2} /></StyledLink>
+                <StyledLink to={theme.links.facebook}><Icon src={theme.images.footerIcons.icon3} /></StyledLink>
+                <StyledLink to={theme.links.youtube}><Icon src={theme.images.footerIcons.icon4} /></StyledLink>
+                <StyledLink to={theme.links.linkedin}><Icon src={theme.images.footerIcons.icon5} /></StyledLink>
               </PartOneBottom>
             </PartOne>
           </Part>
           <Part>
             <PartTwo>
               <Title>Fale conosco</Title>
-              <Button>Entrar em contato</Button>
+              <Button onClick={() => navigate(theme.links.faleConosco)}>Entrar em contato</Button>
             </PartTwo>
           </Part>
           <Part>
             <PartThree>
               <Title>Links úteis</Title>
-              <Text>Fale conosco</Text>
-              <Text>Quem somos</Text>
-              <Text>Trabalhe conosco</Text>
-              <Text>Nossa cultura</Text>
-              <Text>Blog</Text>
+              <Text to={theme.links.faleConosco}>Fale conosco</Text>
+              <Text to={theme.links.quemSomos}>Quem somos</Text>
+              <Text to={theme.links.trabalheConosco}>Trabalhe conosco</Text>
+              <Text to={theme.links.nossaCultura}>Nossa cultura</Text>
+              <Text to={theme.links.blog}>Blog</Text>
             </PartThree>
           </Part>
           <Part>
             <PartFour>
               <Title>Ferramentas</Title>
-              <Text>Ninja Ai</Text>
-              <Text>Calculadora de Resistores</Text>
-              <Text>Tabelas de Conversão</Text>
+              <Text to={theme.links.ninjaAi}>Ninja Ai</Text>
+              <Text to={theme.links.calculadoraDeResistores}>Calculadora de Resistores</Text>
+              <Text to={theme.links.tabelasDeConversao}>Tabelas de Conversão</Text>
             </PartFour>
           </Part>
         </>
